@@ -11,6 +11,7 @@ public class BoardDTO {
 	private String board_update;
 	private String board_img;
 	private int board_hit;
+	private String baord_type;
 	
 	
 	public int getBoard_no() {
@@ -74,6 +75,13 @@ public class BoardDTO {
 	}
 	public void setBoard_hit(int board_hit) {
 		this.board_hit = board_hit;
+	}
+
+	public String getBaord_type() {
+		return baord_type;
+	}
+	public void setBaord_type(String baord_type) {
+		this.baord_type = baord_type;
 	}
 	
 }
