@@ -5,7 +5,6 @@
 <head>
 <meta charset="utf-8">
 <title>EShopper - Bootstrap Shop Template</title>
-
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="Free HTML Templates" name="keywords">
 <meta content="Free HTML Templates" name="description">
@@ -29,7 +28,7 @@
 	rel="stylesheet">
 
 <!-- Customized Bootstrap Stylesheet -->
-<link href="css/style.css" rel="stylesheet">
+<link href="../resource/css/style.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
@@ -180,4 +179,3 @@
 		</div>
 	</div>
 	<!-- Page Header End -->
-
