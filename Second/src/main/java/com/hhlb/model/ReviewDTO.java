@@ -11,6 +11,7 @@ public class ReviewDTO {
 	private String review_image;
 	private String review_date;
 	private String review_update;
+	private int review_hit;
 	
 	
 	public int getReview_no() {
@@ -74,6 +75,13 @@ public class ReviewDTO {
 	}
 	public void setReview_update(String review_update) {
 		this.review_update = review_update;
+	}
+	
+	public int getReview_hit() {
+		return review_hit;
+	}
+	public void setReview_hit(int review_hit) {
+		this.review_hit = review_hit;
 	}
 	
 }
