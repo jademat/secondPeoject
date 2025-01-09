@@ -97,9 +97,4 @@
 
 <jsp:include page="../modal/myInfoMoadl.jsp" />
 <jsp:include page="../modal/reviewWriteModal.jsp" />
-
-</body>
-
-</html>
-</body>
-</html>
+<jsp:include page="../include/footer.jsp" />
