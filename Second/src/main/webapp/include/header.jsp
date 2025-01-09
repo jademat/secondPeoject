@@ -124,13 +124,10 @@
                                         </div>
                                     </div>
                                 </div>
-<<<<<<< HEAD
-                                <a href="../board/board.jsp" class="nav-item nav-link">Board</a>
-                                <a href="../review/review.jsp" class="nav-item nav-link">Review</a>
-=======
+
                                 <a href="<%=request.getContextPath() %>/user_board_list.go" class="nav-item nav-link">Board</a>
                                 <a href="" class="nav-item nav-link">Review</a>
->>>>>>> refs/heads/ho
+
                             </div>
                             <div class="navbar-nav ml-auto py-0">
                                 <a href="../user/login.jsp" class="nav-item nav-link">Login</a>
