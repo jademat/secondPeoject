@@ -58,7 +58,7 @@ public class FrontController extends HttpServlet {
 		 */
 		
 		FileInputStream fis =
-				new FileInputStream("");
+				new FileInputStream("D:\\NCS\\workspase(jsp)\\HHLB\\src\\main\\java\\com\\hhlb\\controller\\mapping.properties");
 		
 		prop.load(fis);
 		
@@ -124,7 +124,7 @@ public class FrontController extends HttpServlet {
 			forward.setPath(value);
 		}
 		
-		
+		// 이동
 		if(forward != null) {
 			if(forward.isRedirect()) {  // true 인 경우
 				response.sendRedirect(forward.getPath());
