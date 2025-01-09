@@ -28,7 +28,7 @@
 	rel="stylesheet">
 
 <!-- Customized Bootstrap Stylesheet -->
-<link href="../resource/css/style.css" rel="stylesheet">
+<link href="<%=request.getContextPath() %>/resource/css/style.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
@@ -121,7 +121,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="" class="nav-item nav-link">Board</a>
+                                <a href="<%=request.getContextPath() %>/user_board_list.go" class="nav-item nav-link">Board</a>
                                 <a href="" class="nav-item nav-link">Review</a>
                             </div>
                             <div class="navbar-nav ml-auto py-0">
