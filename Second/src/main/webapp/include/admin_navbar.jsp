@@ -34,7 +34,6 @@
 
         <!-- Nav Item - Product Management -->
         <li class="nav-item">
-            
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategoryManagement"
                 aria-expanded="true" aria-controls="collapseProductManagement">
                 <i class="fas fa-fw fa-box"></i>
@@ -118,16 +117,16 @@
     	
     	
     	<!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
+        <!-- <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
+        </div> -->
 
         <!-- Sidebar Message -->
-        <div class="sidebar-card d-none d-lg-flex">
+        <!-- <div class="sidebar-card d-none d-lg-flex">
             <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
             <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
             <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-        </div>
+        </div> -->
 
     </ul>
     <!-- End of Sidebar -->
