@@ -110,7 +110,7 @@
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="../product/main.jsp" class="nav-item nav-link">Home</a>
-                                <a href="미정" class="nav-item nav-link">Shop</a>
+                                <a href="../product/shop.jsp" class="nav-item nav-link">Shop</a>
                            
                         
                                 <div class="nav-item dropdown">
@@ -149,7 +149,7 @@
 
 
 
-<!-- Page Header Start -->
+	<!-- Page Header Start -->
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
             <h1 class="font-weight-semi-bold text-uppercase mb-3">HAEDER 입니다</h1>
