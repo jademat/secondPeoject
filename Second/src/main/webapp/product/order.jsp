@@ -109,43 +109,13 @@
             <label for="id">주소 입력</label>
             <div class="d-flex align-items-center">
                 <input type="text" class="form-control mr-5" id="id" placeholder="" value="DB주소" required>
-                <button type="button" class="btn btn-primary" style="width: 120px;" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">상세 주소</button>
+                <button type="button" class="btn btn-primary" style="width: 120px;" data-toggle="modal" data-target="#cartAddrModal" data-whatever="@getbootstrap">상세 주소</button>
             </div>
             <div class="invalid-feedback">
                 주소를 입력해주세요.
             </div>
         </div>
         <br>
-
-          <!-- Modal 코드 -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">상세 주소 입력 란</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="form-group">
-                      <label for="recipient-name" class="col-form-label">주소 : </label>
-                      <input type="text" class="form-control" id="recipient-name" value="DB주소">
-                    </div>
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">상세 주소 입력 :</label>
-                      <textarea class="form-control" id="message-text"></textarea>
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                  <button type="button" class="btn btn-primary">입력</button>
-                </div>
-              </div>
-            </div>
-          </div>
 
           <label for="id">결제 수단</label>
             <br>
@@ -339,22 +309,23 @@
     </div>
     <!-- Products End -->
 
+	<!-- 유효성 검사 -->
     <script>
-    window.addEventListener('load', () => {
-      const forms = document.getElementsByClassName('validation-form');
-    
-      Array.prototype.filter.call(forms, (form) => {
-        form.addEventListener('submit', function (event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-    
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
+	    window.addEventListener('load', () => {
+	      const forms = document.getElementsByClassName('validation-form');
+	    
+	      Array.prototype.filter.call(forms, (form) => {
+	        form.addEventListener('submit', function (event) {
+	          if (form.checkValidity() === false) {
+	            event.preventDefault();
+	            event.stopPropagation();
+	          }
+	    
+	          form.classList.add('was-validated');
+	        }, false);
+	      });
+	    }, false);
     </script>
 
-<jsp:include page="../modal/reviewModal.jsp" />
+<jsp:include page="../modal/cartAddrModal.jsp" />
 <jsp:include page="../include/footer.jsp" />

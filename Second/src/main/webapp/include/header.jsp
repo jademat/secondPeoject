@@ -10,7 +10,7 @@
 <meta content="Free HTML Templates" name="description">
 
 <!-- Favicon -->
-<link href="img/favicon.ico" rel="icon">
+<link href="../resource/img/favicon.ico" rel="icon">
 
 <!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -24,11 +24,13 @@
 	rel="stylesheet">
 
 <!-- Libraries Stylesheet -->
-<link href="lib/owlcarousel/assets/owl.carousel.min.css"
+<link href="../resource/lib/owlcarousel/assets/owl.carousel.min.css"
 	rel="stylesheet">
 
 <!-- Customized Bootstrap Stylesheet -->
-<link href="../resource/css/style.css" rel="stylesheet">
+
+
+<link href="<%=request.getContextPath() %>/resource/css/style.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
@@ -41,6 +43,7 @@
 
 <!-- Template Javascript -->
 <script src="js/main.js"></script>
+
 
 </head>
 <body>
@@ -58,7 +61,7 @@
             </div>
             <div class="row align-items-center py-3 px-xl-5">
                 <div class="col-lg-3 d-none d-lg-block">
-                    <a href="index.html" class="text-decoration-none">
+                    <a href="../product/main.jsp" class="text-decoration-none">
                         <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>HHLB</h1>
                     </a>
                 </div>
@@ -98,7 +101,7 @@
                 </div>
                 <div class="col-lg-9">
                     <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-                        <a href="index.html" class="text-decoration-none d-block d-lg-none">
+                        <a href="../product/main.jsp" class="text-decoration-none d-block d-lg-none">
                             <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>HHLB</h1>
                         </a>
                         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -106,8 +109,8 @@
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="index.html" class="nav-item nav-link">Home</a>
-                                <a href="shop.html" class="nav-item nav-link">Shop</a>
+                                <a href="../product/main.jsp" class="nav-item nav-link">Home</a>
+                                <a href="../product/shop.jsp" class="nav-item nav-link">Shop</a>
                            
                         
                                 <div class="nav-item dropdown">
@@ -115,21 +118,23 @@
                                     <div class="nav-item dropdown">
                                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                         <div class="dropdown-menu rounded-0 m-0">
-                                            <a href="cart.html" class="dropdown-item">Shopping Cart</a>
+                                            <a href="../product/cart.jsp" class="dropdown-item">Shopping Cart</a>
                                             <a href="" class="dropdown-item">여기 아마 QnA</a>
                                             <a href="" class="dropdown-item"> + 추가할 내용</a>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="" class="nav-item nav-link">Board</a>
+
+                                <a href="<%=request.getContextPath() %>/user_board_list.go" class="nav-item nav-link">Board</a>
                                 <a href="" class="nav-item nav-link">Review</a>
+
                             </div>
                             <div class="navbar-nav ml-auto py-0">
-                                <a href="login(2).html" class="nav-item nav-link">Login</a>
-                                <a href="register.html" class="nav-item nav-link">Register</a>
+                                <a href="../user/login.jsp" class="nav-item nav-link">Login</a>
+                                <a href="../user/register.jsp" class="nav-item nav-link">Register</a>
                             </div>
                             <div class="col-lg-3 col-6 d-flex" align = "right">
-                                <a href="" class="btn border ms-auto">
+                                <a href="../product/cart.jsp" class="btn border ms-auto">
                                     <i class="fas fa-shopping-cart text-primary"></i>
                                     <span class="badge">0</span>
                                 </a>
@@ -144,7 +149,7 @@
 
 
 
-<!-- Page Header Start -->
+	<!-- Page Header Start -->
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
             <h1 class="font-weight-semi-bold text-uppercase mb-3">HAEDER 입니다</h1>

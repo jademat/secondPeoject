@@ -9,6 +9,7 @@ public class OrderDTO {
 	private int order_total;
 	private int payment_status;
 	private String order_memo;
+	private String user_id;
 	
 	
 	public int getOrder_no() {
@@ -58,6 +59,12 @@ public class OrderDTO {
 	}
 	public void setOrder_memo(String order_memo) {
 		this.order_memo = order_memo;
+	}
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 	
 }
