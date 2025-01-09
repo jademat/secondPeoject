@@ -28,7 +28,22 @@
 	rel="stylesheet">
 
 <!-- Customized Bootstrap Stylesheet -->
-<link href="../resource/css/style.css" rel="stylesheet">
+
+
+<link href="<%=request.getContextPath() %>/resource/css/style.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+<!-- Contact Javascript File -->
+<script src="mail/jqBootstrapValidation.min.js"></script>
+<script src="mail/contact.js"></script>
+
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+
 
 </head>
 <body>
@@ -109,8 +124,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="../board/board.jsp" class="nav-item nav-link">Board</a>
-                                <a href="../review/review.jsp" class="nav-item nav-link">Review</a>
+
+                                <a href="<%=request.getContextPath() %>/user_board_list.go" class="nav-item nav-link">Board</a>
+                                <a href="" class="nav-item nav-link">Review</a>
+
                             </div>
                             <div class="navbar-nav ml-auto py-0">
                                 <a href="../user/login.jsp" class="nav-item nav-link">Login</a>

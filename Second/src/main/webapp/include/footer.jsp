@@ -21,11 +21,11 @@
                 <div class="col-md-4 mb-5">
                     <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
                     <div class="d-flex flex-column justify-content-start">
-                        <a class="text-dark mb-2" href="<%=request.getContextPath() %>product/main.jsp"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                        <a class="text-dark mb-2" href="<%=request.getContextPath() %>0"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                        <a class="text-dark mb-2" href="<%=request.getContextPath() %>/main.go"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                        <a class="text-dark mb-2" href="<%=request.getContextPath() %>/shop.go"><i class="fa fa-angle-right mr-2"></i>Shop</a>
                         
-                        <a class="text-dark mb-2" href="<%=request.getContextPath() %>product/cart.jsp"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                        <a class="text-dark mb-2" href="<%=request.getContextPath() %>board/board.jsp"><i class="fa fa-angle-right mr-2"></i>Board</a>
+                        <a class="text-dark mb-2" href="<%=request.getContextPath() %>/cart.go"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                        <a class="text-dark mb-2" href="<%=request.getContextPath() %>/user_board_list.go"><i class="fa fa-angle-right mr-2"></i>Board</a>
                         <a class="text-dark" href="<%=request.getContextPath() %>/review.go"><i class="fa fa-angle-right mr-2"></i>Review</a>
                     </div>
                 </div>
