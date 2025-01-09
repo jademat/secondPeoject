@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ include file="/include/header.jsp"%>
+<jsp:include page="../include/header.jsp" />
 <!-- Categories Start -->
 
 <div class="container-fluid pt-5">
@@ -129,7 +129,4 @@
 	class="fa fa-angle-double-up"></i></a>
 
 <jsp:include page="../modal/reviewModal.jsp" />
-
-</body>
-
-</html>
+<jsp:include page="../include/footer.jsp" />
