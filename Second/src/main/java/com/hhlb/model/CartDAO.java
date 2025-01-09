@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -88,4 +90,29 @@ public class CartDAO {
 			}
 		
 	}  // closeConn() 메서드 end
+
+
+	public List<CartDTO> getCartList() {
+		
+		List<CartDTO> list = new ArrayList<CartDTO>();
+		
+		
+		try {
+			
+			openConn();
+			
+			sql = "select * from sc_cart order by cart_no desc";
+			
+			pstmt= con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 }
