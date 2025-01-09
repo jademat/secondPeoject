@@ -4,7 +4,7 @@ public class ReplyDTO {
 
 	private int reply_no;
 	private int board_no;
-	private int user_no;
+	private String user_id;
 	private String reply_cont;
 	private String reply_date;
 	private String reply_update;
@@ -23,14 +23,12 @@ public class ReplyDTO {
 	public void setBoard_no(int board_no) {
 		this.board_no = board_no;
 	}
-	
-	public int getUser_no() {
-		return user_no;
+	public String getUser_id() {
+		return user_id;
 	}
-	public void setUser_no(int user_no) {
-		this.user_no = user_no;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
-	
 	public String getReply_cont() {
 		return reply_cont;
 	}

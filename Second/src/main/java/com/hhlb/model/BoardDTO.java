@@ -3,7 +3,7 @@ package com.hhlb.model;
 public class BoardDTO {
 
 	private int board_no;
-	private int user_no;
+	private String user_id;
 	private String board_title;
 	private String board_cont;
 	private String board_pwd;
@@ -22,13 +22,12 @@ public class BoardDTO {
 		this.board_no = board_no;
 	}
 	
-	public int getUser_no() {
-		return user_no;
+	public String getUser_id() {
+		return user_id;
 	}
-	public void setUser_no(int user_no) {
-		this.user_no = user_no;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
-	
 	public String getBoard_title() {
 		return board_title;
 	}

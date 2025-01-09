@@ -17,7 +17,7 @@ public class BoardDAO {
 
 	PreparedStatement pstmt = null;
 
-	ResultSet rs,rs1 = null;
+	ResultSet rs, rs1 = null;
 
 	String sql = null;
 
@@ -86,23 +86,23 @@ public class BoardDAO {
 
 	} // closeConn() 메서드 end
 
-	public List<BoardDTO> getBoardList(){
+	public List<BoardDTO> getBoardList() {
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
-		
+
 		try {
 			openConn();
-			
+
 			sql = "select * from sc_board order by board_no desc";
-			
+
 			pstmt = con.prepareStatement(sql);
-			
+
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				BoardDTO dto = new BoardDTO();
-				
+
 				dto.setBoard_no(rs.getInt("board_no"));
-				dto.setUser_no(rs.getInt("user_no"));
+				dto.setUser_id(rs.getString("user_id"));
 				dto.setBoard_title(rs.getString("board_title"));
 				dto.setBoard_cont(rs.getString("board_title"));
 				dto.setBoard_pwd(rs.getString("board_pwd"));
@@ -110,27 +110,51 @@ public class BoardDAO {
 				dto.setBoard_update(rs.getString("board_update"));
 				dto.setBoard_hit(rs.getInt("board_hit"));
 				dto.setBoard_type(rs.getString("board_type"));
-				
-				sql = "select user_id from sc_board b join sc_user u on b.user_no = u.user_no where u.user_no = ?";
-				
-				pstmt = con.prepareStatement(sql);
-				
-				pstmt.setInt(1,rs.getInt("user_no"));
-				
-				rs1 = pstmt.executeQuery();
-				
-				if(rs1.next()) {
-					dto.setBoard_id(rs1.getString(1));
-				}
-				
+
 				list.add(dto);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			closeConn(rs, pstmt, con);
 		}
 		return list;
+	}
+
+	public BoardDTO getBoardDetail(int no) {
+		BoardDTO dto = null;
+
+		try {
+			openConn();
+
+			sql = "select * from sc_board where board_no = ?";
+
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, no);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				dto = new BoardDTO();
+
+				dto.setBoard_no(rs.getInt("board_no"));
+				dto.setUser_id(rs.getString("user_id"));
+				dto.setBoard_title(rs.getString("board_title"));
+				dto.setBoard_cont(rs.getString("board_title"));
+				dto.setBoard_pwd(rs.getString("board_pwd"));
+				dto.setBoard_date(rs.getString("board_date"));
+				dto.setBoard_update(rs.getString("board_update"));
+				dto.setBoard_hit(rs.getInt("board_hit"));
+				dto.setBoard_type(rs.getString("board_type"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return dto;
 	}
 }
