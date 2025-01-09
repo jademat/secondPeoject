@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="../include/header.jsp" />
 <div class="container mt-3">
-	<h2>Q & A</h2>
+	
 	<table class="table table-hover">
 		<thead>
 			<tr align="center">
@@ -20,6 +20,14 @@
 				<th>아이디</th>
 				<th>작성일자</th>
 			</tr>
+			<tr>
+				<td>1</td>
+				<td>교환</td>
+				<td>비밀글입니다.</td>
+				<td>ㅁㄴㅇ</td>
+				<td>2025.01.09</td>
+			</tr>
+			
 		</thead>
 	</table>
 </div>

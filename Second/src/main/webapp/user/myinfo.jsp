@@ -45,13 +45,13 @@
 			<th width="20%">구매일</th>
 			<th width="20%">리뷰</th>
 		</tr>
-		<tr>
+		<tr onclick="openOrderDetailModal()">
 			<td>asd</td>
 			<td>asd</td>
 			<td>asd</td>
 			<td>
-				<button type="button" class="btn btn-primary" data-toggle="modal"
-					data-target="#reviewWriteModal">리뷰작성</button>
+				<button type="button" class="btn btn-primary"
+					onclick="openReviewModal(event)">리뷰작성</button>
 			</td>
 		</tr>
 	</table>
@@ -95,6 +95,21 @@
 	</table>
 </div>
 
+
+
+<script>
+	// 주문 상세 내역 모달 열기
+	function openOrderDetailModal() {
+		$('#orderDetailModal').modal('show');
+	}
+
+	function openReviewModal(event) {
+		event.stopPropagation(); // 버튼 클릭 시 <tr> 클릭 이벤트 발생 방지
+		$('#reviewWriteModal').modal('show');
+	}
+</script>
 <jsp:include page="../modal/myInfoMoadl.jsp" />
 <jsp:include page="../modal/reviewWriteModal.jsp" />
+<jsp:include page="../modal/orderDetailModal.jsp" />
 <jsp:include page="../include/footer.jsp" />
+

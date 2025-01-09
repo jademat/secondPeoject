@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>월별 매출 현황</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/startbootstrap_admin_pages/css/style.css">
+   	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 

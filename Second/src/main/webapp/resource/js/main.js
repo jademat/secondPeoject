@@ -101,11 +101,21 @@
     });
 
 
-    // 토글버튼 클릭 시 내용 보이기
-    $(document).ready(function() {
-        $("#moreButton").click(function() {
-            // 숨겨진 내용을 토글 (보이기/숨기기)
-            $("#hiddenContent").slideToggle();
+	// 더보기 버튼 클릭 시 이벤트 핸들러
+    $(document).ready(function () {
+        $('#moreButton').click(function () {
+            const hiddenContent = $('#hiddenContent');
+            const button = $(this);
+
+            // 숨겨진 내용 표시/숨기기
+            if (hiddenContent.is(':hidden')) {
+                hiddenContent.slideDown(); // 슬라이드 다운 효과로 표시
+                button.text('숨기기'); // 버튼 텍스트 변경
+                hiddenContent.after(button); // 버튼을 숨겨진 내용 아래로 이동
+            } else {
+                hiddenContent.slideUp(); // 슬라이드 업 효과로 숨김
+                button.text('더보기'); // 버튼 텍스트 변경
+            }
         });
     });
     
