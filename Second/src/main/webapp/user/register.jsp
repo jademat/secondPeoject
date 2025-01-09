@@ -18,17 +18,23 @@
 						<div class="invalid-feedback">이름을 입력해주세요.</div>
 					</div>
 					<div class="col-md-6 mb-3">
-						<label for="nickname">별명</label> <input type="text"
+						<label for="nickname"> 사용할 닉네임 </label> <input type="text"
 							class="form-control" id="nickname" placeholder="" value=""
 							required>
 						<div class="invalid-feedback">별명을 입력해주세요.</div>
 					</div>
 				</div>
 
+
 				<div class="mb-3">
-					<label for="id">아이디</label> <input type="text" class="form-control"
-						id="id" placeholder="" required>
+					<label for="id">아이디</label> <br> <input type="text"
+						class="form-control" id="id" placeholder="" required
+						style="width: 80%; display: inline-block;">
+					<button type="button" id="check-duplicate"
+						class="btn btn-primary mt-2" style="display: inline-block;">중복
+						확인</button>
 					<div class="invalid-feedback">아이디를 입력해주세요.</div>
+					<div id="duplicate-message" class="mt-2"></div>
 				</div>
 
 				<div class="mb-3">

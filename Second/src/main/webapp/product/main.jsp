@@ -455,5 +455,5 @@
     <!-- Vendor End -->
 
 
-<jsp:include page="../modal/reviewModal.jsp" />
+
 <jsp:include page="../include/footer.jsp" />
