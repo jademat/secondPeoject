@@ -54,7 +54,7 @@
             <div class="row bg-secondary py-2 px-xl-5">
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="d-inline-flex align-items-center">
-                        <a class="text-dark" href="">FAQs</a>
+                        <a class="text-dark" href="<%=request.getContextPath() %>board/board.jsp">FAQs</a>
                 
                     </div>
                 </div>

@@ -183,7 +183,7 @@ public class BoardDAO {
 				dto.setBoard_no(rs.getInt("board_no"));
 				dto.setUser_id(rs.getString("user_id"));
 				dto.setBoard_title(rs.getString("board_title"));
-				dto.setBoard_cont(rs.getString("board_title"));
+				dto.setBoard_cont(rs.getString("board_cont"));
 				dto.setBoard_pwd(rs.getString("board_pwd"));
 				dto.setBoard_date(rs.getString("board_date"));
 				dto.setBoard_update(rs.getString("board_update"));
@@ -199,4 +199,5 @@ public class BoardDAO {
 		}
 		return dto;
 	}
+
 }
