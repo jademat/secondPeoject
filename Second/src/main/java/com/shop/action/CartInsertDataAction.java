@@ -11,7 +11,7 @@ import com.hhlb.controller.ActionForward;
 import com.hhlb.model.CartDAO;
 import com.hhlb.model.CartDTO;
 
-public class CartInsertDateAction implements Action {
+public class CartInsertDataAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
