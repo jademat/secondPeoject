@@ -89,6 +89,7 @@ Connection con = null;
 		
 	}  // closeConn() 메서드 end
 	
+
 	// 입력받은 아이의 중복 여부를 체크하는 메서드.
 	public int idCheck(String id) {
 		
@@ -152,5 +153,75 @@ Connection con = null;
 			closeConn(rs, pstmt, con);
 		}
 		return result;
-}
+	}
+	public int userCheck(String id, String pwd) {
+		int result = 0;
+
+		try {
+
+			openConn();
+			
+			sql = "select * from sc_user where user_id = ?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(pwd.equals(rs.getString("user_pwd"))) {
+					result = 1;
+				}else {
+					result = -1;
+				}
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return result;
+	}
+	
+	public UserDTO getUser(String id) {
+		UserDTO dto = null;
+		
+		try {
+			openConn();
+			
+			sql = "select * from sc_user where user_id = ?";
+		
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new UserDTO();
+				
+				dto.setUser_id(rs.getString("user_id"));
+				dto.setUser_pwd(rs.getString("user_pwd"));
+				dto.setUser_name(rs.getString("user_name"));
+				dto.setUser_nick(rs.getString("user_nick"));
+				dto.setUser_email(rs.getString("user_email"));
+				dto.setUser_age(rs.getInt("user_age"));
+				dto.setUser_gender(rs.getString("user_gender"));
+				dto.setUser_phone(rs.getString("user_phone"));
+				dto.setUser_addr(rs.getString("user_addr"));
+				dto.setUser_date(rs.getString("user_date"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		
+		return dto;
+	}
+
 }

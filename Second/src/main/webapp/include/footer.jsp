@@ -27,6 +27,7 @@
                         <a class="text-dark mb-2" href="<%=request.getContextPath() %>/cart.go"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
                         <a class="text-dark mb-2" href="<%=request.getContextPath() %>/user_board_list.go"><i class="fa fa-angle-right mr-2"></i>Board</a>
                         <a class="text-dark" href="<%=request.getContextPath() %>/review.go"><i class="fa fa-angle-right mr-2"></i>Review</a>
+
                     </div>
                 </div>
 
