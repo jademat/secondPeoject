@@ -11,7 +11,7 @@ textarea {
 }
 </style>
 <div class="container">
-	<c:set var="cont" value="${Cont }" />
+	<c:set var="cont" value="${bCont }" />
 	<table class="table table-borderless">
 		<c:if test="${!empty cont }">
 			

@@ -22,7 +22,7 @@ public class BoardDetailAction implements Action {
 		
 		BoardDTO bCont = dao.getBoardDetail(board_no);
 		
-		request.setAttribute("Cont", bCont);
+		request.setAttribute("bCont", bCont);
 		
 		ActionForward forward = new ActionForward();
 		
