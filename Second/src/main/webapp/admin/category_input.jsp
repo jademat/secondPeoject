@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>카테고리 등록</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/startbootstrap_admin_pages/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.js"></script>
@@ -26,7 +28,7 @@
 
         <br> <br>
 
-        <form action="category_insert.go" method="POST" class="category-form">
+        <form action="<%=request.getContextPath() %>/category_insert.go" method="POST" class="category-form">
             <!-- 카테고리 이름 입력 -->
             <div class="form-group">
                 <label for="category_name">카테고리 이름:</label>
@@ -69,6 +71,7 @@
             }
         });
     </script>
+
 
 </body>
 </html>

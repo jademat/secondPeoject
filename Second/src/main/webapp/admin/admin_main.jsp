@@ -7,30 +7,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/startbootstrap_admin_pages/css/style.css">
    	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.js"></script>
-    <style>
-        /* 화면 전체 높이를 채우는 기본 스타일 */
-        html, body {
-            height: 100%; /* HTML과 BODY를 화면 전체 높이로 설정 */
-            margin: 0;    /* 기본 여백 제거 */
-        }
-
-        #content-wrapper {
-            display: flex;
-            flex-direction: column; /* 세로 방향 정렬 */
-            min-height: 100vh;      /* 화면 전체 높이 설정 */
-        }
-
-        #content {
-            flex-grow: 1; /* 컨텐츠가 여유 공간을 차지하도록 설정 */
-        }
-
-        footer {
-            background-color: #f8f9fa; /* Footer 배경색 */
-            text-align: center;
-            padding: 1rem 0;
-            width: 100%;
-        }
-    </style>
+    
 </head>
 <body>
     <!-- 헤더 포함 -->
