@@ -5,7 +5,7 @@ public class CartDTO {
 	private int cart_no;
 	private int product_no;
 	private int category_no;
-	private int user_no;
+	private String user_id;
 	private int cart_deliveryfee;
 	
 	
@@ -29,14 +29,12 @@ public class CartDTO {
 	public void setCategory_no(int category_no) {
 		this.category_no = category_no;
 	}
-	
-	public int getUser_no() {
-		return user_no;
+	public String getUser_id() {
+		return user_id;
 	}
-	public void setUser_no(int user_no) {
-		this.user_no = user_no;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
-	
 	public int getCart_deliveryfee() {
 		return cart_deliveryfee;
 	}

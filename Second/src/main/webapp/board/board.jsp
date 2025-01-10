@@ -23,11 +23,11 @@
 			</tr>
 			<c:if test="${!empty list }">
 				<c:forEach items="${list}" var = "dto">
-					<tr>
+					<tr onClick="location.href='user_boardDetail.go?no=${dto.getBoard_no() }'">
 						<td>${dto.getBoard_no() }</td>
 						<td>${dto.getBoard_type() }</td>
 						<td>${dto.getBoard_title() }</td>
-						<td>${dto.getBoard_id() }</td>
+						<td>${dto.getUser_id() }</td>
 						<td>${dto.getBoard_date().substring(0,10) }</td>
 					</tr>
 				</c:forEach>

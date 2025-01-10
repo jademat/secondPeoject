@@ -89,4 +89,67 @@ public class ProductDAO {
 			}
 		
 	}  // closeConn() 메서드 end
+	
+	
+	// 제품 번호에 해당하는 제품의 상세 정보를 조회하는 메서드
+	public ProductDTO getProductContent(int pnum) {
+		ProductDTO dto = null;
+		
+		try {
+			openConn();
+			
+			sql = "selete * from sc_product where product_no = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, pnum);
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				dto = new ProductDTO();
+				
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return dto;
+	} // getProductContent() 메서드 end
+	
+	
+	//
+	public int getProductRiviewRank(int pnum) {
+		int result = 0;
+		
+		try {
+			openConn();
+			
+			sql = "SELECT ROUND(AVG(r.REVIEW_RANK), 1) AS AVG_REVIEW_RANK FROM sc_product p "
+					+ " JOIN sc_review r ON p.PRODUCT_NO = r.PRODUCT_NO WHERE p.PRODUCT_NO = ?"
+					+ "GROUP BY p.?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, pnum);
+			pstmt.setInt(2, pnum);
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	} // getProductRiviewRank() 메서드 end
 }
