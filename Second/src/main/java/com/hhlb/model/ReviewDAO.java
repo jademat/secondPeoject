@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -89,7 +91,85 @@ Connection con = null;
 		
 	}  // closeConn() 메서드 end
 	
+
+	public List<ReviewDTO> getReview(String id){
+		List<ReviewDTO> rList = new ArrayList<ReviewDTO>();
+		
+		try {
+			openConn();
+			
+			sql = "select * from sc_review where user_id = ?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1,id);
+		
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ReviewDTO dto = new ReviewDTO();
+				
+				dto.setReview_no(rs.getInt("review_no"));
+				dto.setUser_id(rs.getString("user_id"));
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setReview_cont(rs.getString("review_cont"));
+				dto.setReview_rank(rs.getInt("review_rank"));
+				dto.setReview_image(rs.getString("review_image"));
+				dto.setReview_date(rs.getString("review_date"));
+				dto.setReview_update(rs.getString("review_update"));
+				dto.setReview_hit(rs.getInt("review_hit"));
+				
+				rList.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		
+		
+		return rList;
+	}
 	
-	//
+	public List<ReviewDTO> getReviewList(){
+		List<ReviewDTO> rList = new ArrayList<ReviewDTO>();
+		
+		try {
+			openConn();
+			
+			sql = "select * from sc_review order by review_no desc";
+			
+			pstmt = con.prepareStatement(sql);
+		
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ReviewDTO dto = new ReviewDTO();
+				
+				dto.setReview_no(rs.getInt("review_no"));
+				dto.setUser_id(rs.getString("user_id"));
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setReview_cont(rs.getString("review_cont"));
+				dto.setReview_rank(rs.getInt("review_rank"));
+				dto.setReview_image(rs.getString("review_image"));
+				dto.setReview_date(rs.getString("review_date"));
+				dto.setReview_update(rs.getString("review_update"));
+				dto.setReview_hit(rs.getInt("review_hit"));
+				
+				rList.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		
+		
+		return rList;
+	}
 	
 }

@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../include/header.jsp" />
 <div class="container mt-3">
-
-	<c:set var="list" value="${boardList }" />
+	<c:set var="user_id" value="${sessionScope.user_id}" />
+	<c:set var="blist" value="${blist }" />
 	<table class="table table-hover">
 		<thead>
 			<tr align="center">
@@ -21,9 +21,10 @@
 				<th>아이디</th>
 				<th>작성일자</th>
 			</tr>
-			<c:if test="${!empty list }">
-				<c:forEach items="${list}" var = "dto">
-					<tr onClick="location.href='user_boardDetail.go?no=${dto.getBoard_no() }'">
+			<c:if test="${!empty blist }">
+				<c:forEach items="${blist}" var="dto">
+					<tr
+						onClick="location.href='user_boardDetail.go?no=${dto.getBoard_no() }'">
 						<td>${dto.getBoard_no() }</td>
 						<td>${dto.getBoard_type() }</td>
 						<td>${dto.getBoard_title() }</td>
@@ -32,22 +33,20 @@
 					</tr>
 				</c:forEach>
 			</c:if>
-			
-			<c:if test = "${empty list }">
-				<td colspan = "5" align = "center">
-					게시물이 없습니다.
-				</td>
+
+			<c:if test="${empty blist }">
+				<td colspan="5" align="center">게시물이 없습니다.</td>
 			</c:if>
 		</thead>
 	</table>
 </div>
 <br>
 <br>
-
-<div align="center">
-	<button type="button" class="btn btn-primary" data-toggle="modal"
-		data-target="#exampleModal">글쓰기</button>
-</div>
-
-<jsp:include page="../modal/boardModal.jsp" />
+<c:if test="${!empty user_id}">
+	<div align="center">
+		<button type="button" class="btn btn-primary" data-toggle="modal"
+			data-target="#boardWriteModal">글쓰기</button>
+	</div>
+</c:if>
+<jsp:include page="../modal/boardWriteModal.jsp" />
 <jsp:include page="../include/footer.jsp" />
