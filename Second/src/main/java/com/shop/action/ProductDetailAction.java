@@ -24,10 +24,17 @@ public class ProductDetailAction implements Action {
 		// 상품에 대한 정보를 가져오는 메서드
 		ProductDTO cont = dao.getProductContent(product_no);
 		
+		//dto.리뷰 dto가져와야함, 가져와서 setAttribute 한 뒤 detail.jsp에서 리뷰 섹션 정비. 그럼 detail 끝. 그 후 더미 데이터도 만들고 리스트 페이지도 수정
+		
 		// 해당 상품의 review_rank 를 가져오는 메서드
-		dao.getProductRiviewRank(product_no);
+		int review_rank = dao.getProductRiviewRank(product_no);
+		
+		// 해당 상품의 리뷰 개수를 가져오는 메서드
+		int review_count = dao.getProductRiviewCount(product_no);
 		
 		request.setAttribute("ProductCont", cont);
+		request.setAttribute("ReviewRank", review_rank);
+		request.setAttribute("ReviewCount", review_count);
 		
 		ActionForward forward = new ActionForward();
 		
