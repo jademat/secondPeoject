@@ -19,9 +19,11 @@
             <div class="invalid-feedback">
               비밀번호를 입력해주세요.
             </div>
+            <form action="<%=request.getContextPath() %>/user_resetPwd.go" >
             <div style="text-align: left; width: 500px; margin-top: 5px;">
                 <a href="#" data-toggle="modal" data-target="#findPasswordModal" style="text-decoration: none; color: #007bff;">비밀번호를 잊으셨나요?</a>
             </div>
+            </form>
         </div>
 
 	<div style="text-align: center;">
