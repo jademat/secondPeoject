@@ -25,7 +25,7 @@
                         <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
                         
                         <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                        <a class="text-dark mb-2" href=""><i class="fa fa-angle-right mr-2"></i>Board</a>
+                        <a class="text-dark mb-2" href="<%=request.getContextPath() %>/user_board_list.go"><i class="fa fa-angle-right mr-2"></i>Board</a>
                         <a class="text-dark" href=""><i class="fa fa-angle-right mr-2"></i>Review</a>
                     </div>
                 </div>
