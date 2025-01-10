@@ -1,33 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	
 <jsp:include page="../include/header.jsp" />
 
 
-    <!-- Shop Detail Start -->
+    <!-- 상품 정보(상품 사진, 장바구니 버튼, 상품 설명 등) start -->
     <div class="container-fluid py-5">
+    
+    <c:set var="dto" value="${ ProductCont }"/>
+    
+    	<!-- 받아올 상품 데이터가 잡힌 경우 -->
+    	<c:if test="${ !empty dto  }">
         <div class="row px-xl-5">
+        	<!-- 상품 사진 -->
             <div class="col-lg-5 pb-5">
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner border">
                         <div class="carousel-item active">
-                            <img class="w-100 h-100" src="../resource/img/product-1.jpg" alt="Image">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="w-100 h-100" src="../resource/img/product-2.jpg" alt="Image">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="w-100 h-100" src="../resource/img/product-3.jpg" alt="Image">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="w-100 h-100" src="../resource/img/product-4.jpg" alt="Image">
-                        </div>
+                            <img class="w-100 h-100" src="<%= request.getContextPath() %>../resource/img/${ dto.getProduct_image }"
+                            		alt="Image">
                     </div>
-                    <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
-                        <i class="fa fa-2x fa-angle-left text-dark"></i>
-                    </a>
-                    <a class="carousel-control-next" href="#product-carousel" data-slide="next">
-                        <i class="fa fa-2x fa-angle-right text-dark"></i>
-                    </a>
                 </div>
             </div>
 
@@ -306,7 +301,15 @@
             </div>
         </div>
     </div>
-    <!-- Shop Detail End -->
+    </c:if>
+    
+    <!-- 받아올 상품 데이터가 잡히지 않은 경우 -->
+    <c:if test="${ empty dto }">
+    
+    	<h3>상품 데이터 오류</h3>
+    
+    </c:if>
+    <!-- 상품 정보(상품 사진, 장바구니 버튼, 상품 설명 등) end -->
 
 
     <!-- Products Start -->
