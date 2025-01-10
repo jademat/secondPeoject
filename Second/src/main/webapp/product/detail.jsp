@@ -26,15 +26,12 @@
                 </div>
             </div>
 
+			<!-- 상품 사진 옆 결제 정보 창 -->
             <div class="col-lg-7 pb-5">
-                <h3 class="font-weight-semi-bold">Colorful Stylish Shirt</h3>
+                <h3 class="font-weight-semi-bold">${ dto.getProduct_name }</h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star-half-alt"></small>
-                        <small class="far fa-star"></small>
+                    	<small class="pt-1"></small>
                     </div>
                     <small class="pt-1">(50 Reviews)</small>
                 </div>

@@ -21,7 +21,11 @@ public class ProductDetailAction implements Action {
 		
 		ProductDAO dao = ProductDAO.getInstance();
 		
+		// 상품에 대한 정보를 가져오는 메서드
 		ProductDTO cont = dao.getProductContent(product_no);
+		
+		// 해당 상품의 review_rank 를 가져오는 메서드
+		dao.getProductRiviewRank(product_no);
 		
 		request.setAttribute("ProductCont", cont);
 		
