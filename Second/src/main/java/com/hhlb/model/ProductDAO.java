@@ -128,28 +128,5 @@ public class ProductDAO {
 	
 	
 	//
-	public int getProductRiviewRank(int pnum) {
-		int result = 0;
-		
-		try {
-			openConn();
-			
-			sql = "SELECT ROUND(AVG(r.REVIEW_RANK), 1) AS AVG_REVIEW_RANK FROM sc_product p "
-					+ " JOIN sc_review r ON p.PRODUCT_NO = r.PRODUCT_NO WHERE p.PRODUCT_NO = ?"
-					+ "GROUP BY p.?";
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setInt(1, pnum);
-			pstmt.setInt(2, pnum);
-			
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	} // getProductRiviewRank() 메서드 end
+	
 }
