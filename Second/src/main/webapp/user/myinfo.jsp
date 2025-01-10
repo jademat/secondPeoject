@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../include/header.jsp" />
 
 <div class="container">
@@ -9,26 +10,27 @@
 			data-target="#myInfoModal">개인정보수정</button>
 	</div>
 	<br>
+	<c:set var="ucont" value="${uCont }" />
 	<table class="table table-bordered">
 		<tr>
 			<th scope="row" width="20%">아이디</th>
-			<td>Mark</td>
+			<td>${ucont.getUser_id() }</td>
 		</tr>
 		<tr>
 			<th scope="row">이름</th>
-			<td>Thornton</td>
+			<td>${ucont.getUser_name() }</td>
 		</tr>
 		<tr>
 			<th scope="row">닉네임</th>
-			<td>Larry</td>
+			<td>${ucont.getUser_nick() }</td>
 		</tr>
 		<tr>
 			<th scope="row">주소</th>
-			<td>서울시 마포구</td>
+			<td>${ucont.getUser_addr() }</td>
 		</tr>
 		<tr>
 			<th scope="row">연락처</th>
-			<td>010-1234-1234</td>
+			<td>${ucont.getUser_phone() }</td>
 		</tr>
 	</table>
 </div>
@@ -68,17 +70,28 @@
 			<th width="65%">리뷰제목</th>
 			<th>작성일</th>
 		</tr>
-		<tr>
-			<td>asd</td>
-			<td>asd</td>
-			<td>asd</td>
-		</tr>
+		<c:set var="rCont" value="${ rCont}" />
+		<c:if test="${!empty rCont }">
+			<c:forEach items="${rCont }" var="rList">
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</c:forEach>
+		</c:if>
+		<c:if test="${empty rList }">
+			<tr>
+				<td colspan="3" align="center">작성한 리뷰가 없습니다.</td>
+			</tr>
+		</c:if>
 	</table>
 </div>
 
 <br>
 <br>
 <div class="container">
+	<c:set var="bCont" value="${bCont }" />
 	<h3>내가 쓴 게시판</h3>
 	<br>
 	<table class="table table-bordered">
@@ -86,11 +99,24 @@
 			<th scope="row" width="10%">교환 환불</th>
 			<th scope="row" width="50%">글 제목</th>
 			<th scope="row" width="20%">작성일</th>
-			<th scope="row" width="20%">답변상태</th>
 		</tr>
-		<tr>
-			<td colspan="4" align="center">작성한 게시물이 없습니다.</td>
-		</tr>
+
+
+		<c:if test="${!empty bCont }">
+			<c:forEach items="${bCont }" var="bCont">
+				<tr>
+					<td>${bCont.getBoard_type() }</td>
+					<td>${bCont.getBoard_title() }</td>
+					<td>${bCont.getBoard_date().substring(0,10) }</td>
+				</tr>
+			</c:forEach>
+		</c:if>
+
+		<c:if test="${empty bCont }">
+			<tr>
+				<td colspan="4" align="center">작성한 게시물이 없습니다.</td>
+			</tr>
+		</c:if>
 
 	</table>
 </div>

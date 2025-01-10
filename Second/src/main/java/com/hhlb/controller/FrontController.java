@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 
@@ -35,6 +36,10 @@ public class FrontController extends HttpServlet {
 		String command = uri.substring(path.length() + 1);
 		System.out.println("Command >>> " + command);
 		
+		HttpSession session = request.getSession();
+		
+		System.out.println("session >>> " + session);
+		
 		Action action = null;
 		ActionForward forward = null;
 		
@@ -59,7 +64,8 @@ public class FrontController extends HttpServlet {
 		
 		FileInputStream fis =
 				new FileInputStream("");
-		
+
+
 		prop.load(fis);
 		
 		String value = prop.getProperty(command);

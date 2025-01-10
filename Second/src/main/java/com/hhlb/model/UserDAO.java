@@ -88,4 +88,140 @@ Connection con = null;
 			}
 		
 	}  // closeConn() 메서드 end
+	
+
+	// 입력받은 아이의 중복 여부를 체크하는 메서드.
+	public int idCheck(String id) {
+		
+		int check = 0;
+		
+		
+		try {
+			openConn();
+			
+			sql = "select * from sc_user where user_id = ?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				// 중복인 경우
+				check = -1;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			closeConn(rs, pstmt, con);
+		}
+		return check;
+	}
+
+	public int insertUser(UserDTO dto) {
+
+		int result = 0;
+		
+		try {
+			
+			
+			openConn();
+			
+			sql="insert into sc_user values(?,?,?,?,?,?,?,?,?,sysdate)";
+			
+			pstmt= con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getUser_id());
+			pstmt.setString(2, dto.getUser_pwd());
+			pstmt.setString(3, dto.getUser_name());
+			pstmt.setString(4, dto.getUser_nick());
+			pstmt.setString(5, dto.getUser_email());
+			pstmt.setInt(6, dto.getUser_age());
+			pstmt.setString(7, dto.getUser_gender());
+			pstmt.setString(8, dto.getUser_phone());
+			pstmt.setString(9, dto.getUser_addr());
+			
+			result = pstmt.executeUpdate();
+	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return result;
+	}
+	public int userCheck(String id, String pwd) {
+		int result = 0;
+
+		try {
+
+			openConn();
+			
+			sql = "select * from sc_user where user_id = ?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(pwd.equals(rs.getString("user_pwd"))) {
+					result = 1;
+				}else {
+					result = -1;
+				}
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return result;
+	}
+	
+	public UserDTO getUser(String id) {
+		UserDTO dto = null;
+		
+		try {
+			openConn();
+			
+			sql = "select * from sc_user where user_id = ?";
+		
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new UserDTO();
+				
+				dto.setUser_id(rs.getString("user_id"));
+				dto.setUser_pwd(rs.getString("user_pwd"));
+				dto.setUser_name(rs.getString("user_name"));
+				dto.setUser_nick(rs.getString("user_nick"));
+				dto.setUser_email(rs.getString("user_email"));
+				dto.setUser_age(rs.getInt("user_age"));
+				dto.setUser_gender(rs.getString("user_gender"));
+				dto.setUser_phone(rs.getString("user_phone"));
+				dto.setUser_addr(rs.getString("user_addr"));
+				dto.setUser_date(rs.getString("user_date"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		
+		return dto;
+	}
+
 }

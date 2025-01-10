@@ -12,9 +12,8 @@ public class BoardDTO {
 	private String board_img;
 	private int board_hit;
 	private String board_type;
-	private String board_id;
+	private int board_visible;
 	
-
 	public int getBoard_no() {
 		return board_no;
 	}
@@ -82,12 +81,12 @@ public class BoardDTO {
 	public void setBoard_type(String board_type) {
 		this.board_type = board_type;
 	}
+	public int getBoard_visible() {
+		return board_visible;
+	}
+	public void setBoard_visible(int board_visible) {
+		this.board_visible = board_visible;
+	}
 	
-	public String getBoard_id() {
-		return board_id;
-	}
-	public void setBoard_id(String board_id) {
-		this.board_id = board_id;
-	}
 
 }

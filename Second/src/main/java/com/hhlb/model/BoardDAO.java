@@ -86,6 +86,46 @@ public class BoardDAO {
 
 	} // closeConn() 메서드 end
 
+	public List<BoardDTO> getBoard(String id) {
+
+		List<BoardDTO> list = new ArrayList<BoardDTO>();
+
+		try {
+
+			openConn();
+
+			sql = "select * from sc_board where user_id = ?";
+
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, id);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				BoardDTO dto = new BoardDTO();
+
+				dto.setBoard_no(rs.getInt("board_no"));
+				dto.setUser_id(rs.getString("user_id"));
+				dto.setBoard_title(rs.getString("board_title"));
+				dto.setBoard_cont(rs.getString("board_title"));
+				dto.setBoard_pwd(rs.getString("board_pwd"));
+				dto.setBoard_date(rs.getString("board_date"));
+				dto.setBoard_update(rs.getString("board_update"));
+				dto.setBoard_hit(rs.getInt("board_hit"));
+				dto.setBoard_type(rs.getString("board_type"));
+				dto.setBoard_visible(rs.getInt("board_visible"));
+
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return list;
+	}
+
 	public List<BoardDTO> getBoardList() {
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
 
@@ -110,7 +150,8 @@ public class BoardDAO {
 				dto.setBoard_update(rs.getString("board_update"));
 				dto.setBoard_hit(rs.getInt("board_hit"));
 				dto.setBoard_type(rs.getString("board_type"));
-
+				dto.setBoard_visible(rs.getInt("board_visible"));
+				
 				list.add(dto);
 			}
 
@@ -142,12 +183,13 @@ public class BoardDAO {
 				dto.setBoard_no(rs.getInt("board_no"));
 				dto.setUser_id(rs.getString("user_id"));
 				dto.setBoard_title(rs.getString("board_title"));
-				dto.setBoard_cont(rs.getString("board_title"));
+				dto.setBoard_cont(rs.getString("board_cont"));
 				dto.setBoard_pwd(rs.getString("board_pwd"));
 				dto.setBoard_date(rs.getString("board_date"));
 				dto.setBoard_update(rs.getString("board_update"));
 				dto.setBoard_hit(rs.getInt("board_hit"));
 				dto.setBoard_type(rs.getString("board_type"));
+				dto.setBoard_visible(rs.getInt("board_visible"));
 			}
 
 		} catch (SQLException e) {
@@ -157,4 +199,5 @@ public class BoardDAO {
 		}
 		return dto;
 	}
+
 }

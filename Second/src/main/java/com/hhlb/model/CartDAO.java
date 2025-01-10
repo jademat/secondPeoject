@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -88,4 +90,69 @@ public class CartDAO {
 			}
 		
 	}  // closeConn() 메서드 end
+	
+	
+	// product/detail.jsp에서 Add to Cart 버튼을 클릭시 넘어온 데이터들을 sc_cart 테이블에 저장시기는 메서드
+	public int insertCartData(CartDTO dto, String user_id) {
+		int result = 0, count = 0;
+		
+		try {
+			openConn();
+			
+			sql = "select max(cart_no) from sc_cart";
+			pstmt = con.prepareStatement(sql);
+			
+			if (rs.next()) {
+				count = rs.getInt(1) + 1;
+			}
+			
+			sql = "insert into sc_cart values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, count);
+			pstmt.setInt(2, dto.getProduct_no());
+			pstmt.setInt(3, dto.getCategory_no());
+			pstmt.setString(4, user_id);
+			pstmt.setInt(5, 0);
+			pstmt.setString(6, dto.getProduct_size());
+			pstmt.setInt(7, dto.getProduct_qty());
+			pstmt.setInt(8, dto.getProduct_price());
+			pstmt.setString(9, dto.getProduct_image());
+			pstmt.setString(10, dto.getProduct_name());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return result;
+	} // insertCartData() 메서드 end
+
+
+	public List<CartDTO> getCartList() {
+		
+		List<CartDTO> list = new ArrayList<CartDTO>();
+		
+		
+		try {
+			
+			openConn();
+			
+			sql = "select * from sc_cart order by cart_no desc";
+			
+			pstmt= con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 }
