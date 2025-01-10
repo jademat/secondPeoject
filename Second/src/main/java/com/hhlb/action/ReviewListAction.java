@@ -8,25 +8,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.hhlb.controller.Action;
 import com.hhlb.controller.ActionForward;
-import com.hhlb.model.BoardDAO;
-import com.hhlb.model.BoardDTO;
+import com.hhlb.model.ReviewDAO;
+import com.hhlb.model.ReviewDTO;
 
-public class BoardListAction implements Action {
+public class ReviewListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		ReviewDAO dao = ReviewDAO.getInstance();
 		
-		BoardDAO dao = BoardDAO.getInstance();
+		List<ReviewDTO> list = dao.getReviewList();
 		
-		List<BoardDTO> blist = dao.getBoardList();
-		
-		request.setAttribute("blist", blist);
+		request.setAttribute("rList", list);
 		
 		ActionForward forward = new ActionForward();
 		
 		forward.setRedirect(false);
 		
-		forward.setPath("/board/board.jsp");
+		forward.setPath("/review/review.jsp");
 		
 		return forward;
 	}

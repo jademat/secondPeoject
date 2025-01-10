@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +62,7 @@
             </div>
             <div class="row align-items-center py-3 px-xl-5">
                 <div class="col-lg-3 d-none d-lg-block">
-                    <a href="../product/main.jsp" class="text-decoration-none">
+                    <a href="<%=request.getContextPath() %>/user_main.go" class="text-decoration-none">
                         <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>HHLB</h1>
                     </a>
                 </div>
@@ -109,8 +110,8 @@
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="../product/main.jsp" class="nav-item nav-link">Home</a>
-                                <a href="../product/shop.jsp" class="nav-item nav-link">Shop</a>
+                                <a href="<%=request.getContextPath() %>/user_main.go" class="nav-item nav-link">Home</a>
+                                <a href="<%=request.getContextPath() %>/user_shop.go" class="nav-item nav-link">Shop</a>
                            
                         
                                 <div class="nav-item dropdown">
@@ -126,12 +127,17 @@
                                 </div>
 
                                 <a href="<%=request.getContextPath() %>/user_board_list.go" class="nav-item nav-link">Board</a>
-                                <a href="" class="nav-item nav-link">Review</a>
+                                <a href="<%=request.getContextPath() %>/user_review_list.go" class="nav-item nav-link">Review</a>
 
                             </div>
                             <div class="navbar-nav ml-auto py-0">
+                            <c:if test="${empty user_id}">
                                 <a href="../user/login.jsp" class="nav-item nav-link">Login</a>
                                 <a href="../user/register.jsp" class="nav-item nav-link">Register</a>
+                            </c:if>
+                            <c:if test="${!empty user_id}">
+                                <a href="<%=request.getContextPath() %>/user_myInfo.go?id=${sessionScope.user_id}" class="nav-item nav-link">myInfo</a>
+                            </c:if>
                             </div>
                             <div class="col-lg-3 col-6 d-flex" align = "right">
                                 <a href="../product/cart.jsp" class="btn border ms-auto">
