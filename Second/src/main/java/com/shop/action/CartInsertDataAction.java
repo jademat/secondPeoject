@@ -15,7 +15,7 @@ public class CartInsertDataAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// product/detail.jsp에서 Add to Cart 버튼을 클릭시 넘어온 데이터들을 sc_cart 테이블에 저장시기는 비지니스 로직
+		// product/detail.jsp에서 Add to Cart 버튼을 클릭시 넘어온 데이터들을 sc_cart 테이블에 저장시키는 비지니스 로직
 		
 		String product_size = request.getParameter("size");
 		String product_qty = request.getParameter("qty");
@@ -40,6 +40,7 @@ public class CartInsertDataAction implements Action {
 		
 		CartDAO dao = CartDAO.getInstance();
 		
+		// product/detail.jsp에서 Add to Cart 버튼을 클릭시 해당 페이지 상품을 장바구니에 추가하는 메서드
 		int check = dao.insertCartData(dto, user_id);
 		
 		PrintWriter out = response.getWriter();
