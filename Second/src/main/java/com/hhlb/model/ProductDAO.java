@@ -93,6 +93,7 @@ public class ProductDAO {
 	}  // closeConn() 메서드 end
 	
 	
+
 	// 모든 상품 리스트를 가져오는 메서드
 	public List<ProductDTO> getAllProduct() {
 		List<ProductDTO> list = new ArrayList<ProductDTO>(); 
@@ -139,7 +140,7 @@ public class ProductDAO {
 		try {
 			openConn();
 			
-			sql = "selete * from sc_product where product_no = ?";
+			sql = "select * from sc_product where product_no = ?";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setInt(1, pnum);
@@ -157,6 +158,7 @@ public class ProductDAO {
 				dto.setProduct_hit(rs.getInt("product_hit"));
 				dto.setProduct_image(rs.getString("product_image"));
 				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -194,6 +196,7 @@ public class ProductDAO {
 		}
 		return result;
 	} // getProductRiviewRank() 메서드 end
+
 	
 	
 	// 해당 상품번호에 일치하는 상품의 리뷰 개수를 가져오는 메서드

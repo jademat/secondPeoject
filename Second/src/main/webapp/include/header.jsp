@@ -132,15 +132,18 @@
                             </div>
                             <div class="navbar-nav ml-auto py-0">
                             <c:if test="${empty user_id}">
+
                                 <a href="<%=request.getContextPath() %>/user_login.go" class="nav-item nav-link">Login</a>
                                 <a href="<%=request.getContextPath() %>/user_register.go" class="nav-item nav-link">Register</a>
+
                             </c:if>
                             <c:if test="${!empty user_id}">
                                 <a href="<%=request.getContextPath() %>/user_myInfo.go?id=${sessionScope.user_id}" class="nav-item nav-link">myInfo</a>
+                                <a href="<%=request.getContextPath() %>/user_logout.go" class="nav-item nav-link">Logout</a>
                             </c:if>
                             </div>
                             <div class="col-lg-3 col-6 d-flex" align = "right">
-                                <a href="../product/cart.jsp" class="btn border ms-auto">
+                                <a href="<%= request.getContextPath() %>/user_cart.go?id=${ user_id }" class="btn border ms-auto">
                                     <i class="fas fa-shopping-cart text-primary"></i>
                                     <span class="badge">0</span>
                                 </a>

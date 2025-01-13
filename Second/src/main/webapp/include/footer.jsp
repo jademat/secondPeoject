@@ -53,5 +53,8 @@
 	<script src="../resource/js/main.js"></script>
  -->
 
+	<script src="../resource/js/main.js"></script> -->
+
+
 </body>
 </html>
