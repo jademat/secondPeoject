@@ -223,5 +223,115 @@ Connection con = null;
 		
 		return dto;
 	}
+	public UserDTO findUser(String userName, String userId, String userEmail) {
+		// db 에서 회원 정보 검색
 
+	
+		UserDTO dto = null;
+
+		try {
+			openConn();
+
+			sql = "select * from sc_user where user_name=? and user_id=? and user_email=?";
+
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, userName);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, userEmail);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+
+				dto = new UserDTO();
+
+				dto.setUser_name(rs.getString("user_name"));
+				dto.setUser_id(rs.getString("user_id"));
+				dto.setUser_email(rs.getString("user_email"));
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+			}
+		}
+
+		return dto; // 데이터가 없으면 null을 반환
+	}
+
+	public int updatePassword(String userId, String userNewPwd) {
+	
+		
+		try {
+			openConn();
+			
+			sql = "update sc_user set user_pwd=? where user_id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, userNewPwd);
+			pstmt.setString(2, userId);
+			
+			 
+	        int result = pstmt.executeUpdate(); 
+	        
+	        return result; // 성공적으로 업데이트된 행 수 반환
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			closeConn(pstmt, con);
+			
+		}
+		
+			return 0;
+	}
+
+	public UserDTO findUserDetail(String userName, String userId, String userEmail) {
+		
+		UserDTO dto = null;
+		
+		try {
+			
+			openConn();
+			
+			sql = "select * from sc_user where user_name=? and user_id = ? and user_email = ?";
+			
+			pstmt= con.prepareStatement(sql);
+			
+			pstmt.setString(1, userName);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, userEmail);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+				dto = new UserDTO();
+				
+				dto.setUser_name(rs.getString("user_name"));
+				dto.setUser_id(rs.getString("user_id"));
+				dto.setUser_email(rs.getString("user_email"));
+				
+			}
+		} catch (SQLException e) {
+			 System.err.println("SQL 오류: " + e.getMessage());
+		        e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		
+		return dto;
+	}
 }
