@@ -63,7 +63,6 @@ public class FrontController extends HttpServlet {
 		 */
 		
 		FileInputStream fis =
-
 				new FileInputStream("");
 
 
