@@ -1,10 +1,11 @@
-package com.hhlb.action;
+package com.shop.action;
 
 import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.hhlb.controller.Action;
 import com.hhlb.controller.ActionForward;
@@ -15,21 +16,23 @@ public class CartListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// header에서 장바구니 버튼 클릭시 접속중인 유저의 정보를 받아 이동하는 비지니스 로직
+		// main.jsp에서 shopping cart 이미지 클릭 시 로그인 된 회원의 장바구니 리스트를 보여주는 비지니스 로직
 		
-		String user_id = request.getParameter("id");
+		HttpSession session = request.getSession();
+		
+		// 세션에서 로그인 중인 회원의 id 받기
+		String user_id = (String)session.getAttribute("user_id");
 		
 		CartDAO dao = CartDAO.getInstance();
 		
-		List<CartDTO> list = dao.getCartList(user_id);
+		List<CartDTO> cartList = dao.getCartList(user_id);
 		
-		request.setAttribute("cartList", list);
+		request.setAttribute("CartList", cartList);
 		
 		ActionForward forward = new ActionForward();
 		
 		forward.setRedirect(false);
-		
-		forward.setPath("/product/cart.jsp");
+		forward.setPath("product/cart.jsp");
 		
 		return forward;
 	}

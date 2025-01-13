@@ -140,7 +140,7 @@
                             </c:if>
                             </div>
                             <div class="col-lg-3 col-6 d-flex" align = "right">
-                                <a href="../product/cart.jsp" class="btn border ms-auto">
+                                <a href="<%= request.getContextPath() %>/user_cart.go?id=${ user_id }" class="btn border ms-auto">
                                     <i class="fas fa-shopping-cart text-primary"></i>
                                     <span class="badge">0</span>
                                 </a>
