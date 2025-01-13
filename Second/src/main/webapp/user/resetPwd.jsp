@@ -12,7 +12,7 @@
 			var resultDiv = document.getElementById("result");
 
 			// 비밀번호 조건: 특수문자 포함, 길이 6자 이상 20자 미만
-			var passwordRegex = /^(?=.*[!@#$%^&*?_])(?=.*[a-zA-Z0-9]).{6,19}$/;
+			var passwordRegex = /^(?=.*[!@#$%^&*?_])(?=.*[a-zA-Z0-9]).{6,20}$/;
 
 		    if (!passwordRegex.test(newPassword)) {
 		        resultDiv.innerHTML = "비밀번호는 특수문자를 포함하고, 6자 이상 20자 미만이어야 합니다.";
