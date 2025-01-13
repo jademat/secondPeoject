@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -91,6 +93,45 @@ public class ProductDAO {
 	}  // closeConn() 메서드 end
 	
 	
+	// 모든 상품 리스트를 가져오는 메서드
+	public List<ProductDTO> getAllProduct() {
+		List<ProductDTO> list = new ArrayList<ProductDTO>(); 
+		
+		try {
+			openConn();
+			
+			sql ="select * from sc_product";
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return list;
+	} // getAllProduct() 메서드 end
+	
+	
+	
 	// 제품 번호에 해당하는 제품의 상세 정보를 조회하는 메서드
 	public ProductDTO getProductContent(int pnum) {
 		ProductDTO dto = null;
@@ -127,6 +168,59 @@ public class ProductDAO {
 	} // getProductContent() 메서드 end
 	
 	
-	//
+	// 해당 상품번호에 일치하는 상품의 review_rank 를 소수점 1자리로 가져오는 메서드
+	public int getProductRiviewRank(int pnum) {
+		int result = 0;
+		
+		try {
+			openConn();
+			
+			sql = "SELECT ROUND(AVG(r.REVIEW_RANK), 1) AS AVG_REVIEW_RANK FROM sc_product p "
+					+ " JOIN sc_review r ON p.PRODUCT_NO = r.PRODUCT_NO WHERE p.PRODUCT_NO = ?"
+					+ "GROUP BY p.PRODUCT_NO";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, pnum);
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return result;
+	} // getProductRiviewRank() 메서드 end
 	
+	
+	// 해당 상품번호에 일치하는 상품의 리뷰 개수를 가져오는 메서드
+	public int getProductRiviewCount(int pnum) {
+		int result = 0;
+		
+		try {
+			openConn();
+			
+			sql = "SELECT COUNT(r.REVIEW_NO) AS REVIEW_COUNT FROM sc_product p "
+					+ "	LEFT JOIN sc_review r ON p.PRODUCT_NO = r.PRODUCT_NO "
+					+ " WHERE p.PRODUCT_NO = ? GROUP BY p.PRODUCT_NO";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, pnum);
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return result;
+	} // getProductRiviewCount() 메서드 end
+
 }

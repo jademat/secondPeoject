@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<!-- admin_navbar -->
+
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -7,7 +9,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin_main.jsp">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<%=request.getContextPath() %>/admin/admin_main.jsp">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -19,7 +21,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="admin_main.jsp">
+            <a class="nav-link" href="<%=request.getContextPath() %>/admin/admin_main.jsp">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>관리자 홈</span></a>
         </li>
@@ -41,9 +43,10 @@
             </a>
             <div id="collapseCategoryManagement" class="collapse" aria-labelledby="headingProductManagement" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="category_input.jsp">카테고리 등록</a>
-                    <a class="collapse-item" href="category_modify.jsp">카테고리 수정</a>
-                    <a class="collapse-item" href="category_delete.jsp">카테고리 삭제</a>
+                    <a class="collapse-item" href="<%=request.getContextPath() %>/category_input.go">카테고리 등록</a>
+                    <a class="collapse-item" href="<%=request.getContextPath() %>/category_modify.go">카테고리 수정</a>
+                    <a class="collapse-item" href="<%=request.getContextPath() %>/category_delete.go">카테고리 삭제</a>
+                    <a class="collapse-item" href="<%=request.getContextPath() %>/category_list.go">카테고리 목록</a>
                 </div>
             </div>
             

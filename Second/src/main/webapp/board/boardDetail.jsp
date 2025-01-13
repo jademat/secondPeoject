@@ -33,7 +33,7 @@ textarea {
 			
 		</c:if>
 	</table>
-	<br> <br>
+	<br>
 
 	<div align="center">
 		<input type = "button" class = "btn btn-primary" value = "전체목록" onclick = "location.href = 'user_board_list.go'">

@@ -130,7 +130,7 @@ public class FrontController extends HttpServlet {
 			forward.setPath(value);
 		}
 		
-		
+		// 이동
 		if(forward != null) {
 			if(forward.isRedirect()) {  // true 인 경우
 				response.sendRedirect(forward.getPath());
