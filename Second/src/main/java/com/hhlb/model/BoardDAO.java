@@ -109,7 +109,6 @@ public class BoardDAO {
 				dto.setUser_id(rs.getString("user_id"));
 				dto.setBoard_title(rs.getString("board_title"));
 				dto.setBoard_cont(rs.getString("board_title"));
-				dto.setBoard_pwd(rs.getString("board_pwd"));
 				dto.setBoard_date(rs.getString("board_date"));
 				dto.setBoard_update(rs.getString("board_update"));
 				dto.setBoard_hit(rs.getInt("board_hit"));
@@ -145,7 +144,6 @@ public class BoardDAO {
 				dto.setUser_id(rs.getString("user_id"));
 				dto.setBoard_title(rs.getString("board_title"));
 				dto.setBoard_cont(rs.getString("board_title"));
-				dto.setBoard_pwd(rs.getString("board_pwd"));
 				dto.setBoard_date(rs.getString("board_date"));
 				dto.setBoard_update(rs.getString("board_update"));
 				dto.setBoard_hit(rs.getInt("board_hit"));
@@ -184,7 +182,6 @@ public class BoardDAO {
 				dto.setUser_id(rs.getString("user_id"));
 				dto.setBoard_title(rs.getString("board_title"));
 				dto.setBoard_cont(rs.getString("board_cont"));
-				dto.setBoard_pwd(rs.getString("board_pwd"));
 				dto.setBoard_date(rs.getString("board_date"));
 				dto.setBoard_update(rs.getString("board_update"));
 				dto.setBoard_hit(rs.getInt("board_hit"));
@@ -200,4 +197,40 @@ public class BoardDAO {
 		return dto;
 	}
 
+	public int insertBoard(BoardDTO dto) {
+		int result = 0, count = 0;
+				
+		try {
+			openConn();
+
+			sql = "select max(board_no) from sc_board";
+
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+			sql = "insert into sc_board values(?,?,?,?,sysdate,'','',default,?,?)";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, count + 1);
+			pstmt.setString(2,dto.getUser_id());
+			pstmt.setString(3, dto.getBoard_title());
+			pstmt.setString(4,dto.getBoard_cont());
+			pstmt.setString(5, dto.getBoard_type());
+			pstmt.setInt(6, dto.getBoard_visible());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return result;
+	}
+	
 }
