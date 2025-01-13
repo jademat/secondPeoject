@@ -23,7 +23,6 @@
                     <div class="d-flex flex-column justify-content-start">
 
                         <a class="text-dark mb-2" href="<%=request.getContextPath() %>/user_main.go"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                        <a class="text-dark mb-2" href="<%=request.getContextPath() %>/user_shop.go"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
                         <a class="text-dark mb-2" href="<%=request.getContextPath() %>/user_shop.go"><i class="fa fa-angle-right mr-2"></i>Shop</a>
                         <a class="text-dark mb-2" href="<%=request.getContextPath() %>/cart.go"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
                         <a class="text-dark mb-2" href="<%=request.getContextPath() %>/user_board_list.go"><i class="fa fa-angle-right mr-2"></i>Board</a>
@@ -41,18 +40,18 @@
                 </div>
 
 	<!-- JavaScript Libraries -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 	<script src="../resource/lib/easing/easing.min.js"></script>
 	<script src="../resource/lib/owlcarousel/owl.carousel.min.js"></script>
 	
-	<!-- Contact Javascript File -->
+	Contact Javascript File
 	<script src="../resource/mail/jqBootstrapValidation.min.js"></script>
 	<script src="../resource/mail/contact.js"></script>
 	
-	<!-- Template Javascript -->
+	Template Javascript
 	<script src="../resource/js/main.js"></script>
-
+ -->
 
 </body>
 </html>
