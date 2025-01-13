@@ -130,11 +130,9 @@ public class BoardDAO {
 
 		try {
 			openConn();
-
-			sql = "select * from sc_board order by board_no desc";
+			 sql = "select * from sc_board order by board_no desc";
 
 			pstmt = con.prepareStatement(sql);
-
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -149,7 +147,7 @@ public class BoardDAO {
 				dto.setBoard_hit(rs.getInt("board_hit"));
 				dto.setBoard_type(rs.getString("board_type"));
 				dto.setBoard_visible(rs.getInt("board_visible"));
-				
+
 				list.add(dto);
 			}
 
@@ -199,37 +197,96 @@ public class BoardDAO {
 
 	public int insertBoard(BoardDTO dto) {
 		int result = 0, count = 0;
-				
+
 		try {
 			openConn();
 
 			sql = "select max(board_no) from sc_board";
 
 			pstmt = con.prepareStatement(sql);
-			
+
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				count = rs.getInt(1);
 			}
-			
+
 			sql = "insert into sc_board values(?,?,?,?,sysdate,'','',default,?,?)";
-			
+
 			pstmt = con.prepareStatement(sql);
-			
+
 			pstmt.setInt(1, count + 1);
-			pstmt.setString(2,dto.getUser_id());
+			pstmt.setString(2, dto.getUser_id());
 			pstmt.setString(3, dto.getBoard_title());
-			pstmt.setString(4,dto.getBoard_cont());
+			pstmt.setString(4, dto.getBoard_cont());
 			pstmt.setString(5, dto.getBoard_type());
 			pstmt.setInt(6, dto.getBoard_visible());
-			
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			closeConn(rs, pstmt, con);
 		}
+		return result;
+	}
+
+	public List<BoardDTO> getBoardType(String type) {
+		List<BoardDTO> blist = new ArrayList<BoardDTO>();
+
+		try {
+			openConn();
+
+			sql = "select * from sc_board where board_type = ? order by board_no desc";
+
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, type);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				BoardDTO dto = new BoardDTO();
+
+				dto.setBoard_no(rs.getInt("board_no"));
+				dto.setUser_id(rs.getString("user_id"));
+				dto.setBoard_title(rs.getString("board_title"));
+				dto.setBoard_cont(rs.getString("board_cont"));
+				dto.setBoard_date(rs.getString("board_date"));
+				dto.setBoard_update(rs.getString("board_update"));
+				dto.setBoard_hit(rs.getInt("board_hit"));
+				dto.setBoard_type(rs.getString("board_type"));
+				dto.setBoard_visible(rs.getInt("board_visible"));
+
+				blist.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return blist;
+	}
+	
+	public int deleteBoard(int no) {
+		int result = 0;
+		
+		try {
+			openConn();
+			
+			sql = "delete from sc_board where board_no = ?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(pstmt, con);
+		}
+		
 		return result;
 	}
 	

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<div class="modal fade" id="orderDetailModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="orderDetailModalLabel" aria-hidden="true">
+<div class="modal fade" id="orderDetailModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="orderDetailModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">

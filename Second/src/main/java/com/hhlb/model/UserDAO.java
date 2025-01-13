@@ -223,5 +223,30 @@ Connection con = null;
 		
 		return dto;
 	}
+	
+	public int updateUser(UserDTO dto) {
+		int result = 0;
+		
+		try {
+			openConn();
+			
+			sql = "update sc_user set user_nick = ?,user_email = ?, user_phone = ?, user_addr = ? where user_id = ?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getUser_nick());
+			pstmt.setString(2, dto.getUser_email());
+			pstmt.setString(3, dto.getUser_phone());
+			pstmt.setString(4, dto.getUser_addr());
+			pstmt.setString(5, dto.getUser_id());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(pstmt, con);
+		}
+		return result;
+	}
 
 }
