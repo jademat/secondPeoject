@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -89,6 +91,45 @@ public class ProductDAO {
 			}
 		
 	}  // closeConn() 메서드 end
+	
+	
+	// 모든 상품 리스트를 가져오는 메서드
+	public List<ProductDTO> getAllProduct() {
+		List<ProductDTO> list = new ArrayList<ProductDTO>(); 
+		
+		try {
+			openConn();
+			
+			sql ="select * from sc_product";
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return list;
+	} // getAllProduct() 메서드 end
+	
 	
 	
 	// 제품 번호에 해당하는 제품의 상세 정보를 조회하는 메서드

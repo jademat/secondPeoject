@@ -10,9 +10,11 @@
     <!-- 상품 정보(상품 사진, 장바구니 버튼, 상품 설명 등) start -->
     <div class="container-fluid py-5">
     
-    <c:set var="dto" value="${ ProductCont }"/>
+    <c:set var="dto" value="${ ProductCont }"/>			<!-- 해당 상품의 정보 -->
+    <c:set var="reviewDto" value="${ ReviewList }"/>	<!-- 해당 상품의 리뷰 리스트 -->
     <c:set var="reviewRank" value="${ ReviewRank }"/>	<!-- 리뷰의 점수 평균 -->
     <c:set var="reviewCount" value="${ ReviewCount }"/>	<!-- 해당 상품 리뷰 개수  -->
+    <c:set var="productList" value="${ ProductList }"/>	<!-- 해당 상품 리뷰 개수  -->
     
     	<!-- 받아올 상품 데이터가 잡힌 경우 -->
     	<c:if test="${ !empty dto  }">
@@ -144,10 +146,11 @@
                     <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Information</a>
                     <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Reviews (${ reviewCount })</a>
                 </div>
-<!-- 새로운 컬럼 추가 해야할 지도????????????????????????????????????????????????????????????????????????????????????????????????? -->>
+
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
                         <h4 class="mb-3">Product Description</h4>
+                        <p>${ dto.getProduct_specInfo() }</p>
                         <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam
                             invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod
                             consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam.
@@ -169,7 +172,7 @@
 
                     </div>
                     <div class="tab-pane fade" id="tab-pane-2">
-                        <h4 class="mb-3">Additional Information</h4>
+                        <h4 class="mb-3">Size Information</h4>
                         <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam
                             invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod
                             consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam.
@@ -217,100 +220,34 @@
                     <div class="tab-pane fade" id="tab-pane-3">
                         <div class="row">
                         
-                        <c:if test="${ !empty dto }">
-                            <div class="col-md-6">
-                                <h4 class="mb-4">1 review for "Colorful Stylish Shirt"</h4>
-                                <!-- Modal 트리거 -->
-                                <a href="#" data-toggle="modal" data-target="#reviewDetailModal">
-                                <div class="media mb-4">
-                                    <img src="../resource/img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1"
-                                        style="width: 150px;">
-                                    <div class="media-body">
-                                        <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                        <div class="text-primary mb-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                        <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum
-                                            et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
-                                    </div>
-                                </div>
-                                </a>
-                            </div>
+                        <!-- 해당 상품의 리뷰 가져오기 -->
+                        <c:if test="${ !empty reviewDto }">
+                        	<c:forEach items="${ reviewDto }" var="dto">
+	                            <div class="col-md-6">
+	                                <h4 class="mb-4">${ dto.getUser_id() } 님의 리뷰</h4>
+	                                <!-- Modal 트리거 -->
+	                                <a href="#" data-toggle="modal" data-target="#reviewDetailModal">
+	                                <div class="media mb-4">
+	                                    <img src="<%= request.getContextPath() %>/upload/${ dto.getReview_image() }"
+	                                    	alt="Image" class="img-fluid mr-3 mt-1" style="width: 150px;">
+	                                    <div class="media-body">
+	                                        <h6>${ dto.getUser_id() }<small> - <i>${ dto.getReview_date() }</i></small></h6>
+	                                        <div class="text-primary mb-2">
+	                                        	${ dto.getReview_rank() }
+	                                        	<!-- 미정 -->
+	                                            <i class="fas fa-star"></i>
+	                                            <i class="fas fa-star"></i>
+	                                            <i class="fas fa-star"></i>
+	                                            <i class="fas fa-star-half-alt"></i>
+	                                            <i class="far fa-star"></i>
+	                                        </div>
+	                                        <p>${ dto.getReview_cont() }</p>
+	                                    </div>
+	                                </div>
+	                                </a>
+	                            </div>
+                            </c:forEach>
 						</c:if>
-						
-						
-                            <div class="col-md-6">
-                                <h4 class="mb-4">1 review for "Colorful Stylish Shirt"</h4>
-                                <!-- Modal 트리거 -->
-                                <a href="#" data-toggle="modal" data-target="#reviewDetailModal">
-                                <div class="media mb-4">
-                                    <img src="../resource/img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1"
-                                        style="width: 150px;">
-                                    <div class="media-body">
-                                        <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                        <div class="text-primary mb-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                        <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum
-                                            et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
-                                    </div>
-                                </div>
-                                </a>
-                            </div>
-
-                            <div class="col-md-6">
-                                <h4 class="mb-4">1 review for "Colorful Stylish Shirt"</h4>
-                                <!-- Modal 트리거 -->
-                                <a href="#" data-toggle="modal" data-target="#reviewDetailModal">
-                                <div class="media mb-4">
-                                    <img src="../resource/img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1"
-                                        style="width: 150px;">
-                                    <div class="media-body">
-                                        <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                        <div class="text-primary mb-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                        <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum
-                                            et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
-                                    </div>
-                                </div>
-                                </a>
-                            </div>
-
-                            <div class="col-md-6">
-                                <h4 class="mb-4">1 review for "Colorful Stylish Shirt"</h4>
-                                <!-- Modal 트리거 -->
-                                <a href="#" data-toggle="modal" data-target="#reviewDetailModal">
-                                <div class="media mb-4">
-                                    <img src="../resource/img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1"
-                                        style="width: 150px;">
-                                    <div class="media-body">
-                                        <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                        <div class="text-primary mb-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                        <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum
-                                            et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
-                                    </div>
-                                </div>
-                                </a>
-                            </div>
 
                             <!-- 페이지네이션(수정 必) -->
                             <div class="col-12 pb-1">
@@ -352,121 +289,50 @@
     <!-- 상품 정보(상품 사진, 장바구니 버튼, 상품 설명 등) end -->
 
 
-    <!-- Products Start -->
+    <!-- 추천상품 로테이션 리스트 Start -->
     <div class="container-fluid py-5">
         <div class="text-center mb-4">
-            <h2 class="section-title px-5"><span class="px-2">You May Also Like</span></h2>
+            <h2 class="section-title px-5"><span class="px-2">추천 상품</span></h2>
         </div>
         <div class="row px-xl-5">
             <div class="col">
                 <div class="owl-carousel related-carousel">
-                    <div class="card product-item border-0">
-                        <div
-                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                            <img class="img-fluid w-100" src="../resource/img/product-1.jpg" alt="">
-                        </div>
-                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                            <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
-                            <div class="d-flex justify-content-center">
-                                <h6>$123.00</h6>
-                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                            </div>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between bg-light border">
-                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View
-                                Detail</a>
-                            <a href="" class="btn btn-sm text-dark p-0"><i
-                                    class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-                        </div>
-                    </div>
-                    <div class="card product-item border-0">
-                        <div
-                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                            <img class="img-fluid w-100" src="../resource/img/product-2.jpg" alt="">
-                        </div>
-                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                            <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
-                            <div class="d-flex justify-content-center">
-                                <h6>$123.00</h6>
-                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                            </div>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between bg-light border">
-                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View
-                                Detail</a>
-                            <a href="" class="btn btn-sm text-dark p-0"><i
-                                    class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-
-
-                        </div>
-                    </div>
-                    <div class="card product-item border-0">
-                        <div
-                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                            <img class="img-fluid w-100" src="../resource/img/product-3.jpg" alt="">
-                        </div>
-                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                            <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
-                            <div class="d-flex justify-content-center">
-                                <h6>$123.00</h6>
-                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                            </div>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between bg-light border">
-                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View
-                                Detail</a>
-                            <a href="" class="btn btn-sm text-dark p-0"><i
-                                    class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-                        </div>
-                    </div>
-                    <div class="card product-item border-0">
-                        <div
-                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                            <img class="img-fluid w-100" src="../resource/img/product-4.jpg" alt="">
-                        </div>
-                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                            <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
-                            <div class="d-flex justify-content-center">
-                                <h6>$123.00</h6>
-                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                            </div>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between bg-light border">
-                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View
-                                Detail</a>
-                            <a href="" class="btn btn-sm text-dark p-0"><i
-                                    class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-                        </div>
-                    </div>
-                    <div class="card product-item border-0">
-                        <div
-                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                            <img class="img-fluid w-100" src="../resource/img/product-5.jpg" alt="">
-                        </div>
-                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                            <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
-                            <div class="d-flex justify-content-center">
-                                <h6>$123.00</h6>
-                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                            </div>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between bg-light border">
-                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View
-                                Detail</a>
-                            <a href="" class="btn btn-sm text-dark p-0"><i
-                                    class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-                        </div>
-                    </div>
+                
+                	<!-- 추천 상품 로테이션 -->
+                	<c:if test="${ !empty productList }">
+                		<c:forEach items="${ productList }" var="dto">
+		                    <div class="card product-item border-0">
+		                        <div
+		                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+		                            <img class="img-fluid w-100" src="<%= request.getContextPath() %>/upload/${ dto.getProduct_image() }" alt="">
+		                        </div>
+		                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+		                            <h6 class="text-truncate mb-3">${ dto.getProduct_name() }</h6>
+		                            <div class="d-flex justify-content-center">
+		                                <h6>${ dto.getProduct_price() }</h6>
+		                                <h6 class="text-muted ml-2"><del>${ dto.getProduct_price() }</del></h6>
+		                            </div>
+		                        </div>
+		                        <div class="card-footer d-flex justify-content-between bg-light border">
+		                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View
+		                                Detail</a>
+		                            <a href="" class="btn btn-sm text-dark p-0"><i
+		                                    class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+		                        </div>
+		                    </div>
+		            	</c:forEach>
+                    </c:if>
+                    
                 </div>
             </div>
         </div>
     </div>
-    <!-- Products End -->
+    <!-- 추천상품 로테이션 리스트 End -->
 
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-<jsp:include page="../modal/reviewDetailModal.jsp" />
+<jsp:include page="../modal/reviewDetailModal.jsp" />		<!-- 리뷰 클릭시 modal 팝업 -->
 <jsp:include page="../include/footer.jsp" />
