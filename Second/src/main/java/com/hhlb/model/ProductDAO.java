@@ -93,6 +93,7 @@ public class ProductDAO {
 	}  // closeConn() 메서드 end
 	
 	
+
 	// 모든 상품 리스트를 가져오는 메서드
 	public List<ProductDTO> getAllProduct() {
 		List<ProductDTO> list = new ArrayList<ProductDTO>(); 
@@ -194,6 +195,7 @@ public class ProductDAO {
 		}
 		return result;
 	} // getProductRiviewRank() 메서드 end
+
 	
 	
 	// 해당 상품번호에 일치하는 상품의 리뷰 개수를 가져오는 메서드
