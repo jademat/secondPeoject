@@ -24,8 +24,9 @@
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner border">
                         <div class="carousel-item active">
-                            <img class="w-100 h-100" src="<%= request.getContextPath() %>../resource/img/${ dto.getProduct_image() }"
+                            <img class="w-100 h-100" src="<%= request.getContextPath() %>/resource/img/${ dto.getProduct_image() }"
                             		alt="Image">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -139,6 +140,8 @@
                 </div>
             </div>
         </div>
+        
+        <!-- 제품 설명, 사이즈 설명, 리뷰 -->
         <div class="row px-xl-5">
             <div class="col">
                 <div class="nav nav-tabs justify-content-center border-secondary mb-4">
@@ -151,24 +154,13 @@
                     <div class="tab-pane fade show active" id="tab-pane-1">
                         <h4 class="mb-3">Product Description</h4>
                         <p>${ dto.getProduct_specInfo() }</p>
-                        <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam
-                            invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod
-                            consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam.
-                            Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos
-                            dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod
-                            nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt
-                            tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
-                        <p>Dolore magna est eirmod sanctus dolor, amet diam et eirmod et ipsum. Amet dolore tempor
-                            consetetur sed lorem dolor sit lorem tempor. Gubergren amet amet labore sadipscing clita
-                            clita diam clita. Sea amet et sed ipsum lorem elitr et, amet et labore voluptua sit rebum.
-                            Ea erat sed et diam takimata sed justo. Magna takimata justo et amet magna et.</p>
                         <!-- toogle 버튼 -->
                         <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="button" aria-pressed="false"
                             id="moreButton">
                             더보기
                         </button>
                         <!-- 숨겨진 글 -->
-                        <p id="hiddenContent" style="display: none; margin-top: 10px;">toogle 버튼 내용</p>
+                        <p id="hiddenContent" style="display: none; margin-top: 10px;">${ dto.getProduct_specInfo() }</p>
 
                     </div>
                     <div class="tab-pane fade" id="tab-pane-2">
@@ -228,12 +220,12 @@
 	                                <!-- Modal 트리거 -->
 	                                <a href="#" data-toggle="modal" data-target="#reviewDetailModal">
 	                                <div class="media mb-4">
-	                                    <img src="<%= request.getContextPath() %>/upload/${ dto.getReview_image() }"
+	                                    <img src="<%= request.getContextPath() %>/resource/img/${ dto.getReview_image() }"
 	                                    	alt="Image" class="img-fluid mr-3 mt-1" style="width: 150px;">
 	                                    <div class="media-body">
 	                                        <h6>${ dto.getUser_id() }<small> - <i>${ dto.getReview_date() }</i></small></h6>
 	                                        <div class="text-primary mb-2">
-	                                        	${ dto.getReview_rank() }
+	                                        	${ dto.getReview_rank() } 점
 	                                        	<!-- 미정 -->
 	                                            <i class="fas fa-star"></i>
 	                                            <i class="fas fa-star"></i>
@@ -277,15 +269,11 @@
                 </div>
             </div>
         </div>
+        </c:if>
     </div>
-    </c:if>
     
-    <!-- 받아올 상품 데이터가 잡히지 않은 경우 -->
-    <c:if test="${ empty dto }">
     
-    	<h3>상품 데이터 오류</h3>
     
-    </c:if>
     <!-- 상품 정보(상품 사진, 장바구니 버튼, 상품 설명 등) end -->
 
 
@@ -298,13 +286,12 @@
             <div class="col">
                 <div class="owl-carousel related-carousel">
                 
-                	<!-- 추천 상품 로테이션 -->
-                	<c:if test="${ !empty productList }">
-                		<c:forEach items="${ productList }" var="dto">
-		                    <div class="card product-item border-0">
-		                        <div
-		                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-		                            <img class="img-fluid w-100" src="<%= request.getContextPath() %>/upload/${ dto.getProduct_image() }" alt="">
+               		<!-- 추천 상품 로테이션(미정) -->
+               		<c:forEach items="${ productList }" var="dto">
+               			<div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+		                    <div class="card product-item border-0 mb-4">
+		                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+		                            <img class="img-fluid w-100" src="<%= request.getContextPath() %>/resource/img/${ dto.getProduct_image() }" alt="">
 		                        </div>
 		                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
 		                            <h6 class="text-truncate mb-3">${ dto.getProduct_name() }</h6>
@@ -314,15 +301,13 @@
 		                            </div>
 		                        </div>
 		                        <div class="card-footer d-flex justify-content-between bg-light border">
-		                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View
-		                                Detail</a>
-		                            <a href="" class="btn btn-sm text-dark p-0"><i
-		                                    class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+		                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+		                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
 		                        </div>
 		                    </div>
-		            	</c:forEach>
-                    </c:if>
-                    
+	                    </div>
+	            	</c:forEach>
+	            	
                 </div>
             </div>
         </div>
