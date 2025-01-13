@@ -23,7 +23,6 @@
                     <div class="d-flex flex-column justify-content-start">
 
                         <a class="text-dark mb-2" href="<%=request.getContextPath() %>/user_main.go"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                        <a class="text-dark mb-2" href="<%=request.getContextPath() %>/user_shop.go"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
                         <a class="text-dark mb-2" href="<%=request.getContextPath() %>/user_shop.go"><i class="fa fa-angle-right mr-2"></i>Shop</a>
                         <a class="text-dark mb-2" href="<%=request.getContextPath() %>/cart.go"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
                         <a class="text-dark mb-2" href="<%=request.getContextPath() %>/user_board_list.go"><i class="fa fa-angle-right mr-2"></i>Board</a>
