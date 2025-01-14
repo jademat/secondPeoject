@@ -121,7 +121,7 @@
                                     <div class="nav-item dropdown">
                                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                         <div class="dropdown-menu rounded-0 m-0">
-                                            <a href="../product/cart.jsp" class="dropdown-item">Shopping Cart</a>
+                                            <a href="<%= request.getContextPath() %>/user_cart.go?id=${ user_id }" class="dropdown-item">Shopping Cart</a>
                                             <a href="" class="dropdown-item">여기 아마 QnA</a>
                                             <a href="" class="dropdown-item"> + 이거 됨?</a>
                                         </div>
