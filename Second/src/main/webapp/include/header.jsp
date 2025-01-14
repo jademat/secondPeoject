@@ -121,7 +121,7 @@
                                         <div class="dropdown-menu rounded-0 m-0">
                                             <a href="../product/cart.jsp" class="dropdown-item">Shopping Cart</a>
                                             <a href="" class="dropdown-item">여기 아마 QnA</a>
-                                            <a href="" class="dropdown-item"> + 추가할 내용</a>
+                                            <a href="" class="dropdown-item"> + 이거 됨?</a>
                                         </div>
                                     </div>
                                 </div>
