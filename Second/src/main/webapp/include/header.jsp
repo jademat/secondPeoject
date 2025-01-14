@@ -133,8 +133,8 @@
                             <div class="navbar-nav ml-auto py-0">
                             <c:if test="${empty user_id}">
 
-                                <a href="<%=request.getContextPath() %>/user_login.go" class="nav-item nav-link">Login</a>
-                                <a href="<%=request.getContextPath() %>/user_register.go" class="nav-item nav-link">Register</a>
+                                <a href="<%=request.getContextPath() %>/user/login.jsp" class="nav-item nav-link">Login</a>
+                                <a href="<%=request.getContextPath() %>/user/register.jsp" class="nav-item nav-link">Register</a>
 
                             </c:if>
                             <c:if test="${!empty user_id}">
