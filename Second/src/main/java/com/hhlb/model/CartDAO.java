@@ -102,6 +102,7 @@ public class CartDAO {
 			sql = "select max(cart_no) from sc_cart";
 			pstmt = con.prepareStatement(sql);
 			
+			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				count = rs.getInt(1) + 1;
 			}

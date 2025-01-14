@@ -25,7 +25,7 @@
 	rel="stylesheet">
 
 <!-- Libraries Stylesheet -->
-<link href="../resource/lib/owlcarousel/assets/owl.carousel.min.css"
+<link href="<%=request.getContextPath() %>/resource/lib/owlcarousel/assets/owl.carousel.min.css"
 	rel="stylesheet">
 
 <!-- Customized Bootstrap Stylesheet -->
@@ -45,6 +45,8 @@
 <!-- Template Javascript -->
 <script src="js/main.js"></script>
 
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
 </head>
 <body>
@@ -54,7 +56,7 @@
             <div class="row bg-secondary py-2 px-xl-5">
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="d-inline-flex align-items-center">
-                        <a class="text-dark" href="<%=request.getContextPath() %>board/board.jsp">FAQs</a>
+                        <a class="text-dark" href="<%=request.getContextPath() %>/user_board_list.go">FAQs</a>
                 
                     </div>
                 </div>
@@ -121,7 +123,7 @@
                                         <div class="dropdown-menu rounded-0 m-0">
                                             <a href="../product/cart.jsp" class="dropdown-item">Shopping Cart</a>
                                             <a href="" class="dropdown-item">여기 아마 QnA</a>
-                                            <a href="" class="dropdown-item"> + 추가할 내용</a>
+                                            <a href="" class="dropdown-item"> + 이거 됨?</a>
                                         </div>
                                     </div>
                                 </div>
@@ -133,8 +135,8 @@
                             <div class="navbar-nav ml-auto py-0">
                             <c:if test="${empty user_id}">
 
-                                <a href="<%=request.getContextPath() %>/user_login.go" class="nav-item nav-link">Login</a>
-                                <a href="<%=request.getContextPath() %>/user_register.go" class="nav-item nav-link">Register</a>
+                                <a href="<%=request.getContextPath() %>/user/login.jsp" class="nav-item nav-link">Login</a>
+                                <a href="<%=request.getContextPath() %>/user/register.jsp" class="nav-item nav-link">Register</a>
 
                             </c:if>
                             <c:if test="${!empty user_id}">

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.hhlb.controller.Action;
 import com.hhlb.controller.ActionForward;
-import com.hhlb.model.BoardDAO;
 import com.hhlb.model.UserDAO;
 import com.hhlb.model.UserDTO;
 
