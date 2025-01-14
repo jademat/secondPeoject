@@ -25,7 +25,7 @@
 	rel="stylesheet">
 
 <!-- Libraries Stylesheet -->
-<link href="../resource/lib/owlcarousel/assets/owl.carousel.min.css"
+<link href="<%=request.getContextPath() %>/resource/lib/owlcarousel/assets/owl.carousel.min.css"
 	rel="stylesheet">
 
 <!-- Customized Bootstrap Stylesheet -->
@@ -45,6 +45,8 @@
 <!-- Template Javascript -->
 <script src="js/main.js"></script>
 
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
 </head>
 <body>
@@ -54,7 +56,7 @@
             <div class="row bg-secondary py-2 px-xl-5">
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="d-inline-flex align-items-center">
-                        <a class="text-dark" href="<%=request.getContextPath() %>board/board.jsp">FAQs</a>
+                        <a class="text-dark" href="<%=request.getContextPath() %>/user_board_list.go">FAQs</a>
                 
                     </div>
                 </div>
