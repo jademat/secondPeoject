@@ -177,7 +177,12 @@
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
                         <h4 class="mb-3">Product Description</h4>
-                        <p>${ dto.getProduct_specInfo() }</p>
+                        <br> <br>
+                        
+                        <div align="center">
+                        <img class="w-50 h-50" src="<%= request.getContextPath() %>/resource/img/${ dto.getProduct_specInfo() }"
+                            		alt="Image">
+                        </div>
                         <!-- toogle 버튼 -->
                         <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="button" aria-pressed="false"
                             id="moreButton">
