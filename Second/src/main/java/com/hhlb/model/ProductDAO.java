@@ -111,7 +111,6 @@ public class ProductDAO {
 				dto.setProduct_no(rs.getInt("product_no"));
 				dto.setCategory_no(rs.getInt("category_no"));
 				dto.setProduct_name(rs.getString("product_name"));
-				dto.setProduct_name(rs.getString("product_name"));
 				dto.setProduct_price(rs.getInt("product_price"));
 				dto.setProduct_spec(rs.getString("product_spec"));
 				dto.setProduct_qty(rs.getInt("product_qty"));
