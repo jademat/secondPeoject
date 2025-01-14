@@ -23,6 +23,8 @@ public class ShopListAction implements Action {
 		
 		request.setAttribute("ProductList", productList);
 		
+		System.out.println(" productList >>> " + productList);
+		
 		ActionForward forward = new ActionForward();
 		
 		forward.setRedirect(false);

@@ -41,10 +41,10 @@ public class BoardWriteAction implements Action {
 		PrintWriter out = response.getWriter();
 
 		if(chk > 0) {
-			out.println("<script>");
-			out.println("alert('게시글 등록 성공')");
-			out.println("location.href = 'user_board_list.go'");
-			out.println("</script>");
+			 out.println("<script>");
+	            out.println("alert('게시글 등록 성공')");
+	            out.println("location.href = '" + request.getContextPath() + "/user_board_list.go?board_type=all'");
+	            out.println("</script>");
 		}else {
 			out.println("<script>");
 			out.println("alert('게시글 등록 실패')");

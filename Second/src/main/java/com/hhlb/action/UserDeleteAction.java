@@ -8,35 +8,36 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.hhlb.controller.Action;
 import com.hhlb.controller.ActionForward;
-import com.hhlb.model.BoardDAO;
+import com.hhlb.model.UserDAO;
 
-public class BoardDeleteAction implements Action {
+public class UserDeleteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int board_no = Integer.parseInt(request.getParameter("board_no"));
-		String userId = (String) request.getSession().getAttribute("user_id");
-		
-		BoardDAO dao = BoardDAO.getInstance();
-		
-		int chk = dao.deleteBoard(board_no);
-		
+
+		String user_id = (String) request.getSession().getAttribute("user_id");
+
+		UserDAO dao = UserDAO.getInstance();
+
+		int chk = dao.userDelete(user_id);
+
 		PrintWriter out = response.getWriter();
-		
-		if(chk > 0) {
-			
-			dao.updateSequence(board_no);
+
+		if (chk > 0) {
+
+			request.getSession().invalidate();
 			
 			out.println("<script>");
-			out.println("alert('게시글 삭제 성공')");
-			out.println("location.href='user_myInfo.go?id=" + userId + "';");
+			out.println("alert('회원 삭제 완료')");
+			out.println("location.href='user_main.go'");
 			out.println("</script>");
-		}else {
+		} else {
 			out.println("<script>");
-			out.println("alert('게시글 삭제 실패')");
+			out.println("alert('회원 삭제 실패')");
 			out.println("history.back()");
 			out.println("</script>");
 		}
+
 		return null;
 	}
 

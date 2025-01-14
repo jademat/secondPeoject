@@ -361,4 +361,25 @@ Connection con = null;
 		
 		return dto;
 	}
+	
+	public int userDelete(String id) {
+		int result = 0;
+		
+		try {
+			openConn();
+			
+			sql = "delete from sc_user where user_id = ?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(pstmt, con);
+		}
+		return result;
+	}
+	
 }

@@ -3,8 +3,6 @@
 <!DOCTYPE html>
 <jsp:include page="../include/header.jsp" />
 
- 
-   
    <!-- Featured Start -->
     <div class="container-fluid pt-5">
         <div class="row px-xl-5 pb-3">
@@ -42,7 +40,7 @@
         <div id="header-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" style="height: 410px;">
-                    <img class="img-fluid" src="<%=request.getContextPath() %>/resource/img/carousel-1.jpg" alt="Image">
+                    <img class="img-fluid" src="../resource/img/carousel-1.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 700px;">
                             <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
@@ -52,7 +50,7 @@
                     </div>
                 </div>
                 <div class="carousel-item" style="height: 410px;">
-                    <img class="img-fluid" src="<%=request.getContextPath() %>/resource/img/carousel-2.jpg" alt="Image">
+                    <img class="img-fluid" src="../resource/img/carousel-2.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 700px;">
                             <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
@@ -82,7 +80,7 @@
         <div class="row px-xl-5">
             <div class="col-md-6 pb-4">
                 <div class="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
-                    <img src="<%=request.getContextPath() %>/resource/img/offer-1.png" alt="">
+                    <img src="../resource/img/offer-1.png" alt="">
                     <div class="position-relative" style="z-index: 1;">
                         <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
                         <h1 class="mb-4 font-weight-semi-bold">Spring Collection</h1>
@@ -92,7 +90,7 @@
             </div>
             <div class="col-md-6 pb-4">
                 <div class="position-relative bg-secondary text-center text-md-left text-white mb-2 py-5 px-5">
-                    <img src="<%=request.getContextPath() %>/resource/img/offer-2.png" alt="">
+                    <img src="../resource/img/offer-2.png" alt="">
                     <div class="position-relative" style="z-index: 1;">
                         <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
                         <h1 class="mb-4 font-weight-semi-bold">Winter Collection</h1>
@@ -114,7 +112,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<%=request.getContextPath() %>/resource/img/product-1.jpg" alt="">
+                        <img class="img-fluid w-100" src="../resource/img/product-1.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
@@ -131,7 +129,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<%=request.getContextPath() %>/resource/img/product-2.jpg" alt="">
+                        <img class="img-fluid w-100" src="../resource/img/product-2.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
@@ -148,7 +146,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<%=request.getContextPath() %>/resource/img/product-3.jpg" alt="">
+                        <img class="img-fluid w-100" src="../resource/img/product-3.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
@@ -165,7 +163,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<%=request.getContextPath() %>/resource/img/product-4.jpg" alt="">
+                        <img class="img-fluid w-100" src="../resource/img/product-4.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
@@ -182,7 +180,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<%=request.getContextPath() %>/resource/img/product-5.jpg" alt="">
+                        <img class="img-fluid w-100" src="../resource/img/product-5.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
@@ -199,7 +197,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<%=request.getContextPath() %>/resource/img/product-6.jpg" alt="">
+                        <img class="img-fluid w-100" src="../resource/img/product-6.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
@@ -216,7 +214,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<%=request.getContextPath() %>/resource/img/product-7.jpg" alt="">
+                        <img class="img-fluid w-100" src="../resource/img/product-7.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
@@ -233,7 +231,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<%=request.getContextPath() %>/resource/img/product-8.jpg" alt="">
+                        <img class="img-fluid w-100" src="../resource/img/product-8.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
@@ -258,7 +256,7 @@
             <div class="col-md-6 col-12 py-5">
                 <div class="text-center mb-2 pb-2">
                     <h2 class="section-title px-5 mb-3"><span class="bg-secondary px-2">뉴스레터 구독</span></h2>
-                    <p>매주 새로운 컬렉션, 프로모션 및 HHLB의 기타 뉴스에 대한 정보를 받으려면 뉴스레터를 놓치지 마세요.</p>
+                    <p>Amet lorem at rebum amet dolores. Elitr lorem dolor sed amet diam labore at justo ipsum eirmod duo labore labore.</p>
                 </div>
                 <form action="">
                     <div class="input-group">
@@ -283,7 +281,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<%=request.getContextPath() %>/resource/img/product-1.jpg" alt="">
+                        <img class="img-fluid w-100" src="../resource/img/product-1.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
@@ -300,7 +298,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<%=request.getContextPath() %>/resource/img/product-2.jpg" alt="">
+                        <img class="img-fluid w-100" src="../resource/img/product-2.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
@@ -317,7 +315,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<%=request.getContextPath() %>/resource/img/product-3.jpg" alt="">
+                        <img class="img-fluid w-100" src="../resource/img/product-3.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
@@ -334,7 +332,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<%=request.getContextPath() %>/resource/img/product-4.jpg" alt="">
+                        <img class="img-fluid w-100" src="../resource/img/product-4.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
@@ -351,7 +349,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<%=request.getContextPath() %>/resource/img/product-5.jpg" alt="">
+                        <img class="img-fluid w-100" src="../resource/img/product-5.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
@@ -368,7 +366,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<%=request.getContextPath() %>/resource/img/product-6.jpg" alt="">
+                        <img class="img-fluid w-100" src="../resource/img/product-6.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
@@ -385,7 +383,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<%=request.getContextPath() %>/resource/img/product-7.jpg" alt="">
+                        <img class="img-fluid w-100" src="../resource/img/product-7.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
@@ -402,7 +400,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<%=request.getContextPath() %>/resource/img/product-8.jpg" alt="">
+                        <img class="img-fluid w-100" src="../resource/img/product-8.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
@@ -418,7 +416,8 @@
             </div>
         </div>
     </div>
-  
+    <!-- Products End -->
+
 
     <!-- Vendor Start -->
     <div class="container-fluid py-5">
@@ -426,38 +425,35 @@
             <div class="col">
                 <div class="owl-carousel vendor-carousel">
                     <div class="vendor-item border p-4">
-                        <img src="<%=request.getContextPath() %>/resource/img/vendor-1.jpg" alt="">
+                        <img src="../resource/img/vendor-1.jpg" alt="">
                     </div>
                     <div class="vendor-item border p-4">
-                        <img src="<%=request.getContextPath() %>/resource/img/vendor-2.jpg" alt="">
+                        <img src="../resource/img/vendor-2.jpg" alt="">
                     </div>
                     <div class="vendor-item border p-4">
-                        <img src="<%=request.getContextPath() %>/resource/img/vendor-3.jpg" alt="">
+                        <img src="../resource/img/vendor-3.jpg" alt="">
                     </div>
                     <div class="vendor-item border p-4">
-                        <img src="<%=request.getContextPath() %>/resource/img/vendor-4.jpg" alt="">
+                        <img src="../resource/img/vendor-4.jpg" alt="">
                     </div>
                     <div class="vendor-item border p-4">
-                        <img src="<%=request.getContextPath() %>/resource/img/vendor-5.jpg" alt="">
+                        <img src="../resource/img/vendor-5.jpg" alt="">
                     </div>
                     <div class="vendor-item border p-4">
-                        <img src="<%=request.getContextPath() %>/resource/img/vendor-6.jpg" alt="">
+                        <img src="../resource/img/vendor-6.jpg" alt="">
                     </div>
                     <div class="vendor-item border p-4">
-                        <img src="<%=request.getContextPath() %>/resource/img/vendor-7.jpg" alt="">
+                        <img src="../resource/img/vendor-7.jpg" alt="">
                     </div>
                     <div class="vendor-item border p-4">
-                        <img src="<%=request.getContextPath() %>/resource/img/vendor-8.jpg" alt="">
-                   </div>
-            </div> 
-        </div> 
+                        <img src="../resource/img/vendor-8.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<!-- Vendor End -->
+    <!-- Vendor End -->
 
- <!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- Owl Carousel JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
 
 <jsp:include page="../include/footer.jsp" />

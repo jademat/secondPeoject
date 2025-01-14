@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="modal fade" id="orderDetailModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="orderDetailModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -11,43 +12,20 @@
                 </div>
                 <div class="modal-body">
                    <table class = "table table">
-                        <tr>
-                            <th>이름</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>연락처</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>주소</th>
-                            <td></td>
-                        </tr>
+                       <tr>
+                        <th>이름</th>
+                        <td ></td>  <!-- 이름 -->
+                    </tr>
+                    <tr>
+                        <th>연락처</th>
+                        <td ></td>  <!-- 연락처 -->
+                    </tr>
+                    <tr>
+                        <th>주소</th>
+                        <td ></td>  <!-- 주소 -->
+                    </tr>
                         
-                        <tr>
-                            <th>상품이미지</th>
-                            <td>상품명</td>
-                        </tr>
-                        <tr>
-                            <th>상품사이즈</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>가격</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>수량</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>결제수단</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>배송비</th>
-                            <td></td>
-                        </tr>
+                       
                    </table>
                 </div>
                 <div class="modal-footer">
