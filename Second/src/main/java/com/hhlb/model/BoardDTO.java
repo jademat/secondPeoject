@@ -6,7 +6,6 @@ public class BoardDTO {
 	private String user_id;
 	private String board_title;
 	private String board_cont;
-	private String board_pwd;
 	private String board_date;
 	private String board_update;
 	private String board_img;
@@ -39,13 +38,6 @@ public class BoardDTO {
 	}
 	public void setBoard_cont(String board_cont) {
 		this.board_cont = board_cont;
-	}
-	
-	public String getBoard_pwd() {
-		return board_pwd;
-	}
-	public void setBoard_pwd(String board_pwd) {
-		this.board_pwd = board_pwd;
 	}
 	
 	public String getBoard_date() {

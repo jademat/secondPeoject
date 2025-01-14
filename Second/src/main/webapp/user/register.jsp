@@ -15,6 +15,20 @@
 			// 회원 id 입력했을 때, 값을 가져오라는 메서드
 			let user_id = $("#user_id").val();
 			
+			  // 아이디 정규식: 영문 대소문자 + 숫자만 허용
+		    var idRegex = /^[a-zA-Z0-9]+$/;  // 영문 대소문자 + 숫자만 허용
+		    
+		 // 아이디가 소문자와 대문자가 구별되는지 체크
+		    if (!idRegex.test(user_id)) {
+		        let warningTxt = '<font color="red">아이디는 영문과 숫자만 입력이 가능하며, 대소문자를 구별합니다.</font>';
+		        $("#idCheck").text("");
+		        $("#idCheck").show();
+		        $("#idCheck").append(warningTxt);
+		        $("#user_id").val("").focus();
+		        return false;
+		    }
+
+		    
 			// 입력한 아이디의 글자 길이가 16자 이상이면
 			if($.trim($("#user_id").val()).length > 16){ 
 				
@@ -49,7 +63,6 @@
 					if(res == -1) {
 						// 중복인 경우
 						let warningTxt = '<font color="red"> 중복 아이디 입니다. </font>';
-						
 						$("#idCheck").text(""); // span 태그 영역 초기화
 						$("#idCheck").show(); // span 태그를 보여주는 기능
 						$("#idCheck").append(warningTxt); 
@@ -69,6 +82,19 @@
 			});
 			
 		});
+		// 리디렉션 후에도 아이디 중복 여부를 체크할 수 있도록 페이지 로드 시 메시지 표시
+	    const urlParams = new URLSearchParams(window.location.search);
+	    const errorId = urlParams.get('errorId'); // 서버에서 errorId가 넘어오는 경우
+
+	    if (errorId) {
+	        // 중복된 아이디라면 경고 메시지 표시
+	        let warningTxt = '<font color="red">아이디가 이미 존재합니다.</font>';
+	        $("#idCheck").text(""); // span 태그 영역 초기화
+	        $("#idCheck").show(); // span 태그를 보여주는 기능
+	        $("#idCheck").append(warningTxt);
+	    }
+
+		
 	});
 </script>
 
@@ -85,7 +111,8 @@
 			<h4 class="mb-3">회원가입</h4>
 
 
-			<form class="validation-form" action="<%=request.getContextPath()%>/user_resgister.go"
+			<form class="validation-form"
+				action="<%=request.getContextPath()%>/user_resgister.go"
 				method="post" novalidate onsubmit="return validateForm()">
 				<div class="row">
 					<div class="col-md-6 mb-3">
@@ -105,20 +132,21 @@
 
 				<div class="mb-3">
 					<label for="id">아이디</label> <br> <input type="text"
-						class="form-control" name="user_id" id="user_id" placeholder=""
-						required style="width: 80%; display: inline-block;">
+						maxlength='20' class="form-control" name="user_id" id="user_id"
+						placeholder="" required style="width: 80%; display: inline-block;">
 					<button type="button" id="idCheck_btn" class="btn btn-primary mt-2"
 						style="display: inline-block;">중복 확인</button>
 					<br> <span id="idCheck"></span>
 				</div>
-				
+
 				<div class="mb-3">
 					<label for="pwd">비밀번호</label> <input type="password"
 						class="form-control" name="user_pwd" id="pwd" maxlength='19'
 						required>
-					<div class="invalid-feedback">(특수문자/6자 이상) 입력해주세요.</div>
+					<div class="invalid-feedback"></div>
 				</div>
-				<button type="button" class="btn btn-primary" onclick="validatePassword()">확인</button>
+				<button type="button" class="btn btn-primary"
+					onclick="validatePassword()">확인</button>
 				<div id="result"></div>
 
 
@@ -131,8 +159,8 @@
 
 				<div class="mb-3">
 					<label for="age">나이</label> <input type="text" class="form-control"
-						name="user_age" id="age" required>
-					<div class="invalid-feedback">나이를 입력해주세요.</div>
+						name="user_age" id="age"	maxlength='4' placeholder="숫자만 입력이 가능합니다. "required oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+					<div class="invalid-feedback"> 나이를 입력해주세요. </div>
 				</div>
 
 
@@ -141,7 +169,7 @@
 						class="form-control" name="user_phone" id="phone"
 						placeholder="' - ' 를 제외하고 입력해주세요. " maxlength='11' required
 						oninput="validatePhone()">
-					<div class="invalid-feedback">전화번호를 입력해주세요.</div>
+					<div class="invalid-feedback">' - ' 를 제외하고 입력해주세요.</div>
 				</div>
 
 				<div class="mb-3">
@@ -230,10 +258,13 @@
         if (passwordRegex.test(password)) {
             resultDiv.innerHTML = "유효한 비밀번호입니다.";
             resultDiv.style.color = "green";
+          
             return true;
         } else {
             resultDiv.innerHTML = "비밀번호는 특수문자를 포함하고, 6자 이상 20자 미만이어야 합니다.";
             resultDiv.style.color = "red";
+            document.getElementById("pwd").classList.add('is-invalid');  // invalid 추가
+            resultDiv.classList.add('is-invalid');  // resultDiv에도 invalid 클래스를 추가
             return false;
         }
     }

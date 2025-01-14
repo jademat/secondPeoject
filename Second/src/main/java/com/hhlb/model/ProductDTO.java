@@ -83,6 +83,4 @@ public class ProductDTO {
 	public void setProduct_specInfo(String product_specInfo) {
 		this.product_specInfo = product_specInfo;
 	}
-	
-	
 }

@@ -4,55 +4,55 @@
 
 <div class="container mt-5">
 
+	<script>
+		function validatePwd() {
+
+			var newPassword = document.getElementById("newPassword").value;
+			var confirmPassword = document.getElementById("confirmPassword").value;
+			var resultDiv = document.getElementById("result");
+
+			// 비밀번호 조건: 특수문자 포함, 길이 6자 이상 20자 미만
+			var passwordRegex = /^(?=.*[!@#$%^&*?_])(?=.*[a-zA-Z0-9]).{6,20}$/;
+
+		    if (!passwordRegex.test(newPassword)) {
+		        resultDiv.innerHTML = "비밀번호는 특수문자를 포함하고, 6자 이상 20자 미만이어야 합니다.";
+		        resultDiv.style.color = "red";
+		        return false;
+		    }
+
+		    // 비밀번호 확인 일치 여부 확인
+		    if (newPassword !== confirmPassword) {
+		        resultDiv.innerHTML = "비밀번호가 일치하지 않습니다.";
+		        resultDiv.style.color = "red";
+		        return false;
+		    }
+
+		    resultDiv.innerHTML = "비밀번호가 일치하며 유효합니다.";
+		    resultDiv.style.color = "green";
+		    return true;
+		}
+	</script>
+
 	<h3>비밀번호 재설정</h3>
 
-	<form action="resetPassword.jsp" method="post">
+	<form id="resetForm" action="<%=request.getContextPath()%>/user_pwdUpdate.go" method="post" onsubmit="return validatePwd()">
 		<div class="mb-3">
-			<label for="id">아이디</label> <br> <input type="text"
-				class="form-control" id="id" name="id" value="" readonly
-				style="width: 80%;">
+			<label for="userId" class="form-label">아이디</label> 
+			<input type="text" class="form-control" id="user_id" name="user_id" value="${user_id}"
+				readonly required> 
+				<label for="newPassword" class="form-label">새로운 비밀번호</label> 
+				<input type="password" class="form-control" id="newPassword" name="newPassword" required>
+
+			<label for="confirmPassword" class="form-label">비밀번호 확인</label>
+
+			<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+	
 		</div>
-		<div class="mb-3">
-			<label for="password">새로운 비밀번호</label> <br> <input
-				type="password" class="form-control" id="newpwd" name="user_newPwd"
-				required style="width: 80%;">
-			<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
-		</div>
-		<div class="mb-3">
-			<label for="confirm-password">비밀번호 확인</label> <br> <input
-				type="password" class="form-control" id="confirm_password"
-				name="confirm-password" required style="width: 80%;">
-			<div class="invalid-feedback">비밀번호 확인란을 입력해주세요.</div>
-		</div>
-		<button type="submit" class="btn btn-primary" onclick="validatePwd()">비밀번호
-			변경</button>
-		<div id="result"></div>
+		
+		 <div id="result"></div> 
+		<button type="submit" class="btn btn-primary">비밀번호 재설정</button>
 	</form>
 </div>
 
-<script>
-	function validatePwd(event) {
-		
-		event.preventDefault();
-		
-        var newPassword = document.getElementById("newpwd").value;
-        var confirmPassword = document.getElementById("confirm_password").value;
-        var resultDiv = document.getElementById("result");
-		
-		var passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]).{8,16}$/;
 
-		if (passwordRegex.test(newPassword)) {
-			if (newPassword === confirmPassword) {
-				resultDiv.innerHTML = '비밀번호가 일치하며 유효합니다.';
-				resultDiv.style.color = 'green';
-			} else {
-				resultDiv.innerHTML = '비밀번호가 일치하지 않습니다.';
-				resultDiv.style.color = 'red';
-			}
-		} else {
-			resultDiv.innerHTML = '비밀번호는 최소 8자에서 16자까지, 영문자, 숫자 및 특수 문자를 포함해야 합니다.';
-			resultDiv.style.color = 'red';
-		}
-	}}
-</script>
 <jsp:include page="../include/footer.jsp" />

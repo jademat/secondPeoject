@@ -93,6 +93,7 @@ public class ProductDAO {
 	}  // closeConn() 메서드 end
 	
 	
+
 	// category_code로 category_no 조회하는 메서드
     public int getCategoryNoByCode(String categoryCode) {
         
@@ -272,7 +273,82 @@ public class ProductDAO {
 	
 	
 	
+
+
+	// 모든 상품 리스트를 가져오는 메서드
+	public List<ProductDTO> getAllProduct() {
+		List<ProductDTO> list = new ArrayList<ProductDTO>(); 
+		
+		try {
+			openConn();
+			
+			sql ="select * from sc_product";
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return list;
+	} // getAllProduct() 메서드 end
 	
+	
+	
+	// 제품 번호에 해당하는 제품의 상세 정보를 조회하는 메서드
+	public ProductDTO getProductContent(int pnum) {
+		ProductDTO dto = null;
+		
+		try {
+			openConn();
+			
+			sql = "select * from sc_product where product_no = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, pnum);
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				dto = new ProductDTO();
+				
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return dto;
+	} // getProductContent() 메서드 end
+
 	
 	
 	// 해당 상품번호에 일치하는 상품의 review_rank 를 소수점 1자리로 가져오는 메서드
@@ -301,6 +377,7 @@ public class ProductDAO {
 		}
 		return result;
 	} // getProductRiviewRank() 메서드 end
+
 	
 	
 	// 해당 상품번호에 일치하는 상품의 리뷰 개수를 가져오는 메서드

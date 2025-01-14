@@ -181,7 +181,7 @@
             <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
             <hr class="my-4">
             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button" type="submit">주문확정</a>
+            <a class="btn btn-primary btn-lg" role="button" type="submit"  data-toggle="modal" data-target="#completePayment">주문확정</a>
             <img class="rounded mx-auto d-block" src="img/payments.png" alt="">
           </div>
           
@@ -326,6 +326,7 @@
 	      });
 	    }, false);
     </script>
-
+    
+<jsp:include page="../modal/payOkModal.jsp"/>
 <jsp:include page="../modal/cartAddrModal.jsp" />
 <jsp:include page="../include/footer.jsp" />

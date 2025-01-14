@@ -120,24 +120,29 @@
     });
 	
 	
-	// product/detail.jsp에서 Add to Cart 버튼을 클릭했을 때 sc_cart 테이블에 저장하기
-	$("#goCartBtn").click(function() {
-		$.ajax({
-			url : "/Second/cartInsert.go",
-			data : $("#goCart").serialize(),
-			dataType : "text",
-			success : function(res) {
-				/*if (res > 0) {
-					alert("장바구니 추가 완료");
-				} else {
-					alert("장바구니 추가 실패");
-				}*/
-			},
-			error : function() {
-				alert("데이터 통신 오류입니다...")
-			}
-		});
-	});
+	
+	
+	
+	/* // product/cart.jsp 장바구니 리스트에서 X(deleteBtn) 클릭 시 삭제되는 코드
+	$(document).ready(function() {
+        // 삭제 버튼 클릭 이벤트
+        $('.deleteBtn').click(function() {
+
+            // AJAX 요청
+            $.ajax({
+                url: '/Second/cartDelete.go', // 요청 URL
+                method: 'POST',              // 요청 방식
+                data: { cart_no: cartNo },   // 전송 데이터
+                success: function(response) {
+                    alert("상품이 장바구니에서 삭제되었습니다."); // 성공 메시지
+                    location.reload(); // 페이지 새로고침
+                },
+                error: function() {
+                    alert("상품 삭제에 실패했습니다. 다시 시도해 주세요."); // 오류 메시지
+                }
+            });
+        });
+    });*/
     
 })(jQuery);
 

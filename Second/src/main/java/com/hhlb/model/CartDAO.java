@@ -102,6 +102,7 @@ public class CartDAO {
 			sql = "select max(cart_no) from sc_cart";
 			pstmt = con.prepareStatement(sql);
 			
+			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				count = rs.getInt(1) + 1;
 			}
@@ -132,27 +133,69 @@ public class CartDAO {
 	} // insertCartData() 메서드 end
 
 
-	public List<CartDTO> getCartList() {
-		
+	// 현재 로그인 중인 회원의 아이디에 해당하는 장바구니 목록을 가져오는 메서드
+	public List<CartDTO> getCartList(String user_id) {
 		List<CartDTO> list = new ArrayList<CartDTO>();
 		
-		
 		try {
-			
 			openConn();
 			
-			sql = "select * from sc_cart order by cart_no desc";
-			
+			sql = "select * from sc_cart where user_id = ? order by cart_no desc";
 			pstmt= con.prepareStatement(sql);
 			
+			pstmt.setString(1,user_id);
+			
 			rs = pstmt.executeQuery();
-			
-			
+			while (rs.next()) {
+				CartDTO dto = new CartDTO();
+				
+				dto.setCart_no(rs.getInt("cart_no"));
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setUser_id(rs.getString("user_id"));
+				dto.setCart_deliveryfee(rs.getInt("cart_deliveryfee"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_name(rs.getString("product_name"));
+				
+				list.add(dto);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
 		}
-
-		return null;
+		return list;
 	}
+	
+	
+	//
+	public int deleteCartData(int cart_no) {
+		int result = 0;
+		
+		try {
+			openConn();
+			
+			sql = "delete from sc_cart where cart_no = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, cart_no);
+			
+			result = pstmt.executeUpdate();
+			if (result > 0) {
+				sql = "update sc_cart set cart_no = cart_no -1 where cart_no > ?";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, cart_no);
+				pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} closeConn(rs, pstmt, con);
+		return result;
+	} // deleteCartData() 메서드 end
 }

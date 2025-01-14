@@ -172,4 +172,46 @@ Connection con = null;
 		return rList;
 	}
 	
+	
+	
+	// 상품번호에 해당하는 리뷰를 모두 가져오는 메서드
+	public List<ReviewDTO> getReviewInfo(int pnum) {
+			List<ReviewDTO> list = new ArrayList<ReviewDTO>();
+			
+			try {
+				openConn();
+				
+				sql = "select * from sc_review where product_no = ? order by review_date desc";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, pnum);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					ReviewDTO dto = new ReviewDTO();
+					
+					dto.setReview_no(rs.getInt("review_no"));
+					dto.setUser_id(rs.getString("user_id"));
+					dto.setProduct_no(rs.getInt("product_no"));
+					dto.setCategory_no(rs.getInt("category_no"));
+					dto.setReview_cont(rs.getString("review_cont"));
+					dto.setReview_rank(rs.getInt("review_rank"));
+					dto.setReview_image(rs.getString("review_image"));
+					dto.setReview_date(rs.getString("review_date"));
+					dto.setReview_update(rs.getString("review_update"));
+					dto.setReview_hit(rs.getInt("review_hit"));
+					
+					list.add(dto);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeConn(rs, pstmt, con);
+			}
+			return list;
+	} // getReviewInfo() 메서드 end
 }
