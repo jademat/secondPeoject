@@ -120,24 +120,7 @@
     });
 	
 	
-	// product/detail.jsp에서 Add to Cart 버튼을 클릭했을 때 sc_cart 테이블에 저장하기
-	$("#goCartBtn").click(function() {
-		$.ajax({
-			url : "/Second/cartInsert.go",
-			data : $("#goCart").serialize(),
-			dataType : "text",
-			success : function(res) {
-				if (res > 0) {
-					alert("장바구니 추가 완료");
-				} else {
-					alert("장바구니 추가 실패");
-				}
-			},
-			error : function() {
-				alert("데이터 통신 오류입니다...")
-			}
-		});
-	});
+	
 	
 	
 	/* // product/cart.jsp 장바구니 리스트에서 X(deleteBtn) 클릭 시 삭제되는 코드

@@ -40,7 +40,7 @@
                     </div>
                     <small class="pt-1">${ reviewCount } reviews</small>
                 </div>
-                <h3 class="font-weight-semi-bold mb-4">$150.00</h3>
+                <h3 class="font-weight-semi-bold mb-4">${ dto.getProduct_price() }</h3>
                 <p class="mb-4">${ dto.getProduct_spec() }</p>
                 
                 
@@ -118,6 +118,30 @@
 	                    
 	                    <!-- 선택한 사이즈, 수량을 가지고 장바구니 페이지로 넘어가는 버튼 -->
 	                    <button class="btn btn-primary px-3" id="goCartBtn"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+	                    
+	                    <script type="text/javascript">
+	                    
+			                 // product/detail.jsp에서 Add to Cart 버튼을 클릭했을 때 sc_cart 테이블에 저장하기
+			                	$("#goCartBtn").click(function() {
+			                		$.ajax({
+			                			url : "/Second/cartInsert.go",
+			                			data : $("#goCart").serialize(),
+			                			dataType : "text",
+			                			success : function(res) {
+			                				if (res > 0) {
+			                					alert("장바구니 추가 완료");
+			                				} else {
+			                					alert("장바구니 추가 실패");
+			                				}
+			                			},
+			                			error : function() {
+			                				alert("데이터 통신 오류입니다...")
+			                			}
+			                		});
+			                	});
+	                    
+	                    </script>
+	                    
 	                </div>
                 </form>
                 
