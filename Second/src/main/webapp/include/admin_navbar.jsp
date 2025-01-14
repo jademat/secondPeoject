@@ -57,9 +57,11 @@
             </a>
             <div id="collapseProductManagement" class="collapse" aria-labelledby="headingProductManagement" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="product_input.jsp">상품 등록</a>
-                    <a class="collapse-item" href="product_modify.jsp">상품 수정</a>
-                    <a class="collapse-item" href="product_delete.jsp">상품 삭제</a>
+                    <a class="collapse-item" href="<%=request.getContextPath() %>/product_input.go">상품 등록</a>
+                    <a class="collapse-item" href="<%=request.getContextPath() %>/product_list.go">상품 관리</a>
+                    <%-- <a class="collapse-item" href="<%=request.getContextPath() %>/product_modify.go">상품 수정</a> --%>
+                    <%-- <a class="collapse-item" href="<%=request.getContextPath() %>/product_delete.go">상품 삭제</a> --%>
+                    
                 </div>
             </div>
             

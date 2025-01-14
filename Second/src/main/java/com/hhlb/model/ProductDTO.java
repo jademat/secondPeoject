@@ -11,6 +11,7 @@ public class ProductDTO {
 	private int product_hit;
 	private String product_image;
 	private String product_size;
+	private String product_specInfo;
 	
 	
 	public int getProduct_no() {
@@ -75,5 +76,13 @@ public class ProductDTO {
 	public void setProduct_size(String product_size) {
 		this.product_size = product_size;
 	}
+	
+	public String getProduct_specInfo() {
+		return product_specInfo;
+	}
+	public void setProduct_specInfo(String product_specInfo) {
+		this.product_specInfo = product_specInfo;
+	}
+	
 	
 }

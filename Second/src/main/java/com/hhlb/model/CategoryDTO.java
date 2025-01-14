@@ -5,7 +5,7 @@ public class CategoryDTO {
 	private int category_no;
 	private String category_code;
 	private String category_name;
-	
+	private String category_gender;
 	
 	public int getCategory_no() {
 		return category_no;
@@ -27,5 +27,15 @@ public class CategoryDTO {
 	public void setCategory_name(String category_name) {
 		this.category_name = category_name;
 	}
+	
+	public String getCategory_gender() {
+		return category_gender;
+	}
+	public void setCategory_gender(String category_gender) {
+		this.category_gender = category_gender;
+	}
+	
+	
+	
 	
 }
