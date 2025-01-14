@@ -126,7 +126,7 @@
                                     </div>
                                 </div>
 
-                                <a href="<%=request.getContextPath() %>/user_board_list.go" class="nav-item nav-link">Board</a>
+                                <a href="<%=request.getContextPath() %>/user_board_list.go?board_type=all" class="nav-item nav-link">Board</a>
                                 <a href="<%=request.getContextPath() %>/user_review_list.go" class="nav-item nav-link">Review</a>
 
                             </div>

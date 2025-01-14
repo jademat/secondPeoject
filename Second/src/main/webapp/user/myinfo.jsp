@@ -47,9 +47,9 @@
 			<th width="20%">리뷰</th>
 		</tr>
 		<tr onclick="openOrderDetailModal()">
-			<td>asd</td>
-			<td>asd</td>
-			<td>asd</td>
+			<td>a</td>
+			<td>a</td>
+			<td>a</td>
 			<td>
 				<button type="button" class="btn btn-primary"
 					onclick="openReviewModal(event)">리뷰작성</button>
@@ -120,17 +120,20 @@
 				<td colspan="4" align="center">작성한 게시물이 없습니다.</td>
 			</tr>
 		</c:if>
-
 	</table>
+	
 </div>
 
 
 
 <script>
 	// 주문 상세 내역 모달 열기
-	function openOrderDetailModal() {
-		$('#orderDetailModal').modal('show');
-	}
+function openOrderDetailModal() {
+    // 여기에 모달을 여는 코드 작성
+    $('#orderDetailModal .modal-content').load('/modal/orderDetailModal.jsp');
+    $('#orderDetailModal').modal();
+}
+		
 
 	function openReviewModal(event) {
 		event.stopPropagation(); // 버튼 클릭 시 <tr> 클릭 이벤트 발생 방지
