@@ -56,7 +56,7 @@
             <div class="row bg-secondary py-2 px-xl-5">
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="d-inline-flex align-items-center">
-                        <a class="text-dark" href="<%=request.getContextPath() %>/user_board_list.go">FAQs</a>
+                        <a class="text-dark" href="<%=request.getContextPath() %>/user_board_list.go?board_type=all">FAQs</a>
                 
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                                     </div>
                                 </div>
 
-                                <a href="<%=request.getContextPath() %>/user_board_list.go" class="nav-item nav-link">Board</a>
+                                <a href="<%=request.getContextPath() %>/user_board_list.go?board_type=all" class="nav-item nav-link">Board</a>
                                 <a href="<%=request.getContextPath() %>/user_review_list.go" class="nav-item nav-link">Review</a>
 
                             </div>

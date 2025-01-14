@@ -125,14 +125,47 @@ public class BoardDAO {
 		return list;
 	}
 
-	public List<BoardDTO> getBoardList() {
+	public List<BoardDTO> getBoardList(int page, int rowsize, String type) {
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
 
+		// 해당 페이지에서 시작 글번호
+		int startNo = (page * rowsize) - (rowsize - 1);
+
+		// 해당 페이지에서 끝 글번호
+		int endNo = (page * rowsize);
 		try {
 			openConn();
-			 sql = "select * from sc_board order by board_no desc";
+			
+			sql = "select * from (select row_number() over (order by board_no desc) as rnum, b.* from sc_board b ";
+
+			if (type.equals("all")) {
+				sql += ")";
+
+			} else if (type.equals("notice")) {
+				sql += " where board_type = ?)";
+			} else if (type.equals("exchange")) {
+				sql += " where board_type = ?)";
+			} else if (type.equals("refund")) {
+				sql += " where board_type = ?)";
+			} else if (type.equals("inquiry")) {
+				sql += " where board_type = ?)";
+			}
+//			sql = "select * from" + "(select row_number() over (order by board_no desc) as rnum, b.* from sc_board b where board_type = ?)"
+//					+ " where rnum >= ? and rnum <= ?";
+			
+			sql += "where rnum >= ? and rnum <= ?";
 
 			pstmt = con.prepareStatement(sql);
+			
+			if(type.equals("notice")|| type.equals("exchange") || type.equals("refund") || type.equals("inquiry")) {
+				pstmt.setString(1, type);
+				pstmt.setInt(2, startNo);
+				pstmt.setInt(3, endNo);
+			}else {
+				pstmt.setInt(1, startNo);
+				pstmt.setInt(2, endNo);
+			}
+			
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -267,27 +300,84 @@ public class BoardDAO {
 		}
 		return blist;
 	}
-	
+
 	public int deleteBoard(int no) {
 		int result = 0;
-		
+
 		try {
 			openConn();
-			
+
 			sql = "delete from sc_board where board_no = ?";
-			
+
 			pstmt = con.prepareStatement(sql);
-			
+
 			pstmt.setInt(1, no);
-			
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			closeConn(pstmt, con);
 		}
-		
+
 		return result;
 	}
-	
+
+	public void updateSequence(int no) {
+		try {
+			openConn();
+
+			sql = "update sc_board set board_no = board_no - 1 where board_no > ?";
+
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, no);
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(pstmt, con);
+		}
+	}
+
+	public int getBoardCount(String type) {
+		int count = 0;
+
+		try {
+			openConn();
+
+			if (type.equals("all")) {
+				sql = "select count(*) from sc_board";
+			} else if (type.equals("notice")) {
+				sql = "select count(*) from sc_board where board_type = ?";
+			} else if (type.equals("exchange")) {
+				sql = "select count(*) from sc_board where board_type = ?";
+			} else if (type.equals("refund")) {
+				sql = "select count(*) from sc_board where board_type = ?";
+			} else if (type.equals("inquiry")) {
+				sql = "select count(*) from sc_board where board_type = ?";
+			}
+
+
+			pstmt = con.prepareStatement(sql);
+			if(type.equals("notice")|| type.equals("exchange") || type.equals("refund") || type.equals("inquiry")) {
+				pstmt.setString(1, type);
+			}
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+			System.out.println("count >>> " + count);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+
+		return count;
+	}
 }
