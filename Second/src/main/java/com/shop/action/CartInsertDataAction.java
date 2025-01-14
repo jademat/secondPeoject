@@ -24,7 +24,7 @@ public class CartInsertDataAction implements Action {
 		int category_no = Integer.parseInt(request.getParameter("category_no"));
 		String product_image = request.getParameter("product_image");
 		String product_name = request.getParameter("product_name");
-		int product_price = Integer.parseInt(request.getParameter("price"));
+		int product_price = Integer.parseInt(request.getParameter("product_price"));
 		String user_id = request.getParameter("user_id");
 		
 		CartDTO dto = new CartDTO();
@@ -45,15 +45,7 @@ public class CartInsertDataAction implements Action {
 		
 		PrintWriter out = response.getWriter();
 		
-		if (check > 0) {
-			out.println("<script>");
-			out.println("alert('장바구니에 추가')");
-			out.println("</script>");
-		} else {
-			out.println("<script>");
-			out.println("alert('장바구니 오류')");
-			out.println("</script>");
-		}
+		out.println(check);
 		
 		return null;
 	}
