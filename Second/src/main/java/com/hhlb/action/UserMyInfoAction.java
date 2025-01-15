@@ -35,10 +35,10 @@ public class UserMyInfoAction implements Action {
 				
 		List<ReviewDTO> rcont = rdao.getReview(user_id);
 		
+		
 		request.setAttribute("uCont", ucont);
 		request.setAttribute("bCont", bcont);
 		request.setAttribute("rCont", rcont);
-		
 		
 		ActionForward forward = new ActionForward();
 		

@@ -39,21 +39,30 @@
 					onClick="location.href='user_boardDetail.go?no=${dto.getBoard_no() }'">
 					<td>${dto.getBoard_no() }</td>
 					<td>${dto.getBoard_type() }</td>
-					<td><c:choose>
-							<c:when test="${dto.board_visible == 0}">
-								<c:choose>
-									<c:when test="${dto.getUser_id() == user_id}">
-                                            비밀글 입니다.
-                                        </c:when>
-									<c:otherwise>
-                                            비공개글입니다.
-                                        </c:otherwise>
-								</c:choose>
-							</c:when>
-							<c:otherwise>
-                                    ${dto.board_title}
-                                </c:otherwise>
-						</c:choose></td>
+					<td>
+					    <c:choose>
+					        <c:when test="${dto.board_visible == 0}">
+					            <c:choose>
+					                <c:when test="${dto.getUser_id() == user_id}">
+					                    비밀글 입니다.
+					                </c:when>
+					                <c:otherwise>
+					                    비공개글입니다.
+					                </c:otherwise>
+					            </c:choose>
+					        </c:when>
+					        <c:otherwise>
+					            <c:choose>
+					                <c:when test="${dto.board_type == 'notice'}">
+					                    <span style="color: red; font-weight: bold;">${dto.board_title}</span> <!-- board_type이 'notice'일 때 빨간색 -->
+					                </c:when>
+					                <c:otherwise>
+					                    ${dto.board_title} <!-- 일반적인 제목 -->
+					                </c:otherwise>
+					            </c:choose>
+					        </c:otherwise>
+					    </c:choose>
+					</td>
 					<td>${dto.getUser_id() }</td>
 					<td>${dto.getBoard_date().substring(0,10) }</td>
 				</tr>

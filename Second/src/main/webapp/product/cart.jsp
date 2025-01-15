@@ -55,7 +55,6 @@
                     </div>
                     <div class="card-body">
                     	<c:forEach items="${ list }" var="dto">
-                    	<c:set var="${dto.getProduct_price() * dto.getProduct_qty() }" name=""></c:set>
 	                        <div class="d-flex justify-content-between mb-3 pt-1">
 	                            <h6 class="font-weight-medium">총 금액</h6>
 	                            <h6 class="font-weight-medium"><span id="total-amount" >totalPrice</span> 원</h6>

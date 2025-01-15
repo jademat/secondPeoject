@@ -134,15 +134,22 @@ Connection con = null;
 		return rList;
 	}
 	
-	public List<ReviewDTO> getReviewList(){
+	public List<ReviewDTO> getReviewList(int page, int rowsize){
 		List<ReviewDTO> rList = new ArrayList<ReviewDTO>();
 		
+		int startNo = (page * rowsize) - (rowsize - 1);
+
+		int endNo = (page * rowsize);
 		try {
 			openConn();
 			
-			sql = "select * from sc_review order by review_no desc";
-			
+			sql = "select * from" + "(select row_number() over (order by review_no desc) as rnum, r.* from sc_review r)"
+					+ " where rnum >= ? and rnum <= ?";
+
 			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, startNo);
+			pstmt.setInt(2, endNo);
 		
 			rs = pstmt.executeQuery();
 			
@@ -255,5 +262,67 @@ Connection con = null;
 		}
 		return dto;
 	}
+	public int getReviewCount() {
+		int count = 0;
+		
+		try {
+			openConn();
+			
+			sql = "select count(*) from sc_review";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return count;
+	}
 	
+	public int deleteReview(int no) {
+		int result = 0;
+		
+		try {
+			openConn();
+			
+			sql = "delete from sc_review where review_no = ?";
+		
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(pstmt, con);
+		}
+		
+		return result;
+	}
+	
+	public void updateReviewSequence(int no) {
+		
+		try {
+			openConn();
+
+			sql = "update sc_review set review_no = review_no - 1 where review_no > ?";
+
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, no);
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			closeConn(pstmt, con);
+		}
+
+	
+	}
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 textarea {
 	resize: vertical;
@@ -34,9 +34,16 @@ textarea {
 							</div>
 							<select class="custom-select" id="inputGroupSelect01" name = "board_type">
 								<option selected>선택해주세요</option>
-								<option value="exchange">교환</option>
-								<option value="refund">환불</option>
-								<option value="inquiry">상품문의</option>
+								 <c:choose>
+							        <c:when test="${sessionScope.user_id == 'admin'}">
+							            <option value="notice">공지사항</option> <!-- admin일 때만 "공지사항" 옵션 보이기 -->
+							        </c:when>
+							        <c:otherwise>
+							            <option value="exchange">교환</option> <!-- 일반 사용자에게만 "교환" 옵션 보이기 -->
+							            <option value="refund">환불</option>  <!-- 일반 사용자에게만 "환불" 옵션 보이기 -->
+							            <option value="inquiry">상품문의</option> <!-- 일반 사용자에게만 "상품문의" 옵션 보이기 -->
+							        </c:otherwise>
+							    </c:choose>
 							</select>
 						</div>
 
