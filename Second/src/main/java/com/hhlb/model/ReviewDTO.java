@@ -12,6 +12,7 @@ public class ReviewDTO {
 	private String review_date;
 	private String review_update;
 	private int review_hit;
+	private String review_title;
 	
 	
 	public int getReview_no() {
@@ -81,5 +82,12 @@ public class ReviewDTO {
 	public void setReview_hit(int review_hit) {
 		this.review_hit = review_hit;
 	}
+	public String getReview_title() {
+		return review_title;
+	}
+	public void setReview_title(String review_title) {
+		this.review_title = review_title;
+	}
+	
 	
 }

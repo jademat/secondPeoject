@@ -254,13 +254,16 @@
 	                                    <div class="media-body">
 	                                        <h6>${ dto.getUser_id() }<small> - <i>${ dto.getReview_date() }</i></small></h6>
 	                                        <div class="text-primary mb-2">
-	                                        	${ dto.getReview_rank() } 점
-	                                        	<!-- 미정 -->
-	                                            <i class="fas fa-star"></i>
-	                                            <i class="fas fa-star"></i>
-	                                            <i class="fas fa-star"></i>
-	                                            <i class="fas fa-star-half-alt"></i>
-	                                            <i class="far fa-star"></i>
+	                                        	<c:forEach var="i" begin="1" end="5">
+											        <c:choose>
+											            <c:when test="${dto.review_rank >= i}">
+											                <i class="fas fa-star text-warning"></i> <!-- 금색 별 -->
+											            </c:when>
+											            <c:otherwise>
+											                <i class="far fa-star text-muted"></i> <!-- 회색 별 -->
+											            </c:otherwise>
+											        </c:choose>
+											    </c:forEach>
 	                                        </div>
 	                                        <p>${ dto.getReview_cont() }</p>
 	                                    </div>

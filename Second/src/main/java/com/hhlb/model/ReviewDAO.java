@@ -119,6 +119,7 @@ Connection con = null;
 				dto.setReview_date(rs.getString("review_date"));
 				dto.setReview_update(rs.getString("review_update"));
 				dto.setReview_hit(rs.getInt("review_hit"));
+				dto.setReview_title(rs.getString("review_title"));
 				
 				rList.add(dto);
 			}
@@ -158,6 +159,7 @@ Connection con = null;
 				dto.setReview_date(rs.getString("review_date"));
 				dto.setReview_update(rs.getString("review_update"));
 				dto.setReview_hit(rs.getInt("review_hit"));
+				dto.setReview_title(rs.getString("review_title"));
 				
 				rList.add(dto);
 			}
@@ -202,6 +204,7 @@ Connection con = null;
 					dto.setReview_date(rs.getString("review_date"));
 					dto.setReview_update(rs.getString("review_update"));
 					dto.setReview_hit(rs.getInt("review_hit"));
+					dto.setReview_title(rs.getString("review_title"));
 					
 					list.add(dto);
 				}
@@ -214,4 +217,43 @@ Connection con = null;
 			}
 			return list;
 	} // getReviewInfo() 메서드 end
+	
+	public ReviewDTO getuserReview(int no) {
+		ReviewDTO dto = null;
+		
+		try {
+			openConn();
+			
+			sql = "select * from sc_review where review_no = ?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, no);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new ReviewDTO();
+				
+				dto.setReview_no(rs.getInt("review_no"));
+				dto.setUser_id(rs.getString("user_id"));
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setReview_cont(rs.getString("review_cont"));
+				dto.setReview_rank(rs.getInt("review_rank"));
+				dto.setReview_image(rs.getString("review_image"));
+				dto.setReview_date(rs.getString("review_date"));
+				dto.setReview_update(rs.getString("review_update"));
+				dto.setReview_hit(rs.getInt("review_hit"));
+				dto.setReview_title(rs.getString("review_title"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return dto;
+	}
+	
 }
