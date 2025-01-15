@@ -14,7 +14,7 @@
 	$(function() {
 		// "아이디 중복체크" 라는 버튼에 마우스가 올라가면
 		// 호출되는 무명함수
-		$("#idCheck_btn").mouseover(function(){
+		$("#idCheck_btn").click(function(){
 			$("#idCheck").hide(); // span 태그를 숨기는 코드
 			 
 			// 회원 id 입력했을 때, 값을 가져오라는 메서드
@@ -66,6 +66,7 @@
 				dataType: "text",
 				success: function(res) {
 					if(res == -1) {
+						
 						// 중복인 경우
 						let warningTxt = '<font color="red"> 중복 아이디 입니다. </font>';
 						$("#idCheck").text(""); // span 태그 영역 초기화
@@ -74,7 +75,7 @@
 						$("#user_id").val("").focus();
 					} else {
 						// 사용 가능한 아이디인 경우
-						let warningTxt = '<font color="red"> 사용 가능한 아이디 입니다. </font>';
+						let warningTxt = '<font color="green"> 사용 가능한 아이디 입니다. </font>';
 						
 						$("#idCheck").text(""); // span 태그 영역 초기화
 						$("#idCheck").show(); // span 태그를 보여주는 기능
@@ -219,23 +220,6 @@
 </div>
 
 
-<script>
-    window.addEventListener('load', () => {
-      const forms = document.getElementsByClassName('validation-form');
-    
-      Array.prototype.filter.call(forms, (form) => {
-        form.addEventListener('submit', function (event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-    
-          form.classList.add('was-validated');
-          
-        }, false);
-      });
-    }, false);
-    </script>
 
 <script> // 폰 번호에 - 이거 넣었을 시, 경고
     function validatePhone() {
@@ -274,5 +258,23 @@
         }
     }
 </script>
+
+<script>
+    window.addEventListener('load', () => {
+      const forms = document.getElementsByClassName('validation-form');
+    
+      Array.prototype.filter.call(forms, (form) => {
+        form.addEventListener('submit', function (event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+    
+          form.classList.add('was-validated');
+          
+        }, false);
+      });
+    }, false);
+    </script>
 
 <jsp:include page="../include/footer.jsp" />
