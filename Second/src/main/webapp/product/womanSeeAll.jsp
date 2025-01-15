@@ -3,8 +3,11 @@
 <%@page import="com.hhlb.model.ProductDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%
+	request.setAttribute("pageTitle", "See all");
+%>	
 <jsp:include page="../include/header.jsp" />
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%

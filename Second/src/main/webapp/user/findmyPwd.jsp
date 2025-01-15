@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%
+	request.setAttribute("pageTitle", "Forgot Password?");
+%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <jsp:include page="../include/header.jsp" />
-
 
 <div class="container">
 	<div class="input-form-backgroud row">
