@@ -172,7 +172,7 @@ public class CartDAO {
 	}
 	
 	
-	//
+	// 장바구니에서 X버튼을 누를 시 실행되는 메서드
 	public int deleteCartData(int cart_no) {
 		int result = 0;
 		
@@ -198,4 +198,46 @@ public class CartDAO {
 		} closeConn(rs, pstmt, con);
 		return result;
 	} // deleteCartData() 메서드 end
+	
+	
+	// 장바구니 페이지에 올라온 해당 유저의 상품의 합계를 구하는 메서드
+	public int getCartTotalPrice(String user_id) {
+		int proPrice = 0, proQty = 0, totalPrice = 0;
+		
+		try {
+			openConn();
+			
+			sql = "select sum(product_price) from sc_cart where user_id = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, user_id);
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				proPrice = rs.getInt("1");
+			}
+			
+			sql = "select sum(product_qty) from sc_cart where user_id = ?";
+			pstmt = con.prepareCall(sql);
+			
+			pstmt.setString(1, user_id);
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				proQty = rs.getInt(1);
+			}
+			
+			totalPrice = proPrice + proQty;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} closeConn(rs, pstmt, con);
+		return totalPrice;
+	} // getCartTotalPrice() 메서드 end
+	
+	
+	// 
+	 getdeliveryFee() {
+		
+	}
 }
