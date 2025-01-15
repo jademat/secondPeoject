@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<jsp:include page="../include/header.jsp" />
 
+<%
+	request.setAttribute("pageTitle", "Order Form");
+%>	
+<jsp:include page="../include/header.jsp" />
 
 <div class="container">
     <div class="input-form-backgroud row">

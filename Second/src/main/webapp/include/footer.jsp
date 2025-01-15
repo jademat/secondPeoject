@@ -39,7 +39,7 @@
                 <div class="col-md-4 mb-5">
                     <h5 class="font-weight-bold text-dark mb-4">운영정책</h5>
                     <div class="d-flex flex-column justify-content-start">
-                        <a class="text-dark mb-2" href=""><i class="fa fa-angle-right mr-2"></i>자주 묻는 질문</a>
+                        <a class="text-dark mb-2" href="<%=request.getContextPath()%>/user_board_list.go?board_type=all"><i class="fa fa-angle-right mr-2"></i>자주 묻는 질문</a>
                         <!-- 개인정보 처리 방침 링크 클릭 시 모달 띄우기 -->
                         <a class="text-dark mb-2" href="#" data-toggle="modal" data-target="#privacyPolicyModal"><i class="fa fa-angle-right mr-2"></i> 개인정보 처리 방침</a>
                      </div>  

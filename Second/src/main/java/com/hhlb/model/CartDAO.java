@@ -236,8 +236,6 @@ public class CartDAO {
 	} // getCartTotalPrice() 메서드 end
 	
 	
-	// 
-	 getdeliveryFee() {
+	//  getdeliveryFee() {
 		
 	}
-}

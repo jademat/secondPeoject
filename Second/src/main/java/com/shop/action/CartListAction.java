@@ -33,17 +33,9 @@ public class CartListAction implements Action {
         
 		CartDAO dao = CartDAO.getInstance();
 		
-		// 장바구니 페이지에 해당 유저의 제품을 보여줌
 		List<CartDTO> cartList = dao.getCartList(user_id);
 		
-		// 장바구니 페이지에 올라온 해당 유저의 상품의 합계를 구하는 메서드
-		int totalPrice = dao.getCartTotalPrice(user_id);
-		
-		// 해당 유저의 배달비의 합계를 구하는 메서드
-		int deliveryFee = dao.getdeliveryFee(user_id);
-		
 		request.setAttribute("CartList", cartList);
-		request.setAttribute("TotalPrice", totalPrice);
 		
 		ActionForward forward = new ActionForward();
 		
