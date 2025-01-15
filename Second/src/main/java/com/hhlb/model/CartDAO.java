@@ -214,7 +214,7 @@ public class CartDAO {
 			
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				proPrice = rs.getInt("1");
+				proPrice = rs.getInt(1);
 			}
 			
 			sql = "select sum(product_qty) from sc_cart where user_id = ?";
@@ -226,8 +226,8 @@ public class CartDAO {
 			if (rs.next()) {
 				proQty = rs.getInt(1);
 			}
+			totalPrice = (proPrice * proQty);
 			
-			totalPrice = proPrice + proQty;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -235,9 +235,4 @@ public class CartDAO {
 		return totalPrice;
 	} // getCartTotalPrice() 메서드 end
 	
-	
-	// 
-	 getdeliveryFee() {
-		
-	}
 }
