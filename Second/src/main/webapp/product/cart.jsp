@@ -61,10 +61,10 @@
                         <h4 class="font-weight-semi-bold m-0">금액</h4>
                     </div>
                     <div class="card-body">
-                           <div class="d-flex justify-content-between mb-3 pt-1">
-                               <h6 class="font-weight-medium">상품 금액</h6>
-                               <h6 class="font-weight-medium"><span id="total-amount" >${ totalPrice }</span> 원</h6>
-                           </div>
+	                        <div class="d-flex justify-content-between mb-3 pt-1">
+	                            <h6 class="font-weight-medium">상품 금액</h6>
+	                            <h6 class="font-weight-medium"><span id="total-amount" >${ totalPrice }</span> 원</h6>
+	                        </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">배송료</h6>
                             <h6 class="font-weight-medium">3000</h6>
