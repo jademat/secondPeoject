@@ -216,7 +216,7 @@
 		<div
 			class="d-flex flex-column align-items-center justify-content-center"
 			style="min-height: 300px">
-			<h1 style="font-size: 36px; color: #333333">
+			<h1 style="font-size: 33px; color: #333333">
 			<%=request.getAttribute("pageTitle") != null ? request.getAttribute("pageTitle") : "Default Title"%>
 			</h1>
 		</div>
