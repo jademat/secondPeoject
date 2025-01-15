@@ -28,6 +28,7 @@
 <link href="<%=request.getContextPath() %>/resource/lib/owlcarousel/assets/owl.carousel.min.css"
 	rel="stylesheet">
 
+
 <!-- Customized Bootstrap Stylesheet -->
 
 
@@ -47,6 +48,10 @@
 
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+
+
+
 
 </head>
 <body>
@@ -88,17 +93,19 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link" data-toggle="dropdown"> Woman<i class="fa fa-angle-down float-right mt-1"></i></a>
                                 <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                    <a href="" class="dropdown-item"> Top </a>
-                                    <a href="" class="dropdown-item"> Bottom </a>
-                                    <a href="" class="dropdown-item"> Outer </a>
+                                    <a href="<%=request.getContextPath() %>/user_womanAll.go" class="dropdown-item"> See All</a>
+                                    <a href="<%=request.getContextPath() %>/user_womanTop.go" class="dropdown-item"> Top </a>
+                                    <a href="<%=request.getContextPath() %>/user_womanBottom.go" class="dropdown-item"> Bottom </a>
+                                    <a href="<%=request.getContextPath() %>/user_womanOuter.go" class="dropdown-item"> Outer </a>
                                 </div>
                             </div>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link" data-toggle="dropdown"> Man <i class="fa fa-angle-down float-right mt-1"></i></a>
                                 <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                    <a href="" class="dropdown-item"> Top </a>
-                                    <a href="" class="dropdown-item"> Bottom </a>
-                                    <a href="" class="dropdown-item"> Outer </a>
+                                    <a href="<%=request.getContextPath() %>/user_manAll.go" class="dropdown-item"> See All </a>
+                                    <a href="<%=request.getContextPath() %>/user_manTop.go" class="dropdown-item"> Top </a>
+                                    <a href="<%=request.getContextPath() %>/user_manBottom.go" class="dropdown-item"> Bottom </a>
+                                    <a href="<%=request.getContextPath() %>/user_manOuter.go" class="dropdown-item"> Outer </a>
                                 </div>
                     </nav>
                 </div>
