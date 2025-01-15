@@ -6,6 +6,7 @@
 <jsp:include page="../include/header.jsp" />
 
 	<c:set var="list" value="${ CartList }"/>
+	<c:set var="totalPrice" value="${ TotalPrice }"/>
 
 	<!-- Cart Start -->
     <div class="container-fluid pt-5">
@@ -24,80 +25,23 @@
                     <tbody class="align-middle">
                     
                     	<c:forEach items="${ list }" var="dto">
+                    		<form action="<%= request.getContextPath() %>/cartDelete.go">
+                    		     <input type="hidden" name="no" value="${dto.getCart_no() }">
+                    		     <input type="hidden" name=user_id value="${ user_id }">
 	                        <tr>
 	                            <td class="align-middle">
 	                            		<img src="<%= request.getContextPath() %>/resource/img/${ dto.getProduct_image() }" 
 	                            				alt="" style="width: 50px;">${ dto.getProduct_name() }</td>
 	                            <td class="align-middle">${ dto.getProduct_price() }</td>
-	                            <td class="align-middle">
-	                                <div class="input-group quantity mx-auto" style="width: 100px;">
-	                                    <div class="input-group-btn">
-	                                        <button class="btn btn-sm btn-primary btn-minus" >
-	                                        <i class="fa fa-minus"></i>
-	                                        </button>
-	                                    </div>
-	                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1" id="quantity-input">
-	                                    <div class="input-group-btn">
-	                                        <button class="btn btn-sm btn-primary btn-plus">
-	                                            <i class="fa fa-plus"></i>
-	                                        </button>
-	                                    </div>
-	                                </div>
-	                            </td>
-	                            <td class="align-middle"><span id="total-price">${dto.getProduct_price()}</span></td>
+	                            <td class="align-middle">${ dto.getProduct_qty() }</td>
+	                            <td class="align-middle"><span id="total-price">${dto.getProduct_price() * dto.getProduct_qty() }</span></td>
 	                            <!-- 삭제 버튼 -->
 	                            <td class="align-middle">
-	                            	<form action="<%= request.getContextPath() %>/cartDelete.go?no=${ dto.getCart_no() }">
-	                            		<button class="btn btn-sm btn-primary" id="deleteBtn">
+	                            		<button type="submit" class="btn btn-sm btn-primary" id="deleteBtn">
 	                	            		<i class="fa fa-times"></i></button>
-	                            	</form>
 	                            </td>
 	                        </tr>
-	                        
-	                        <!-- 수량 버튼 클릭 시 이벤트 처리 -->
-	                        <script>
-							    // 기본 가격 설정
-							    var productPrice = ${dto.getProduct_price()}; // 상품 가격
-							
-							    // 수량 증가 버튼 클릭 이벤트
-							    document.querySelector('.btn-plus').addEventListener('click', function() {
-							        var input = document.getElementById('quantity-input');
-							        var currentValue = parseInt(input.value);
-							        input.value = currentValue + 1;
-							
-							        updateTotalPrice(input.value);  // 총 가격 업데이트
-							    });
-							
-							    // 수량 감소 버튼 클릭 이벤트
-							    document.querySelector('.btn-minus').addEventListener('click', function() {
-							        var input = document.getElementById('quantity-input');
-							        var currentValue = parseInt(input.value);
-							
-							        if (currentValue > 1) {  // 최소 수량을 1로 설정
-							            input.value = currentValue - 1;
-							            updateTotalPrice(input.value);  // 총 가격 업데이트
-							        }
-							    });
-							
-							    // 총 가격 업데이트 함수
-							    function updateTotalPrice(quantity) {
-							        var totalPrice = productPrice * quantity;
-							        
-							        // AJAX로 서버와 연동해 값 갱신 가능
-							        $.ajax({
-							            url: '/update-price',
-							            method: 'POST',
-							            data: { quantity: quantity },
-							            success: function(response) {
-							                $('#total-price').text(response.totalPrice);
-							            }
-							        });
-							
-							        // 클라이언트 측 실시간 가격 업데이트
-							        document.getElementById('total-price').textContent = totalPrice.toLocaleString();
-							    }
-							</script>
-	                        
+	                    </form>
                         </c:forEach>
                         
                     </tbody>
@@ -107,15 +51,18 @@
                 
                 <div class="card border-secondary mb-5">
                     <div class="card-header bg-secondary border-0">
-                        <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                        <h4 class="font-weight-semi-bold m-0">금액</h4>
                     </div>
                     <div class="card-body">
-                        <div class="d-flex justify-content-between mb-3 pt-1">
-                            <h6 class="font-weight-medium">Subtotal</h6>
-                            <h6 class="font-weight-medium">$150</h6>
-                        </div>
+                    	<c:forEach items="${ list }" var="dto">
+                    	<c:set var="${dto.getProduct_price() * dto.getProduct_qty() }" name=""></c:set>
+	                        <div class="d-flex justify-content-between mb-3 pt-1">
+	                            <h6 class="font-weight-medium">총 금액</h6>
+	                            <h6 class="font-weight-medium"><span id="total-amount" >totalPrice</span> 원</h6>
+	                        </div>
+                        </c:forEach>
                         <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Shipping</h6>
+                            <h6 class="font-weight-medium">배송료</h6>
                             <h6 class="font-weight-medium">$10</h6>
                         </div>
                     </div>
