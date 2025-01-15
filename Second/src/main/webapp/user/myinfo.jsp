@@ -3,33 +3,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../include/header.jsp" />
 
-<c:set var="ucont" value="${uCont }" />
+<c:set var="uCont" value="${uCont }" />
+<c:set var = "uList" value = "${uList }"/>
 <div class="container">
 	<h2>My page</h2>
 	<div align="right">
-	<button class="btn btn-primary" onclick = "location.href='user_myinfo_modify.go?user_id=${ucont.getUser_id()}'">개인정보수정</button>
+	<button class="btn btn-primary" onclick = "location.href='user_myinfo_modify.go?user_id=${uCont.getUser_id()}'">개인정보수정</button>
 </div>
 	<br>
 	<table class="table table-bordered">
 		<tr>
 			<th scope="row" width="20%">아이디</th>
-			<td>${ucont.getUser_id() }</td>
+			<td>${uCont.getUser_id() }</td>
 		</tr>
 		<tr>
 			<th scope="row">이름</th>
-			<td>${ucont.getUser_name() }</td>
+			<td>${uCont.getUser_name() }</td>
 		</tr>
 		<tr>
 			<th scope="row">닉네임</th>
-			<td>${ucont.getUser_nick() }</td>
+			<td>${uCont.getUser_nick() }</td>
 		</tr>
 		<tr>
 			<th scope="row">주소</th>
-			<td>${ucont.getUser_addr() }</td>
+			<td>${uCont.getUser_addr() }</td>
 		</tr>
 		<tr>
 			<th scope="row">연락처</th>
-			<td>${ucont.getUser_phone() }</td>
+			<td>${uCont.getUser_phone() }</td>
 		</tr>
 	</table>
 </div>
@@ -37,16 +38,16 @@
 <br>
 
 <div class="container">
-	<h3>주문내역</h3>
+	<h3>구매내역</h3>
 	<br>
 	<table class="table table-hover">
 		<tr>
-			<th width="20%">주문번호</th>
-			<th width="40%">제품명</th>
+			<th width="20%">No.</th>
+			<th width="40%">상품명</th>
 			<th width="20%">구매일</th>
 			<th width="20%">리뷰</th>
 		</tr>
-		<tr onclick="openOrderDetailModal()">
+		<tr onclick="openuserDetailModal()">
 			<td>a</td>
 			<td>a</td>
 			<td>a</td>
@@ -65,21 +66,21 @@
 	<br>
 	<table class="table table-bordered">
 		<tr>
-			<th scope="row" width="20%">제품명</th>
+			<th scope="row" width="20%">No.</th>
 			<th width="65%">리뷰제목</th>
 			<th>작성일</th>
 		</tr>
 		<c:set var="rCont" value="${ rCont}" />
 		<c:if test="${!empty rCont }">
-			<c:forEach items="${rCont }" var="rList">
+			<c:forEach items="${rCont }" var="rCont">
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td>${rCont.getReview_no() }</td>
+					<td>${rCont.getReview_title() }</td>
+					<td>${rCont.getReview_date().substring(0,10) }</td>
 				</tr>
 			</c:forEach>
 		</c:if>
-		<c:if test="${empty rList }">
+		<c:if test="${empty rCont }">
 			<tr>
 				<td colspan="3" align="center">작성한 리뷰가 없습니다.</td>
 			</tr>
@@ -128,7 +129,7 @@
 
 <script>
 	// 주문 상세 내역 모달 열기
-function openOrderDetailModal() {
+function openuserDetailModal() {
     // 여기에 모달을 여는 코드 작성
     $('#orderDetailModal .modal-content').load('/modal/orderDetailModal.jsp');
     $('#orderDetailModal').modal();

@@ -15,10 +15,16 @@
 					<div class="cat-item d-flex flex-column border mb-4"
 						style="padding: 30px;">
 
-						<a href="" class="cat-img position-relative overflow-hidden mb-3"
-							data-toggle="modal" data-target="#reviewModal"> 
-							<img class="img-fluid" src="${dto.review_image}" alt="">
-						</a>
+						<button type="button" class="btn btn-link" data-toggle="modal" data-target="#reviewModal" 
+                            data-image="${dto.getReview_image()}"
+                            data-user="${dto.getUser_id()}"
+                            data-date="${dto.getReview_date()}"
+                            data-content="${dto.getReview_cont()}"
+                            data-rating="${dto.getReview_rank()}"
+                            data-title = "${dto.getReview_title()}"
+                            >
+                            <img class="img-fluid" src="<%= request.getContextPath() %>/resource/img/${dto.getReview_image()}" alt="">
+                        </button>
 						<h5 class="font-weight-semi-bold m-0">${dto.getUser_id() }님의 리뷰페이지</h5>
 					</div>
 				</div>

@@ -81,112 +81,99 @@ public class CategoryDAO {
         }
     }
 
-    // 카테고리 목록을 가져오는 메서드
-    public List<CategoryDTO> getCategoryList() {
-        List<CategoryDTO> categoryList = new ArrayList<>();
+    // 카테고리 정보를 DB에 삽입하는 메서드
+    public boolean insertCategory(String categoryName, String categoryCode, String categoryGender) {
+        boolean success = false;
 
         try {
             openConn();
 
-            // 카테고리 리스트 조회 SQL문 작성 (카테고리 번호 포함)
-            sql = "SELECT * FROM SC_CATEGORY";
+            // 현재 가장 큰 category_no 값을 찾는 SQL문
+            sql = "SELECT MAX(category_no) FROM sc_category";
             pstmt = con.prepareStatement(sql);
-
-            // SQL 실행
             rs = pstmt.executeQuery();
 
-            // 결과 처리
+            int categoryNo = 1; // 기본값 설정
+            if (rs.next()) {
+                categoryNo = rs.getInt(1) + 1;  // 가장 큰 category_no에 1을 더한 값
+            }
+
+            // 카테고리 정보를 DB에 삽입하는 SQL문
+            sql = "INSERT INTO sc_category (category_no, category_name, category_code, category_gender) VALUES (?, ?, ?, ?)";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, categoryNo);  // 자동 증가된 category_no 값
+            pstmt.setString(2, categoryName);  // 카테고리 이름
+            pstmt.setString(3, categoryCode);  // 카테고리 코드
+            pstmt.setString(4, categoryGender);  // 성별
+
+            // SQL 실행
+            int chk = pstmt.executeUpdate();
+            if (chk > 0) {
+                success = true;  // 성공적으로 저장된 경우
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConn(rs, pstmt, con);
+        }
+
+        return success;
+    }
+
+    // 기존 카테고리 코드 목록을 가져오는 메서드
+    public List<String> getCategoryCodes() {
+        List<String> categoryCodes = new ArrayList<>();
+        try {
+            openConn();
+
+            // 카테고리 코드 목록을 가져오는 SQL문
+            sql = "SELECT category_code FROM sc_category ORDER BY category_code";
+            pstmt = con.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                categoryCodes.add(rs.getString("category_code"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConn(rs, pstmt, con);
+        }
+
+        return categoryCodes;
+    }
+
+    // 전체 카테고리 리스트를 가져오는 메서드
+    public List<CategoryDTO> getCategoryList() {
+        List<CategoryDTO> categoryList = new ArrayList<CategoryDTO>();
+
+        try {
+            openConn();
+
+            // 전체 카테고리 리스트를 가져오는 SQL문
+            sql = "SELECT * FROM SC_CATEGORY ORDER BY CATEGORY_NO ASC";
+            pstmt = con.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+
             while (rs.next()) {
                 CategoryDTO category = new CategoryDTO();
                 category.setCategory_no(rs.getInt("CATEGORY_NO"));
                 category.setCategory_code(rs.getString("CATEGORY_CODE"));
                 category.setCategory_name(rs.getString("CATEGORY_NAME"));
+                category.setCategory_gender(rs.getString("CATEGORY_GENDER"));
 
                 categoryList.add(category);
             }
-            
-         // 디버깅을 위한 로그 추가
-            System.out.println("Fetched " + categoryList.size() + " categories.");
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Error during database operation: " + e.getMessage());
-        } finally {
-            closeConn(rs, pstmt, con);
-        }
-
-        return categoryList;
-    }
-
-    // 카테고리 추가 메서드
-    public boolean insertCategory(CategoryDTO category) {
-        boolean result = false;
-        int count = 0;
-
-        try {
-            openConn();
-
-            sql = "select max(category_no) from sc_category";
-            
-            pstmt = con.prepareStatement(sql);
-            
-            rs = pstmt.executeQuery();
-            
-            if(rs.next()) {
-            	
-            	count = rs.getInt(1);
-            }
-            
-            // 카테고리 삽입 SQL문 작성
-            sql = "INSERT INTO SC_CATEGORY(CATEGORY_NO, CATEGORY_CODE, CATEGORY_NAME) VALUES(?, ?, ?)";
-            pstmt = con.prepareStatement(sql);
-
-            // ?에 값 설정
-            pstmt.setInt(1, count + 1);
-            pstmt.setString(2, category.getCategory_code());
-            pstmt.setString(3, category.getCategory_name());
-
-            // SQL 실행
-            int rowsAffected = pstmt.executeUpdate();
-            if (rowsAffected > 0) {
-                result = true;  // 성공
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConn(rs, pstmt, con);
         }
 
-        return result;
+        return categoryList;  // 전체 카테고리 리스트 반환
     }
 
-    // 카테고리 코드 생성 로직
-    public String generateCategoryCode(String categoryGender, String categoryName) {
-        
-    	String codePrefix = "";
-
-        // 성별에 따른 접두사
-        if ("남성".equals(categoryGender)) {
-            codePrefix = "e100";  // 남성 카테고리
-        } else if ("여성".equals(categoryGender)) {
-            codePrefix = "e200";  // 여성 카테고리
-        }
-
-        // 카테고리 이름에 따른 구체적인 코드 생성
-        String categoryCodeSuffix = "";
-        if (categoryName.contains("상의")) {
-            categoryCodeSuffix = "1";  // 상의
-        } else if (categoryName.contains("하의")) {
-            categoryCodeSuffix = "2";  // 하의
-        } else if (categoryName.contains("아우터")) {
-            categoryCodeSuffix = "3";  // 아우터
-        }
-
-        // 전체 카테고리 코드 반환
-        return codePrefix + categoryCodeSuffix;
-    }
-
-    // 카테고리 수정메서드
+    // 카테고리 수정 메서드
     public int updateCategory(CategoryDTO category) {
         int result = 0;
 
@@ -197,11 +184,9 @@ public class CategoryDAO {
             sql = "UPDATE SC_CATEGORY SET CATEGORY_NAME = ? WHERE CATEGORY_NO = ?";
             pstmt = con.prepareStatement(sql);
 
-            // ?에 값 설정
             pstmt.setString(1, category.getCategory_name());
             pstmt.setInt(2, category.getCategory_no());
 
-            // SQL 실행
             result = pstmt.executeUpdate();  // 수정된 레코드 수 반환
         } catch (SQLException e) {
             e.printStackTrace();
@@ -209,35 +194,39 @@ public class CategoryDAO {
             closeConn(pstmt, con);
         }
 
-        return result;  // 성공 시 1   실패 시 0 반환
-    
+        return result;
     }
-   
-    
- // CategoryDAO 클래스에 카테고리 번호에 해당하는 카테고리 정보를 가져오는 메서드 추가
-	/*
-	 * public CategoryDTO getCategoryByNo(int categoryNo) {
-	 * 
-	 * CategoryDTO category = null;
-	 * 
-	 * try { openConn();
-	 * 
-	 * // 카테고리 번호로 카테고리 정보 조회 SQL문 작성 sql =
-	 * "SELECT * FROM SC_CATEGORY WHERE CATEGORY_NO = ?"; pstmt =
-	 * con.prepareStatement(sql); pstmt.setInt(1, categoryNo); // 카테고리 번호를 ?에 설정
-	 * 
-	 * rs = pstmt.executeQuery(); // 결과 실행
-	 * 
-	 * // 결과 처리 if (rs.next()) { category = new CategoryDTO();
-	 * category.setCategory_no(rs.getInt("CATEGORY_NO"));
-	 * category.setCategory_code(rs.getString("CATEGORY_CODE"));
-	 * category.setCategory_name(rs.getString("CATEGORY_NAME")); } } catch
-	 * (SQLException e) { e.printStackTrace(); } finally { closeConn(rs, pstmt,
-	 * con); }
-	 * 
-	 * return category; // 카테고리 정보 반환 }
-	 */
-    
+
+    // 카테고리 삭제 메서드
+    public int deleteCategory(int category_no) {
+        int result = 0;
+
+        try {
+            openConn();
+
+            sql = "SELECT COUNT(*) FROM SC_CATEGORY WHERE CATEGORY_NO = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, category_no);
+            rs = pstmt.executeQuery();
+
+            if (rs.next() && rs.getInt(1) > 0) {
+                // 카테고리가 존재하는 경우에만 삭제
+                sql = "DELETE FROM SC_CATEGORY WHERE CATEGORY_NO = ?";
+                pstmt = con.prepareStatement(sql);
+                pstmt.setInt(1, category_no);
+                result = pstmt.executeUpdate();
+            } else {
+                result = 0;  // 카테고리가 존재하지 않음
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConn(pstmt, con);
+        }
+
+        return result;  // 성공 시 1, 실패 시 0 반환
+    }
     
     
 }
+

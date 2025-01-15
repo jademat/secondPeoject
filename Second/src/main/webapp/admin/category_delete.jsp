@@ -1,44 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>카테고리 삭제</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/startbootstrap_admin_pages/css/style.css">
-   	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/startbootstrap_admin_pages/css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery 추가 -->
-    <script>
-        $(document).ready(function() {
-            // 카테고리 번호 입력 시 해당 카테고리 이름을 동적으로 로드
-            $("#category_no").on("input", function() {
-                var categoryNo = $(this).val(); // 입력된 카테고리 번호 가져오기
-                if (categoryNo) {
-                    $.ajax({
-                        url: "CategoryGetNameServlet",  // 카테고리 이름을 가져올 서블릿
-                        type: "GET",
-                        data: { category_no: categoryNo },
-                        success: function(response) {
-                            if (response) {
-                                $("#category_name").val(response); // 카테고리 이름 표시
-                                $("#category_name").prop("readonly", true); // 이름 수정 불가
-                            } else {
-                                $("#category_name").val(''); // 이름이 없으면 빈 값으로
-                                $("#category_name").prop("readonly", false); // 입력 가능
-                            }
-                        },
-                        error: function() {
-                            alert("카테고리 조회에 실패했습니다.");
-                        }
-                    });
-                } else {
-                    $("#category_name").val(''); // 카테고리 번호가 비어있으면 이름을 초기화
-                    $("#category_name").prop("readonly", false); // 이름 수정 가능
-                }
-            });
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.css" rel="stylesheet">
 
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.js"></script>
+
+    <style>
+        .modal-header {
+            background-color: #5cb85c;
+            color: white;
+        }
+        .modal-header.error {
+            background-color: #d9534f;
+        }
+        .modal-footer button {
+            width: 100px;
+        }
+    </style>
 </head>
 <body>
 
@@ -50,19 +41,60 @@
 
     <!-- 메인 콘텐츠 -->
     <div class="container">
-    
-    	<br> <br>
-    	
+        <br><br>
         <h2 class="text-center mb-4">카테고리 삭제</h2>
-        
-        <br> <br>
+        <hr width="65%">
+        <br><br>
 
-        <form action="CategoryDeleteServlet" method="POST" class="category-form">
-            <div class="form-group">
-                <label for="category_no">삭제할 카테고리 번호:</label>
-                <input type="number" id="category_no" name="category_no" required="required" class="form-control" min="1" />
+        <!-- 삭제 결과 메시지 출력 -->
+        <c:if test="${not empty message}">
+            <!-- 모달 시작 -->
+            <div class="modal fade show" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header ${messageType == 'success' ? '' : 'error'}">
+                            <h5 class="modal-title" id="messageModalLabel">알림</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>${message}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
+            <!-- 모달 끝 -->
+
+            <!-- 모달 자동으로 열기 위한 스크립트 -->
+            <script>
+                $(document).ready(function() {
+                    $('#messageModal').modal('show'); // 모달 자동으로 띄우기
+                });
+            </script>
+        </c:if>
+
+        <!-- 카테고리 삭제 폼 -->
+        <form action="${pageContext.request.contextPath}/category_delete_ok.go" method="POST" class="category-form">
+            <c:set var="cList" value="${cList}" />
+
+            <div class="form-group">
+                <label for="category_no">삭제할 카테고리:</label>
+                <select name="no" id="category_no" class="form-control" required="required">
+                    <c:if test="${empty cList}">
+                        <option value="">:::카테고리 목록 없음:::</option>
+                    </c:if>
+                    <c:if test="${!empty cList}">
+                        <c:forEach items="${cList}" var="dto">
+                            <option value="${dto.getCategory_no()}">${dto.getCategory_name()} [${dto.getCategory_code()}]</option>
+                        </c:forEach>
+                    </c:if>
+                </select>
+            </div>
+
             <div class="form-group">
                 <label for="category_name">카테고리 이름:</label>
                 <input type="text" id="category_name" name="category_name" class="form-control" readonly />
@@ -75,6 +107,16 @@
         </form>
     </div>
 
+    <script>
+        // 카테고리 선택 시 이름 자동 입력
+        $(document).ready(function() {
+            $('#category_no').change(function() {
+                var selectedOption = $(this).find('option:selected');
+                var categoryName = selectedOption.text().split(' [')[0];
+                $('#category_name').val(categoryName);
+            });
+        });
+    </script>
 
 </body>
 </html>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,22 +20,21 @@
 
         if (mainCategory === "male") {
             subCategoryContainer.style.display = "block";
-            subCategory.innerHTML += `
-                <option value="outer">아우터</option>
-                <option value="top">상의</option>
-                <option value="bottom">하의</option>
-            `;
+            subCategory.innerHTML += 
+            	'<option value="top">상의</option>' +
+                '<option value="bottom">하의</option>' +
+                '<option value="outer">아우터</option>'
+            ;
         } else if (mainCategory === "female") {
             subCategoryContainer.style.display = "block";
-            subCategory.innerHTML += `
-                <option value="outer">아우터</option>
-                <option value="top">상의</option>
-                <option value="bottom">하의</option>
-            `;
+            subCategory.innerHTML += 
+            	'<option value="top">상의</option>' +
+                '<option value="bottom">하의</option>' +
+                '<option value="outer">아우터</option>'
+            ;
         }
     }
 </script>
-
 </head>
 <body>
 
@@ -47,20 +45,12 @@
     <jsp:include page ="/include/admin_navbar.jsp" />
 
 	<div class="container mt-5">
-	
-	<br> <br>
         <h2 class="text-center mb-4">상품 등록</h2>
-        <form action="product_input_process.jsp" method="post" enctype="multipart/form-data">
+        <form action="<%=request.getContextPath() %>/product_input_ok.go" method="post" enctype="multipart/form-data">
             <!-- 상품명 -->
             <div class="mb-3">
                 <label for="productName" class="form-label">상품명</label>
                 <input type="text" class="form-control" id="productName" name="productName" required>
-            </div>
-
-            <!-- 상품 가격 -->
-            <div class="mb-3">
-                <label for="productPrice" class="form-label">상품 가격 (원)</label>
-                <input type="number" class="form-control" id="productPrice" name="productPrice" min="0" required>
             </div>
 
             <!-- 상품 카테고리 -->
@@ -83,8 +73,8 @@
 
             <!-- 상품 설명 -->
             <div class="mb-3">
-                <label for="productDescription" class="form-label">상품 설명</label>
-                <textarea class="form-control" id="productSpec" name="productDescription" rows="4" required></textarea>
+                <label for="productSpec" class="form-label">상품 설명</label>
+                <textarea class="form-control" id="productSpec" name="productSpec" rows="4" required></textarea>
             </div>
 
             <!-- 상품 이미지 -->
@@ -93,11 +83,44 @@
                 <input type="file" class="form-control" id="productImage" name="productImage" accept="image/*" required>
             </div>
 
-            <!-- 상품 수량 -->
+            <!-- 상품 이미지 추가(상품 상세정보 이미지) -->
+            <div class="mb-3">
+                <label for="productSpecInfo" class="form-label">상품 설명 이미지</label>
+                <input type="file" class="form-control" id="productSpecInfo" name="productSpecInfo" accept="image/*" required>
+            </div>
+
+            <!-- 상품 수량(재고) -->
             <div class="mb-3">
                 <label for="productQuantity" class="form-label">재고 수량</label>
                 <input type="number" class="form-control" id="productQuantity" name="productQuantity" min="0" required>
             </div>
+
+            <!-- 상품 사이즈 -->
+            <div class="mb-3">
+                <label class="form-label">상품 사이즈</label><br>
+                <label>
+                    <input type="radio" name="productSize" value="XS" required> XS &nbsp;&nbsp;
+                </label>
+                <label>
+                    <input type="radio" name="productSize" value="S"> S &nbsp;&nbsp;
+                </label>
+                <label>
+                    <input type="radio" name="productSize" value="M"> M &nbsp;&nbsp;
+                </label>
+                <label>
+                    <input type="radio" name="productSize" value="L"> L &nbsp;&nbsp;
+                </label>
+                <label>
+                    <input type="radio" name="productSize" value="XL"> XL 
+                </label>
+            </div>
+
+			 <!-- 상품 가격 -->
+            <div class="mb-3">
+   				<label for="productPrice" class="form-label">상품 가격 (원)<sub>&nbsp;&nbsp;5,000원씩 증감</sub></label>
+    			<input type="number" class="form-control" id="productPrice" name="productPrice" min="0" step="5000" required>
+			</div>
+			
 
             <!-- 제출 버튼 -->
             <div class="text-center">
@@ -105,25 +128,6 @@
             </div>
         </form>
     </div>
-
-	<%-- 
-	sc_product 테이블 칼럼이 다들어가야되나?
-	상품 번호	--> db에서 자동등록이 됐나??
-	카테고리 번호 --> 외래키니까 카테고리와 하위 카테고리를 통해 선택된 값으로?
-	상품 이름 ++
-	상품 가격 ++
-	상품 정보(설명) ++
-	상품 수량(재고) ++
-	상품 조회수 --> 기본값으로 하면 될듯
-	상품 이미지 ++ 
-	
-	 --%>
-
-
-	<%--
-	상품 등록 버튼을 누르면 어디로 이동할지? or 창을 띄울지?(추가 등록 yes/no) 정하기
-	 --%>
-
 
 </body>
 </html>
