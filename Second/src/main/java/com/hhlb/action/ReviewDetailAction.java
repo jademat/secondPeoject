@@ -1,37 +1,39 @@
 package com.hhlb.action;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hhlb.controller.Action;
 import com.hhlb.controller.ActionForward;
-import com.hhlb.model.CartDAO;
-import com.hhlb.model.CartDTO;
+import com.hhlb.model.ReviewDAO;
+import com.hhlb.model.ReviewDTO;
 
-public class CartListAction implements Action {
+public class ReviewDetailAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// header에서 장바구니 버튼 클릭시 접속중인 유저의 정보를 받아 이동하는 비지니스 로직
+
+		int review_no = Integer.parseInt(request.getParameter("no"));
 		
-		String user_id = request.getParameter("id");
+		ReviewDAO dao = ReviewDAO.getInstance();
 		
-		CartDAO dao = CartDAO.getInstance();
+		ReviewDTO rCont = dao.getuserReview(review_no);
 		
-		List<CartDTO> list = dao.getCartList(user_id);
+		System.out.println("rCont >>> " + rCont);
+
+		request.setAttribute("rCont", rCont);
 		
-		request.setAttribute("cartList", list);
 		
 		ActionForward forward = new ActionForward();
 		
 		forward.setRedirect(false);
 		
-		forward.setPath("/product/cart.jsp");
+		forward.setPath("/modal/reviewModal.jsp");
 		
 		return forward;
+
 	}
 
 }

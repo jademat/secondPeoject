@@ -10,6 +10,8 @@ import com.hhlb.controller.Action;
 import com.hhlb.controller.ActionForward;
 import com.hhlb.model.BoardDAO;
 import com.hhlb.model.BoardDTO;
+import com.hhlb.model.OrderDAO;
+import com.hhlb.model.OrderDetailsDTO;
 import com.hhlb.model.ReviewDAO;
 import com.hhlb.model.ReviewDTO;
 import com.hhlb.model.UserDAO;
@@ -28,17 +30,21 @@ public class UserMyInfoAction implements Action {
 		
 		ReviewDAO rdao = ReviewDAO.getInstance();
 		
-		
+		OrderDAO odao = OrderDAO.getInstance();
+				
 		UserDTO ucont = udao.getUser(user_id);
 		
 		List<BoardDTO> bcont = bdao.getBoard(user_id);
 				
 		List<ReviewDTO> rcont = rdao.getReview(user_id);
 		
+		List<OrderDetailsDTO> ocont = odao.getOrder(user_id);
+		
+		
 		request.setAttribute("uCont", ucont);
 		request.setAttribute("bCont", bcont);
 		request.setAttribute("rCont", rcont);
-		
+		request.setAttribute("oCont", ocont);
 		
 		ActionForward forward = new ActionForward();
 		

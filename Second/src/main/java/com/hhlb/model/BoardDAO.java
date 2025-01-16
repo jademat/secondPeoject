@@ -94,7 +94,7 @@ public class BoardDAO {
 
 			openConn();
 
-			sql = "select * from sc_board where user_id = ?";
+			sql = "select * from sc_board where user_id = ? order by board_no desc";
 
 			pstmt = con.prepareStatement(sql);
 
@@ -150,9 +150,7 @@ public class BoardDAO {
 			} else if (type.equals("inquiry")) {
 				sql += " where board_type = ?)";
 			}
-//			sql = "select * from" + "(select row_number() over (order by board_no desc) as rnum, b.* from sc_board b where board_type = ?)"
-//					+ " where rnum >= ? and rnum <= ?";
-			
+
 			sql += "where rnum >= ? and rnum <= ?";
 
 			pstmt = con.prepareStatement(sql);

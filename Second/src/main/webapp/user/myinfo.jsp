@@ -1,35 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%
+	request.setAttribute("pageTitle", "My page");
+%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../include/header.jsp" />
 
-<c:set var="ucont" value="${uCont }" />
+<c:set var="uCont" value="${uCont }" />
+<c:set var = "uList" value = "${uList }"/>
+<c:set var="bCont" value="${bCont }" />
+<c:set var = "oCont" value = "${oCont }"/>
 <div class="container">
 	<h2>My page</h2>
 	<div align="right">
-	<button class="btn btn-primary" onclick = "location.href='user_myinfo_modify.go?user_id=${ucont.getUser_id()}'">개인정보수정</button>
+	<button class="btn btn-primary" onclick = "location.href='user_myinfo_modify.go?user_id=${uCont.getUser_id()}'">개인정보수정</button>
 </div>
 	<br>
 	<table class="table table-bordered">
 		<tr>
 			<th scope="row" width="20%">아이디</th>
-			<td>${ucont.getUser_id() }</td>
+			<td>${uCont.getUser_id() }</td>
 		</tr>
 		<tr>
 			<th scope="row">이름</th>
-			<td>${ucont.getUser_name() }</td>
+			<td>${uCont.getUser_name() }</td>
 		</tr>
 		<tr>
 			<th scope="row">닉네임</th>
-			<td>${ucont.getUser_nick() }</td>
+			<td>${uCont.getUser_nick() }</td>
 		</tr>
 		<tr>
 			<th scope="row">주소</th>
-			<td>${ucont.getUser_addr() }</td>
+			<td>${uCont.getUser_addr() }</td>
 		</tr>
 		<tr>
 			<th scope="row">연락처</th>
-			<td>${ucont.getUser_phone() }</td>
+			<td>${uCont.getUser_phone() }</td>
 		</tr>
 	</table>
 </div>
@@ -37,24 +45,48 @@
 <br>
 
 <div class="container">
-	<h3>주문내역</h3>
+	<h3>구매내역</h3>
 	<br>
 	<table class="table table-hover">
 		<tr>
-			<th width="20%">주문번호</th>
-			<th width="40%">제품명</th>
+			<th width="20%">No.</th>
+			<th width="40%">상품명</th>
 			<th width="20%">구매일</th>
 			<th width="20%">리뷰</th>
 		</tr>
-		<tr onclick="openOrderDetailModal()">
-			<td>a</td>
-			<td>a</td>
-			<td>a</td>
+		<c:if test="${!empty oCont }">
+			<c:forEach items="${oCont }" var="oCont">
+		<tr onclick="openuserDetailModal()">
+			<td>${oCont.getOrder_no() }</td>
 			<td>
-				<button type="button" class="btn btn-primary"
-					onclick="openReviewModal(event)">리뷰작성</button>
+				<button type="button" class="btn btn-link" data-toggle="modal"
+							data-target="#orderDetailModal"
+							data-date="${oCont.getOrder_date()}"
+							data-user= "${oCont.getUser_id() }"
+							data-phone= "${oCont.getUser_phone()}"
+							data-addr= "${oCont.getOrder_addr() }"
+							data-name = "${oCont.getProduct_name()}"
+							data-total = "${oCont.getOrder_total() }"
+							data-memo = "${oCont.getOrder_memo()}"
+							>
+					${oCont.getProduct_name().substring(0,20) }...
+				</button>
+			</td>
+			<td>${oCont.getOrder_date() }</td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal"
+							data-target="#reviewWriteModal" >리뷰작성</button>
 			</td>
 		</tr>
+			</c:forEach>
+			</c:if>
+			<c:if test = "${empty oCont }">
+		<tr>
+			<td colspan = "4">
+				작성한 리뷰가 없습니다.
+			</td>
+		</tr>
+			</c:if>
 	</table>
 </div>
 <br>
@@ -65,21 +97,31 @@
 	<br>
 	<table class="table table-bordered">
 		<tr>
-			<th scope="row" width="20%">제품명</th>
-			<th width="65%">리뷰제목</th>
-			<th>작성일</th>
+			<th width="10%">No.</th>
+			<th width="60%">리뷰제목</th>
+			<th width="20%">작성일</th>
+			<th width="10%">삭제</th>
 		</tr>
 		<c:set var="rCont" value="${ rCont}" />
 		<c:if test="${!empty rCont }">
-			<c:forEach items="${rCont }" var="rList">
+			<c:forEach items="${rCont }" var="rCont">
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td>${rCont.getReview_no() }</td>
+					<td><button type="button" class="btn btn-link" data-toggle="modal"
+							data-target="#reviewModal" data-image="${rCont.getReview_image()}"
+							data-user="${rCont.getUser_id()}"
+							data-date="${rCont.getReview_date()}"
+							data-content="${rCont.getReview_cont()}"
+							data-rating="${rCont.getReview_rank()}"
+							data-title="${rCont.getReview_title()}">${rCont.getReview_title() }</button></td>
+					<td>${rCont.getReview_date().substring(0,10) }</td>
+					<td>
+						<button class="btn btn-primary" onclick="confirmReviewDelete('${rCont.getReview_no()}')">삭제</button>
+					</td>
 				</tr>
 			</c:forEach>
 		</c:if>
-		<c:if test="${empty rList }">
+		<c:if test="${empty rCont }">
 			<tr>
 				<td colspan="3" align="center">작성한 리뷰가 없습니다.</td>
 			</tr>
@@ -90,7 +132,6 @@
 <br>
 <br>
 <div class="container">
-	<c:set var="bCont" value="${bCont }" />
 	<h3>내가 쓴 게시판</h3>
 	<br>
 	<table class="table table-bordered">
@@ -128,17 +169,16 @@
 
 <script>
 	// 주문 상세 내역 모달 열기
-function openOrderDetailModal() {
-    // 여기에 모달을 여는 코드 작성
-    $('#orderDetailModal .modal-content').load('/modal/orderDetailModal.jsp');
-    $('#orderDetailModal').modal();
-}
-		
 
-	function openReviewModal(event) {
-		event.stopPropagation(); // 버튼 클릭 시 <tr> 클릭 이벤트 발생 방지
-		$('#reviewWriteModal').modal('show');
-	}
+	
+	 function confirmReviewDelete(reviewNo) {
+        var reviewConfirmed = confirm("정말로 삭제하시겠습니까?");
+	        
+        if (reviewConfirmed) {
+        	    // 사용자가 확인을 눌렀으면 삭제 요청을 보냄
+            location.href = "<%=request.getContextPath() %>/user_review_delete.go?review_no=" + reviewNo;
+	        }
+	    }
 	 function confirmDelete(boardNo) {
         var userConfirmed = confirm("정말로 삭제하시겠습니까?");
 	        
@@ -148,8 +188,8 @@ function openOrderDetailModal() {
 	        }
 	    }
 	 
-	 
 </script>
+<jsp:include page="../modal/reviewModal.jsp" />
 <jsp:include page="../modal/reviewWriteModal.jsp" />
 <jsp:include page="../modal/orderDetailModal.jsp" />
 <jsp:include page="../include/footer.jsp" />

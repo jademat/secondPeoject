@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
+<%
+	request.setAttribute("pageTitle", "Detail");
+%>	
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	
@@ -14,7 +18,7 @@
     <c:set var="reviewDto" value="${ ReviewList }"/>	<!-- 해당 상품의 리뷰 리스트 -->
     <c:set var="reviewRank" value="${ ReviewRank }"/>	<!-- 리뷰의 점수 평균 -->
     <c:set var="reviewCount" value="${ ReviewCount }"/>	<!-- 해당 상품 리뷰 개수  -->
-    <c:set var="productList" value="${ ProductList }"/>	<!-- 해당 상품 리뷰 개수  -->
+    //<c:set var="productList" value="${ ProductList }"/>	<!-- 해당 상품 리뷰 개수  -->
     
     	<!-- 받아올 상품 데이터가 잡힌 경우 -->
     	<c:if test="${ !empty dto  }">
@@ -254,13 +258,19 @@
 	                                    <div class="media-body">
 	                                        <h6>${ dto.getUser_id() }<small> - <i>${ dto.getReview_date() }</i></small></h6>
 	                                        <div class="text-primary mb-2">
-	                                        	${ dto.getReview_rank() } 점
-	                                        	<!-- 미정 -->
-	                                            <i class="fas fa-star"></i>
-	                                            <i class="fas fa-star"></i>
-	                                            <i class="fas fa-star"></i>
-	                                            <i class="fas fa-star-half-alt"></i>
-	                                            <i class="far fa-star"></i>
+	                                        
+	                                        	<!-- 별 찍는 for문 -->
+	                                        	<c:forEach var="i" begin="1" end="5">
+											        <c:choose>
+											            <c:when test="${dto.review_rank >= i}">
+											                <i class="fas fa-star text-warning"></i> <!-- 금색 별 -->
+											            </c:when>
+											            <c:otherwise>
+											                <i class="far fa-star text-muted"></i> <!-- 회색 별 -->
+											            </c:otherwise>
+											        </c:choose>
+											    </c:forEach>
+											    
 	                                        </div>
 	                                        <p>${ dto.getReview_cont() }</p>
 	                                    </div>
@@ -270,28 +280,44 @@
                             </c:forEach>
 						</c:if>
 
-                            <!-- 페이지네이션(수정 必) -->
-                            <div class="col-12 pb-1">
-                                <nav aria-label="Page navigation">
-                                  <ul class="pagination justify-content-center mb-3">
-                                    <li class="page-item disabled">
-                                      <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                      </a>
-                                    </li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                      <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                      </a>
-                                    </li>
-                                  </ul>
-                                </nav>
-                            </div>
+                            <!-- 페이지네이션 시작 -->
+		                    <div class="container">
+								<ul class="pagination justify-content-center mb-3">
+								
+									<!-- 처음으로 -->
+									<c:if test="${page > block }">
+										<li class="page-item">
+											<a class="page-link" href="user_product_view.go?pnum=${ pnum }&page=1">⏪</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="user_product_view.go?pnum=${ pnum }&page=${startBlock - 1 }">◀</a>
+										</li>
+									</c:if>
+									
+									<!-- 페이지 글 번호 -->
+									<c:forEach begin="${startBlock }" end="${endBlock }" var="i">
+										<c:if test="${i == page}">
+											<li class="page-item active"><a class="page-link"
+												href="user_product_view.go?pnum=${ pnum }&page=${ i }">${ i }</a></li>
+										</c:if>
+										<c:if test="${i != page}">
+											<li class="page-item"><a class="page-link"
+												href="user_product_view.go?pnum=${ pnum }&page=${ i }">${ i }</a></li>
+										</c:if>
+									</c:forEach>
+									
+									<!-- 마지막으로 -->
+									<c:if test="${endBlock < allPage}">
+									<li class="page-item">
+										<a class="page-link" href="user_product_view.go?pnum=${ pnum }&page=${endBlock + 1 }">▶</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="user_product_view.go?pnum=${ pnum }&page=${ allPage }">⏩</a>
+									</li>
+									</c:if>
+								</ul>
+							</div>
+							<!-- 페이지네이션 끝 -->
                             
                         </div>
                     </div>

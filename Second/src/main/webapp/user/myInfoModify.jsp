@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%
+	request.setAttribute("pageTitle", "Edit Profile");
+%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../include/header.jsp" />
 <c:set var="dto" value="${Modify }" />
@@ -46,7 +51,7 @@
 		<br>
 		<div align="right">
 			<input type="submit" value="수정" class="btn btn-primary"> 
-			<input type="button" value="삭제" class="btn btn-primary" onclick="deleteUser('${dto.getUser_id()}')">
+			<input type="button" value="탈퇴" class="btn btn-primary" onclick="deleteUser('${dto.getUser_id()}')">
 		</div>
 	</form>
 </div>

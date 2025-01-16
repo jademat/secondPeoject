@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%
+	request.setAttribute("pageTitle", "Write an Inquiry");
+%>	
+
 <jsp:include page="../include/header.jsp" />
+
+
 
 <style>
 textarea {
@@ -36,14 +43,18 @@ textarea {
 	<br>
 
 	<div align="center">
-		<input type = "button" class = "btn btn-primary" value = "전체목록" onclick = "location.href = 'user_board_list.go'">
+		<input type = "button" class = "btn btn-primary" value = "전체목록" onclick = "location.href = '<%=request.getContextPath()%>/user_board_list.go?board_type=all'">
 	</div>
 
 	<br> <br>
 	<!-- 관리자만 볼수 있음 -->
+	<c:choose>
+	<c:when test="${sessionScope.user_id == 'admin' }" > 
 	<div align="center">
 		<button type="button" class="btn btn-primary" >답변하기</button>
 	</div>
+	</c:when>
+	</c:choose>
 </div>
 
 

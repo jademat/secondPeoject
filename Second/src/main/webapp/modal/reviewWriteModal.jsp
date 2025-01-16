@@ -63,6 +63,12 @@
 		</div>
 	</div>
 </div>
+<script>
+$('#reviewWriteModal').on('show.bs.modal', function (event) {
+	var button = $(event.relatedTarget); // 버튼 클릭 이벤트
+});
+
+</script>
 <style>
     #star{
         display: inline-block;

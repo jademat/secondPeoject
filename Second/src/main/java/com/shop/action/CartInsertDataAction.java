@@ -18,7 +18,7 @@ public class CartInsertDataAction implements Action {
 		// product/detail.jsp에서 Add to Cart 버튼을 클릭시 넘어온 데이터들을 sc_cart 테이블에 저장시키는 비지니스 로직
 		
 		String product_size = request.getParameter("size");
-		String product_qty = request.getParameter("qty");
+		int product_qty =Integer.parseInt(request.getParameter("qty"));
 		
 		int product_no = Integer.parseInt(request.getParameter("product_no"));
 		int category_no = Integer.parseInt(request.getParameter("category_no"));
@@ -30,7 +30,7 @@ public class CartInsertDataAction implements Action {
 		CartDTO dto = new CartDTO();
 		
 		dto.setProduct_size(product_size);
-		dto.setProduct_qty(product_price);
+		dto.setProduct_qty(product_qty);
 		dto.setProduct_no(product_no);
 		dto.setCategory_no(category_no);
 		dto.setProduct_image(product_image);
