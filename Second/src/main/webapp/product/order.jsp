@@ -98,7 +98,7 @@
         <div class="mb-3">
             <label for="id">주소</label>
             <div class="d-flex align-items-center">
-                <input type="text" class="form-control mr-5" id="id" placeholder="" value="${ userdto.getUser_addr() }" required>
+                <input type="text" class="form-control mr-5" id="id" name = "addr" placeholder="" value="${ userdto.getUser_addr() }" required >
             </div>
             <div class="invalid-feedback">
                 주소를 입력해주세요.

@@ -98,7 +98,7 @@ Connection con = null;
 		try {
 			openConn();
 			
-			sql = "select * from sc_review where user_id = ?";
+			sql = "select * from sc_review where user_id = ? order by review_no desc";
 			
 			pstmt = con.prepareStatement(sql);
 			

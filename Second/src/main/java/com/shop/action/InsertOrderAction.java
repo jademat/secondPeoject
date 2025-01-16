@@ -22,6 +22,7 @@ public class InsertOrderAction implements Action {
 		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
 		String cardName = request.getParameter("selectedCard");
 		String memo = request.getParameter("memo");
+		String addr = request.getParameter("addr");
 		
 		CartDAO cartDAO = CartDAO.getInstance();
 		
@@ -30,7 +31,7 @@ public class InsertOrderAction implements Action {
 		OrderDAO dao = OrderDAO.getInstance();
 			
 		// 각 리스트마다의 값을 sc_order 테이블에 저장하는 메서드
-		dao.InsertOrderData(user_id, totalPrice, memo, cartList);
+		dao.InsertOrderData(user_id, totalPrice, memo, cartList, addr);
 		
 		ActionForward forward = new ActionForward();
 		

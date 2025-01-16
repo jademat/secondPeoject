@@ -13,6 +13,7 @@ public class UserDTO {
 	private String user_addr;
 	private String user_date;
 	
+	
 	public String getUser_id() {
 		return user_id;
 	}

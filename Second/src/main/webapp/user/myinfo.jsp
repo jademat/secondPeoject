@@ -11,6 +11,7 @@
 <c:set var="uCont" value="${uCont }" />
 <c:set var = "uList" value = "${uList }"/>
 <c:set var="bCont" value="${bCont }" />
+<c:set var = "oCont" value = "${oCont }"/>
 <div class="container">
 	<h2>My page</h2>
 	<div align="right">
@@ -53,15 +54,39 @@
 			<th width="20%">구매일</th>
 			<th width="20%">리뷰</th>
 		</tr>
+		<c:if test="${!empty oCont }">
+			<c:forEach items="${oCont }" var="oCont">
 		<tr onclick="openuserDetailModal()">
-			<td>a</td>
-			<td>a</td>
-			<td>a</td>
+			<td>${oCont.getOrder_no() }</td>
 			<td>
-				<button type="button" class="btn btn-primary"
-					onclick="openReviewModal(event)">리뷰작성</button>
+				<button type="button" class="btn btn-link" data-toggle="modal"
+							data-target="#orderDetailModal"
+							data-date="${oCont.getOrder_date()}"
+							data-user= "${oCont.getUser_id() }"
+							data-phone= "${oCont.getUser_phone()}"
+							data-addr= "${oCont.getOrder_addr() }"
+							data-name = "${oCont.getProduct_name()}"
+							data-total = "${oCont.getOrder_total() }"
+							data-memo = "${oCont.getOrder_memo()}"
+							>
+					${oCont.getProduct_name().substring(0,20) }...
+				</button>
+			</td>
+			<td>${oCont.getOrder_date() }</td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal"
+							data-target="#reviewWriteModal" >리뷰작성</button>
 			</td>
 		</tr>
+			</c:forEach>
+			</c:if>
+			<c:if test = "${empty oCont }">
+		<tr>
+			<td colspan = "4">
+				작성한 리뷰가 없습니다.
+			</td>
+		</tr>
+			</c:if>
 	</table>
 </div>
 <br>
@@ -144,17 +169,8 @@
 
 <script>
 	// 주문 상세 내역 모달 열기
-function openuserDetailModal() {
-    // 여기에 모달을 여는 코드 작성
-    $('#orderDetailModal .modal-content').load('/modal/orderDetailModal.jsp');
-    $('#orderDetailModal').modal();
-}
-		
 
-	function openReviewModal(event) {
-		event.stopPropagation(); // 버튼 클릭 시 <tr> 클릭 이벤트 발생 방지
-		$('#reviewWriteModal').modal('show');
-	}
+	
 	 function confirmReviewDelete(reviewNo) {
         var reviewConfirmed = confirm("정말로 삭제하시겠습니까?");
 	        

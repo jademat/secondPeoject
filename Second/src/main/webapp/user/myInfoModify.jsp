@@ -51,7 +51,7 @@
 		<br>
 		<div align="right">
 			<input type="submit" value="수정" class="btn btn-primary"> 
-			<input type="button" value="삭제" class="btn btn-primary" onclick="deleteUser('${dto.getUser_id()}')">
+			<input type="button" value="탈퇴" class="btn btn-primary" onclick="deleteUser('${dto.getUser_id()}')">
 		</div>
 	</form>
 </div>

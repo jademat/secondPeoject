@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -93,7 +94,7 @@ public class OrderDAO {
 	
 	
 	// order.jsp 에서 넘어와서 sc_order 테이블에 저장하는 메서드
-	public void InsertOrderData(String user_id, int totalPrice, String memo, List<CartDTO> cartList) {
+	public void InsertOrderData(String user_id, int totalPrice, String memo, List<CartDTO> cartList,String addr) {
 			int count = 0;
 		
 			try {
@@ -110,7 +111,7 @@ public class OrderDAO {
 						count = rs.getInt(1) + 1;
 					}
 					// 반복해서 데이터를 sc_order 테이블에 입력하는 코드
-					sql = "insert into sc_order values(?, ?, ?, sysdate, ?, ?, ?, ?)";
+					sql = "insert into sc_order values(?, ?, ?, sysdate, ?, ?, ?, ?,?)";
 					pstmt = con.prepareStatement(sql);
 					
 					pstmt.setInt(1, count);
@@ -119,8 +120,8 @@ public class OrderDAO {
 					pstmt.setInt(4, cartList.get(i).getProduct_price());	
 					pstmt.setInt(5, 1);	
 					pstmt.setString(6, memo);	
-					pstmt.setString(7, user_id);	
-					
+					pstmt.setString(7, user_id);
+					pstmt.setString(8, addr);
 					pstmt.executeUpdate();
 				}
 			} catch (SQLException e) {
@@ -128,4 +129,50 @@ public class OrderDAO {
 				e.printStackTrace();
 			} closeConn(rs, pstmt, con);
 	} // InsertOrderData() 메서드 end
+	
+	public List<OrderDetailsDTO> getOrder(String id){
+		
+		List<OrderDetailsDTO> list = new ArrayList<OrderDetailsDTO>();
+
+		try {
+			openConn();
+			
+			sql = "select o.user_id, o.order_date,o.order_total, p.product_name,u.user_phone, o.order_addr,o.order_memo,o.order_no "
+					+ "from sc_order o "
+					+ "join sc_product p on o.product_no = p.product_no "
+					+ "join sc_user u on u.user_id = o.user_id "
+					+ "where o.user_id = ? "
+					+ " order by order_no desc";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				OrderDetailsDTO dto = new OrderDetailsDTO();
+				
+				dto.setUser_id(rs.getString("user_id"));
+				dto.setOrder_date(rs.getString("order_date"));
+				dto.setOrder_total(rs.getInt("order_total"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setUser_phone(rs.getString("user_phone"));
+				dto.setOrder_addr(rs.getString("order_addr"));
+				dto.setOrder_memo(rs.getString("order_memo"));
+				dto.setOrder_no(rs.getInt("order_no"));
+				
+				list.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return list;
+	}
+	
 }
