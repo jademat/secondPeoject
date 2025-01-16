@@ -17,6 +17,7 @@ public class CategoryDelAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// 1. 카테고리 목록을 가져와서 화면에 출력하기 위해 CategoryDAO 사용
         CategoryDAO dao = CategoryDAO.getInstance();
+        
         List<CategoryDTO> list = dao.getCategoryList();
 
         // 2. 카테고리 목록을 request 속성에 저장
@@ -24,8 +25,10 @@ public class CategoryDelAction implements Action {
 
         // 3. 삭제 페이지로 이동
         ActionForward forward = new ActionForward();
+        
         forward.setRedirect(false); // 포워딩 방식
-        forward.setPath("admin/category_delete.jsp"); // JSP 페이지로 이동
+        
+        forward.setPath("admin/category_delete.jsp");
 
         return forward;
 	}

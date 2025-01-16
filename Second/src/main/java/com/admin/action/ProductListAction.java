@@ -24,12 +24,12 @@ public class ProductListAction implements Action {
         
         System.out.println("list >>> " + productList);
         
-        // 조회된 상품 목록을 request 객체에 저장
+        // 조회된 상품 목록을 request에 저장
         request.setAttribute("productList", productList);
         
         // 상품 목록 페이지로 이동
         ActionForward forward = new ActionForward();
-        forward.setPath("admin/product_list.jsp");  // 상품 목록 페이지로 이동
+        forward.setPath("admin/product_list.jsp");
         forward.setRedirect(false); 
         
         return forward;

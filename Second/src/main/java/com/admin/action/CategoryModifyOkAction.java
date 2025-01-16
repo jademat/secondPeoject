@@ -21,7 +21,7 @@ public class CategoryModifyOkAction implements Action {
 		int category_no = Integer.parseInt(request.getParameter("no"));
 		String categoryName = request.getParameter("category_name");
 		
-		// 2. category_no가 비어있는지 확인
+		// category_no가 비어있는지 확인
 		System.out.println("category_no: " + category_no); // 확인용
 		
         if (category_no == 0) {
@@ -29,8 +29,7 @@ public class CategoryModifyOkAction implements Action {
             return null;
         }
 		
-        // 3. category_no를 int로 변환
-        // int categoryNo = 0;
+        
 		
 		CategoryDTO category = new CategoryDTO();
 		
@@ -43,7 +42,7 @@ public class CategoryModifyOkAction implements Action {
 		
 		ActionForward forward = new ActionForward();
 		
-		PrintWriter out = response.getWriter();
+		// PrintWriter out = response.getWriter();
 		
 		if(chk > 0) {
 			// 1 == 수정 성공

@@ -1,101 +1,69 @@
 package com.hhlb.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
+import javax.naming.*;
 import javax.sql.DataSource;
 
 public class ProductDAO {
 
-	Connection con = null;
-	
-	PreparedStatement pstmt = null;
+    private static ProductDAO instance;
 
-	ResultSet rs= null;
-	
-	String sql = null;
+    private ProductDAO() { }
 
-	private static ProductDAO instance;
-	
-	private ProductDAO() {  }  // 기본 생성자
+    public static ProductDAO getInstance() {
+        if (instance == null) {
+            instance = new ProductDAO();
+        }
+        return instance;
+    }
 
-	public static ProductDAO getInstance() {
-		
-		if(instance == null) {
-			instance = new ProductDAO();
-		}
-		
-		return instance;
-	}  // getInstance() 메서드 end
-	
-	
-	
+    Connection con = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    String sql = null;
 
-	public void openConn() {
-		
-		try {
-			
-			Context initCtx = new InitialContext();
-			
-		
-			Context ctx = 
-				(Context)initCtx.lookup("java:comp/env");
-			
-			
-			DataSource ds = 
-					(DataSource)ctx.lookup("jdbc/myoracle");
-			
-		
-			con = ds.getConnection();
-			
-		} catch (Exception e) {
-		
-			e.printStackTrace();
-		}
-		
-	}  
-		
-	
-	// DB에 연결되어 있던 자원 종료하는 메서드.
-	public void closeConn(ResultSet rs,
-			PreparedStatement pstmt, Connection con) {
-		
-			try {
-				if(rs != null) rs.close();
-				if(pstmt != null) pstmt.close();
-				if(con != null) con.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-	}  // closeConn() 메서드 end
-	
-	
-	// DB에 연결되어 있던 자원 종료하는 메서드.
-	public void closeConn(
-			PreparedStatement pstmt, Connection con) {
-		
-			try {
-				if(pstmt != null) pstmt.close();
-				if(con != null) con.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-	}  // closeConn() 메서드 end
-	
-	
+    // DB 연결 메서드
+    public void openConn() {
+        try {
+            Context initCtx = new InitialContext();
+            Context ctx = (Context) initCtx.lookup("java:comp/env");
+            DataSource ds = (DataSource) ctx.lookup("jdbc/myoracle");
+            con = ds.getConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	// category_code로 category_no 조회하는 메서드
-    public int getCategoryNoByCode(String categoryCode) {
+    // DB 자원 종료 메서드 (ResultSet, PreparedStatement, Connection)
+    public void closeConn(ResultSet rs, PreparedStatement pstmt, Connection con) {
+        try {
+            if (rs != null) rs.close();
+            if (pstmt != null) pstmt.close();
+            if (con != null) con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    // DB에 연결되어 있던 자원 종료하는 메서드.
+ 	public void closeConn(
+ 			PreparedStatement pstmt, Connection con) {
+ 		
+ 			try {
+ 				if(pstmt != null) pstmt.close();
+ 				if(con != null) con.close();
+ 			} catch (SQLException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}
+ 		
+ 	}  // closeConn() 메서드 end
+
+    // category_code로 category_no 조회하는 메서드
+    public int getCategoryNoByCode(String gender, String categoryCode) {
         
     	int categoryNo = 0;
         
@@ -109,12 +77,25 @@ public class ProductDAO {
             pstmt = con.prepareStatement(sql);
            
             // 카테고리 코드가 male이면 'e100%'로, female이면 'e200%'로 설정
-            if (categoryCode.equals("male")) {
-                pstmt.setString(1, "e100%");  // 'e100%'로 시작하는 카테고리 코드
-            } else if (categoryCode.equals("female")) {
-                pstmt.setString(1, "e200%");  // 'e200%'로 시작하는 카테고리 코드
+            if(gender.equals("male")) {
+            	if (categoryCode.equals("1")) {
+                    pstmt.setString(1, "e1001");  // 남자 상의
+                } else if (categoryCode.equals("2")) {
+                    pstmt.setString(1, "e1002");  // 남자 하의
+                } else if (categoryCode.equals("3")) {
+                    pstmt.setString(1, "e1003");  // 남자 아우터
+                } 
+            }else if(gender.equals("female")) {
+            	// categoryCode가 'female'인 경우
+                if (categoryCode.equals("4")) {
+                    pstmt.setString(1, "e2001");  // 여자 상의
+                } else if (categoryCode.equals("5")) {
+                    pstmt.setString(1, "e2002");  // 여자 하의
+                } else if (categoryCode.equals("6")) {
+                    pstmt.setString(1, "e2003");  // 여자 아우터
+                }
             }
-           
+            
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
@@ -155,7 +136,7 @@ public class ProductDAO {
 
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, productNo);
-            pstmt.setInt(2, dto.getCategory_no());  // category_no 설정
+            pstmt.setInt(2, dto.getCategory_no());
             pstmt.setString(3, dto.getProduct_name());
             pstmt.setInt(4, dto.getProduct_price());
             pstmt.setString(5, dto.getProduct_spec());
@@ -183,11 +164,12 @@ public class ProductDAO {
         return result;
     }
 
+    // 전체 상품 목록
     public List<ProductDTO> getProductList() {
 	    List<ProductDTO> productList = new ArrayList<ProductDTO>();
 	    try {
 	        openConn();
-	        sql = "SELECT * FROM sc_product";  // 전체 상품을 조회하는 쿼리
+	        sql = "SELECT * FROM sc_product";
 	        pstmt = con.prepareStatement(sql);
 	        rs = pstmt.executeQuery();
 	        
@@ -215,21 +197,21 @@ public class ProductDAO {
 	    return productList;
 	}
     
- // 상품 삭제 메서드
+    // 상품 삭제 메서드
     public boolean deleteProduct(int product_no) {
         boolean result = false;
         try {
             openConn();
 
-            // 상품을 삭제하는 SQL문
             sql = "DELETE FROM SC_PRODUCT WHERE PRODUCT_NO = ?";
+            
             pstmt = con.prepareStatement(sql);
+            
             pstmt.setInt(1, product_no);
 
-            // SQL 실행
             int chk = pstmt.executeUpdate();
             if (chk > 0) {
-                result = true;  // 성공적으로 삭제된 경우
+                result = true;  // 삭제 성공
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -237,7 +219,7 @@ public class ProductDAO {
             closeConn(pstmt, con);
         }
 
-        return result;  // 삭제 성공 여부 반환
+        return result;
     }
     
     
@@ -245,10 +227,15 @@ public class ProductDAO {
        
     	ProductDTO product = null;
         try {
+        	
             openConn();
+            
             sql = "SELECT * FROM SC_PRODUCT WHERE PRODUCT_NO = ?";
+            
             pstmt = con.prepareStatement(sql);
+            
             pstmt.setInt(1, productId);
+            
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
@@ -259,6 +246,7 @@ public class ProductDAO {
                 product.setProduct_price(rs.getInt("PRODUCT_PRICE"));
                 product.setProduct_spec(rs.getString("PRODUCT_SPEC"));
                 product.setProduct_qty(rs.getInt("PRODUCT_QTY"));
+                product.setProduct_hit(rs.getInt("PRODUCT_HIT"));
                 product.setProduct_image(rs.getString("PRODUCT_IMAGE"));
                 product.setProduct_size(rs.getString("PRODUCT_SIZE"));
                 product.setProduct_specInfo(rs.getString("PRODUCT_SPECINFO"));
@@ -270,141 +258,96 @@ public class ProductDAO {
         }
         return product;
     }
-	
-	
-	
 
+    public int updateProduct(ProductDTO dto) {
+        
+    	int result = 0;  // 실패 == 0
 
-	// 모든 상품 리스트를 가져오는 메서드
-	public List<ProductDTO> getAllProduct() {
-		List<ProductDTO> list = new ArrayList<ProductDTO>(); 
-		
-		try {
-			openConn();
-			
-			sql ="select * from sc_product";
-			pstmt = con.prepareStatement(sql);
-			
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				ProductDTO dto = new ProductDTO();
-				
-				dto.setProduct_no(rs.getInt("product_no"));
-				dto.setCategory_no(rs.getInt("category_no"));
-				dto.setProduct_name(rs.getString("product_name"));
-				dto.setProduct_price(rs.getInt("product_price"));
-				dto.setProduct_spec(rs.getString("product_spec"));
-				dto.setProduct_qty(rs.getInt("product_qty"));
-				dto.setProduct_hit(rs.getInt("product_hit"));
-				dto.setProduct_image(rs.getString("product_image"));
-				dto.setProduct_size(rs.getString("product_size"));
-				dto.setProduct_specInfo(rs.getString("product_specInfo"));
-				
-				list.add(dto);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			closeConn(rs, pstmt, con);
-		}
-		return list;
-	} // getAllProduct() 메서드 end
-	
-	
-	
-	// 제품 번호에 해당하는 제품의 상세 정보를 조회하는 메서드
-	public ProductDTO getProductContent(int pnum) {
-		ProductDTO dto = null;
-		
-		try {
-			openConn();
-			
-			sql = "select * from sc_product where product_no = ?";
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setInt(1, pnum);
-			
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				dto = new ProductDTO();
-				
-				dto.setProduct_no(rs.getInt("product_no"));
-				dto.setCategory_no(rs.getInt("category_no"));
-				dto.setProduct_name(rs.getString("product_name"));
-				dto.setProduct_price(rs.getInt("product_price"));
-				dto.setProduct_spec(rs.getString("product_spec"));
-				dto.setProduct_qty(rs.getInt("product_qty"));
-				dto.setProduct_hit(rs.getInt("product_hit"));
-				dto.setProduct_image(rs.getString("product_image"));
-				dto.setProduct_size(rs.getString("product_size"));
-				dto.setProduct_specInfo(rs.getString("product_specInfo"));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			closeConn(rs, pstmt, con);
-		}
-		return dto;
-	} // getProductContent() 메서드 end
+        
+        
 
-	
-	
-	// 해당 상품번호에 일치하는 상품의 review_rank 를 소수점 1자리로 가져오는 메서드
-	public int getProductRiviewRank(int pnum) {
-		int result = 0;
-		
-		try {
-			openConn();
-			
-			sql = "SELECT ROUND(AVG(r.REVIEW_RANK), 1) AS AVG_REVIEW_RANK FROM sc_product p "
-					+ " JOIN sc_review r ON p.PRODUCT_NO = r.PRODUCT_NO WHERE p.PRODUCT_NO = ?"
-					+ "GROUP BY p.PRODUCT_NO";
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setInt(1, pnum);
-			
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				result = rs.getInt(1);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			closeConn(rs, pstmt, con);
-		}
-		return result;
-	} // getProductRiviewRank() 메서드 end
+        try {
+            openConn();
+            
+            String sql = "UPDATE sc_product SET product_name = ?, product_spec = ?, product_qty = ?, product_size = ?, product_price = ?, category_no = ?, product_image = ?, product_specInfo = ? WHERE product_no = ?";
 
-	
-	
-	// 해당 상품번호에 일치하는 상품의 리뷰 개수를 가져오는 메서드
-	public int getProductRiviewCount(int pnum) {
-		int result = 0;
-		
-		try {
-			openConn();
-			
-			sql = "SELECT COUNT(r.REVIEW_NO) AS REVIEW_COUNT FROM sc_product p "
-					+ "	LEFT JOIN sc_review r ON p.PRODUCT_NO = r.PRODUCT_NO "
-					+ " WHERE p.PRODUCT_NO = ? GROUP BY p.PRODUCT_NO";
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setInt(1, pnum);
-			
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				result = rs.getInt(1);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			closeConn(rs, pstmt, con);
-		}
-		return result;
-	} // getProductRiviewCount() 메서드 end
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, dto.getProduct_name());  		// 상품명
+            pstmt.setString(2, dto.getProduct_spec());  		// 상품 설명
+            pstmt.setInt(3, dto.getProduct_qty());  			// 상품 수량
+            pstmt.setString(4, dto.getProduct_size());  		// 상품 사이즈
+            pstmt.setInt(5, dto.getProduct_price());  			// 상품 가격
+            pstmt.setInt(6, dto.getCategory_no());  			// 카테고리 번호
+            pstmt.setString(7, dto.getProduct_image());  		// 상품 이미지
+            pstmt.setString(8, dto.getProduct_specInfo());  	// 상품 설명 정보
+            pstmt.setInt(9, dto.getProduct_no());  				// 상품 번호 (수정할 조건)
 
-}
+            
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConn(pstmt, con);
+        }
+
+        return result;  // 성공 == 1
+    }
+    
+    // 해당 상품번호에 일치하는 상품의 review_rank 를 소수점 1자리로 가져오는 메서드
+ 	public int getProductRiviewRank(int pnum) {
+ 		int result = 0;
+ 		
+ 		try {
+ 			openConn();
+ 			
+ 			sql = "SELECT ROUND(AVG(r.REVIEW_RANK), 1) AS AVG_REVIEW_RANK FROM sc_product p "
+ 					+ " JOIN sc_review r ON p.PRODUCT_NO = r.PRODUCT_NO WHERE p.PRODUCT_NO = ?"
+ 					+ "GROUP BY p.PRODUCT_NO";
+ 			pstmt = con.prepareStatement(sql);
+ 			
+ 			pstmt.setInt(1, pnum);
+ 			
+ 			rs = pstmt.executeQuery();
+ 			if (rs.next()) {
+ 				result = rs.getInt(1);
+ 			}
+ 		} catch (SQLException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		} finally {
+ 			closeConn(rs, pstmt, con);
+ 		}
+ 		return result;
+ 	} // getProductRiviewRank() 메서드 end
+
+ 	
+ 	
+ 	// 해당 상품번호에 일치하는 상품의 리뷰 개수를 가져오는 메서드
+ 	public int getProductRiviewCount(int pnum) {
+ 		int result = 0;
+ 		
+ 		try {
+ 			openConn();
+ 			
+ 			sql = "SELECT COUNT(r.REVIEW_NO) AS REVIEW_COUNT FROM sc_product p "
+ 					+ "	LEFT JOIN sc_review r ON p.PRODUCT_NO = r.PRODUCT_NO "
+ 					+ " WHERE p.PRODUCT_NO = ? GROUP BY p.PRODUCT_NO";
+ 			pstmt = con.prepareStatement(sql);
+ 			
+ 			pstmt.setInt(1, pnum);
+ 			
+ 			rs = pstmt.executeQuery();
+ 			if (rs.next()) {
+ 				result = rs.getInt(1);
+ 			}
+ 		} catch (SQLException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		} finally {
+ 			closeConn(rs, pstmt, con);
+ 		}
+ 		return result;
+ 	} // getProductRiviewCount() 메서드 end
+
+ }

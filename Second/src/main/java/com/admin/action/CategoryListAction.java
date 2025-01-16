@@ -19,7 +19,7 @@ public class CategoryListAction implements Action {
     	
     	CategoryDAO dao = CategoryDAO.getInstance();
         
-        List<CategoryDTO> categoryList = dao.getCategoryList();// 카테고리 목록이 정상적으로 받아졌는지 확인하기 위한 로그
+        List<CategoryDTO> categoryList = dao.getCategoryList();
      
         System.out.println("Category List Size: " + categoryList.size());
 
