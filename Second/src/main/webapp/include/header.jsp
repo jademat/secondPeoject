@@ -46,7 +46,7 @@
 <script src="mail/contact.js"></script>
 
 <!-- Template Javascript -->
-<script src="js/main.js"></script>
+<script src="<%=request.getContextPath()%>/js/main.js"></script>
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
@@ -65,7 +65,6 @@
 				<div class="d-inline-flex align-items-center">
 					<a class="text-dark"
 						href="<%=request.getContextPath()%>/user_board_list.go?board_type=all">FAQs</a>
-
 				</div>
 			</div>
 
@@ -79,8 +78,6 @@
 					</h1>
 				</a>
 			</div>
-
-
 		</div>
 	</div>
 	<!-- Topbar End -->

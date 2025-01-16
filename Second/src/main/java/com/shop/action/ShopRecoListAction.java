@@ -10,20 +10,15 @@ import com.hhlb.controller.Action;
 import com.hhlb.controller.ActionForward;
 import com.hhlb.model.ProductDAO;
 import com.hhlb.model.ProductDTO;
-import com.hhlb.model.ReviewDAO;
-import com.hhlb.model.ReviewDTO;
 
-public class ProductDetailAction implements Action {
+public class ShopRecoListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// 상품 리스트에서 선택 후 get 방식으로 넘어온 제품번호에 해당하는 제품의 상세정보를 조회하여
-		// product/detail.jsp 페이지로 이동시키는 비지니스 로직
-		
-		int product_no = Integer.parseInt(request.getParameter("pnum"));
+		// shop.jsp에서 sort로 이동 시 해당 정렬로 데이터를 가져오는 비지니스 로직  (추천 상품 정렬)
 		
 		// 한 페이지당 보여지는 게시물 수
-		int rowsize = 4;
+		int rowsize = 8;
 
 		// 아래에 보여지는 페이지의 최대 블럭 수 [1][2][3] / [4][5][6]
 		int block = 3;
@@ -40,7 +35,8 @@ public class ProductDetailAction implements Action {
 		// 보여줄 페이지 종류 설정하는 변수
 		String product_type = "";
 		
-		if (request.getParameter("page") != null) {
+		if (request.getParameter("p"
+				+ "age") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 			//product_type = request.getParameter("board_type");
 		} else {
@@ -62,11 +58,10 @@ public class ProductDetailAction implements Action {
 		// 해당 페이지에서 끝 글 번호
 		int endBlock = (((page - 1) / block) * block) + block;
 
-		ProductDAO productDAO = ProductDAO.getInstance();
-		ReviewDAO reviewDAO = ReviewDAO.getInstance();
+		ProductDAO dao = ProductDAO.getInstance();
 
-		// 해당 상품의 리뷰 개수를 가져오는 메서드
-		totalRecord = productDAO.getProductRiviewCount(product_no);
+		// sc_product 테이블의 상품의 총 개수를 구하는 메서드
+		totalRecord = dao.getProductCount();
 
 		// 전체 상품 수를 한 페이지당 보여질 상품의 수로 나누어 주어 전체 페이지수 산출
 		allPage = (int) Math.ceil(totalRecord / (double) rowsize);
@@ -76,20 +71,8 @@ public class ProductDetailAction implements Action {
 			endBlock = allPage;
 		}
 
-		// 해당 게시물의 리뷰를 모두 가져오는 메서드
-		List<ReviewDTO> review_list = reviewDAO.getReviewInfo(product_no, page, rowsize);
-		
-		// 해당 상품에 대한 정보를 가져오는 메서드
-		ProductDTO cont = productDAO.getProductContent(product_no);
-		
-		// 해당 상품의 review_rank 를 가져오는 메서드
-		int review_rank = productDAO.getProductRiviewRank(product_no);
-		
-		// 해당 상품의 리뷰 개수를 가져오는 메서드
-		int review_count = productDAO.getProductRiviewCount(product_no);
-		
-		// 모든 상품의 정보를 가져오는 메서드(디테일 페이지 아래 이벤트 용)
-		List<ProductDTO> product_list = productDAO.getAllProductData();
+		// 현제 페이지에 해당하는 게시물을 가져오는 로직
+		List<ProductDTO> productList = dao.getAllProductReco(page, rowsize);
 		
 		// 페이징 작업 후 지금까지 페이징 처리 시에 작업했던 모든 정보들을 view page로 바인딩
 		request.setAttribute("page", page);
@@ -101,20 +84,15 @@ public class ProductDetailAction implements Action {
 		request.setAttribute("endNo", endNo);
 		request.setAttribute("startBlock", startBlock);
 		request.setAttribute("endBlock", endBlock);
-		
-		request.setAttribute("ProductCont", cont);
-		request.setAttribute("ReviewList", review_list);
-		request.setAttribute("ReviewRank", review_rank);
-		request.setAttribute("ReviewCount", review_count);
-		request.setAttribute("ProductList", product_list);
-		request.setAttribute("pnum", product_no);
-
+		request.setAttribute("board_type", product_type);
+		request.setAttribute("ProductList", productList);
 
 		ActionForward forward = new ActionForward();
-		
+
 		forward.setRedirect(false);
-		forward.setPath("product/detail.jsp");
-		
+		forward.setPath("product/shop.jsp");
+
 		return forward;
-		}
+	}
+
 }
