@@ -160,9 +160,7 @@
 									<a href="#" class="nav-link dropdown-toggle"
 										data-toggle="dropdown">Pages</a>
 									<div class="dropdown-menu rounded-0 m-0">
-										<a
-											href="<%= request.getContextPath() %>/user_cart.go?id=${ user_id }"
-											class="dropdown-item">Shopping Cart</a> 
+										<a href="<%= request.getContextPath() %>/user_cart.go?id=${ user_id }" class="dropdown-item">Shopping Cart</a> 
 											<a href="<%=request.getContextPath()%>/user_womanAll.go" class="dropdown-item">Women</a> 
 											<a href="<%=request.getContextPath()%>/user_manAll.go" class="dropdown-item"> Men</a>
 									</div>

@@ -8,7 +8,7 @@
 <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
     <div class="row px-xl-5 pt-5">
         <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-            <a href="index.html" class="text-decoration-none">
+            <a href="<%=request.getContextPath() %>/user_main.go" class="text-decoration-none">
                 <h1 class="mb-4 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border border-white px-3 mr-1">E</span>HHLB</h1>
             </a>
             <p>'HHLB'는 고객에게 최상의 쇼핑을 제공하고 
@@ -30,7 +30,7 @@
 
                         <a class="text-dark mb-2" href="<%=request.getContextPath() %>/user_main.go"><i class="fa fa-angle-right mr-2"></i>Home</a>
                         <a class="text-dark mb-2" href="<%=request.getContextPath() %>/user_shop.go"><i class="fa fa-angle-right mr-2"></i>Shop</a>
-                        <a class="text-dark mb-2" href="<%=request.getContextPath() %>/cart.go"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                        <a class="text-dark mb-2" href="<%= request.getContextPath() %>/user_cart.go?id=${ user_id }"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
                         <a class="text-dark mb-2" href="<%=request.getContextPath() %>/user_board_list.go?board_type=all"><i class="fa fa-angle-right mr-2"></i>Board</a>
                         <a class="text-dark" href="<%=request.getContextPath() %>/user_review_list.go"><i class="fa fa-angle-right mr-2"></i>Review</a>
                     </div>
