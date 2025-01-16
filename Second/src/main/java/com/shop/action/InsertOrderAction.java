@@ -11,6 +11,7 @@ import com.hhlb.controller.ActionForward;
 import com.hhlb.model.CartDAO;
 import com.hhlb.model.CartDTO;
 import com.hhlb.model.OrderDAO;
+import com.hhlb.model.ProductDAO;
 
 public class InsertOrderAction implements Action {
 
@@ -26,12 +27,24 @@ public class InsertOrderAction implements Action {
 		
 		CartDAO cartDAO = CartDAO.getInstance();
 		
+		// 해당 유저의 장바구니 상품을 가져오는 메서드
 		List<CartDTO> cartList = cartDAO.getCartList(user_id);
 		
-		OrderDAO dao = OrderDAO.getInstance();
+		OrderDAO orderDAO = OrderDAO.getInstance();
 			
 		// 각 리스트마다의 값을 sc_order 테이블에 저장하는 메서드
-		dao.InsertOrderData(user_id, totalPrice, memo, cartList, addr);
+		int check = orderDAO.InsertOrderData(user_id, totalPrice, memo, cartList, addr);
+		
+		if (check > 0) {
+			ProductDAO proDAO = ProductDAO.getInstance();
+			
+			proDAO.updateProductHit(cartList);
+			
+			// 결제 성공 시(sc_order 테이블에 정상적으로 insert 된 경우) 장바구니 품목 삭제하는 메서드
+			cartDAO.deleteCartList(user_id);
+			
+			
+		}
 		
 		ActionForward forward = new ActionForward();
 		
