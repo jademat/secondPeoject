@@ -23,6 +23,7 @@ public class InsertOrderAction implements Action {
 		String cardName = request.getParameter("selectedCard");
 		String memo = request.getParameter("memo");
 		
+		
 		CartDAO cartDAO = CartDAO.getInstance();
 		
 		List<CartDTO> cartList = cartDAO.getCartList(user_id);
