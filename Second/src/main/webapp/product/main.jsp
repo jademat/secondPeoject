@@ -78,7 +78,7 @@ request.setAttribute("ProductList", list);
 							Off Your First Order</h4>
 						<h3 class="display-4 text-white font-weight-semi-bold mb-4">Fashionable
 							Dress</h3>
-						<a href="" class="btn btn-light py-2 px-3">Shop Now</a>
+						<a href="<%=request.getContextPath() %>/user_shop.go" class="btn btn-light py-2 px-3">Shop Now</a>
 					</div>
 				</div>
 			</div>
