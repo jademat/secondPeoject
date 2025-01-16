@@ -207,6 +207,7 @@ public class ProductDAO {
 	    return productList;
 	}
     
+    
  // 상품 삭제 메서드
     public boolean deleteProduct(int product_no) {
         boolean result = false;
@@ -268,15 +269,24 @@ public class ProductDAO {
 
 
 	// 모든 상품 리스트를 가져오는 메서드
-	public List<ProductDTO> getAllProduct() {
+	public List<ProductDTO> getAllProduct(int page, int rowsize) {
 		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		
+		// 해당 페이지에서 시작 글 번호
+		int startNo = (page * rowsize) - (rowsize - 1);
+		// 해당 페이지에서 끝 글번호
+		int endNo = (page * rowsize);
 
 		try {
 			openConn();
 
-			sql = "select * from sc_product";
+			sql = "select * from (select row_number() over(order by product_no desc) as rnum, b.* from sc_product b) "
+					+ " where rnum >= ? and rnum <= ?";
 			pstmt = con.prepareStatement(sql);
-
+			
+			pstmt.setInt(1, startNo);
+			pstmt.setInt(2, endNo);
+			
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				ProductDTO dto = new ProductDTO();
@@ -302,7 +312,8 @@ public class ProductDAO {
 		}
 		return list;
 	} // getAllProduct() 메서드 end
-
+	
+	
 	// 제품 번호에 해당하는 제품의 상세 정보를 조회하는 메서드
 	public ProductDTO getProductContent(int pnum) {
 		ProductDTO dto = null;
@@ -751,5 +762,237 @@ public class ProductDAO {
 	} // manAllProduct() 메서드 end
 
 
+	// 주문서 페이지에서 결제가 성공 했을 경우 해당 상품의 product_hit를 올려주는 메서드
+	public void updateProductHit(List<CartDTO> cartList) {
+		int proNo = 0;
+		
+		try {
+			openConn();
+			
+			for (int i = 0; i < cartList.size(); i ++) {
+				// 해당 상품 product_no의 hit 값을 찾는 메서드
+				sql = "select max(product_hit) from sc_product where product_no = ?";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, cartList.get(i).getProduct_no());
+				
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					proNo = rs.getInt(1) + 1;
+				}
+				
+				// 반복해서 데이터를 sc_order 테이블에 입력하는 코드
+				sql = "insert into sc_product (product_hit) values(?) where product_no = ?";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, proNo);
+				pstmt.setInt(2, cartList.get(i).getProduct_no());
+				
+				pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  finally {
+			closeConn(rs, pstmt, con);
+		}
+	} // updateProductHit() 메서드 end
+	
+	
+	// 상품 최신순으로 가져오는 메서드
+	public List<ProductDTO> getAllProductRecent(int page, int rowsize) {
+		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		
+		// 해당 페이지에서 시작 글 번호
+		int startNo = (page * rowsize) - (rowsize - 1);
+		// 해당 페이지에서 끝 글번호
+		int endNo = (page * rowsize);
 
+		try {
+			openConn();
+
+			sql = "select * from (select row_number() over(order by product_no asc) as rnum, b.* from sc_product b) "
+					+ " where rnum >= ? and rnum <= ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, startNo);
+			pstmt.setInt(2, endNo);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductDTO dto = new ProductDTO();
+
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
+
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return list;
+	} // getAllProductRecent() 메서드 end
+	
+	
+	// 상품 인기순으로 가져오는 메서드
+	public List<ProductDTO> getAllProductPop(int page, int rowsize) {
+		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		
+		// 해당 페이지에서 시작 글 번호
+		int startNo = (page * rowsize) - (rowsize - 1);
+		// 해당 페이지에서 끝 글번호
+		int endNo = (page * rowsize);
+
+		try {
+			openConn();
+
+			sql = "select * from (select row_number() over(order by product_hit desc) as rnum, b.* from sc_product b) "
+					+ " where rnum >= ? and rnum <= ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, startNo);
+			pstmt.setInt(2, endNo);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductDTO dto = new ProductDTO();
+
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
+
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return list;
+	} // getAllProductPop() 메서드 end
+		
+		
+	// 상품 추천순으로 가져오는 메서드
+	public List<ProductDTO> getAllProductReco(int page, int rowsize) {
+		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		
+		// 해당 페이지에서 시작 글 번호
+		int startNo = (page * rowsize) - (rowsize - 1);
+		// 해당 페이지에서 끝 글번호
+		int endNo = (page * rowsize);
+
+		try {
+			openConn();
+
+			sql = "select * from (select row_number() over(order by product_qty desc) as rnum, b.* from sc_product b) "
+					+ " where rnum >= ? and rnum <= ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, startNo);
+			pstmt.setInt(2, endNo);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductDTO dto = new ProductDTO();
+
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
+
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return list;
+	} // getAllProductReco() 메서드 end
+	
+	
+	// 페이징에 사용하기 위한 해당하는 상품의 개수를 구하는 메서드
+	public int getProductCount() {
+		int count = 0;
+
+		try {
+			openConn();
+
+			sql = "select count(*) from sc_product";
+			pstmt = con.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return count;
+	} // getProductCount() 메서드 end
+	
+	
+	// 모든 상품의 리스트를 가져오는 메서드(페이징 안하는 버전)
+	public List<ProductDTO> getAllProductData() {
+		List<ProductDTO> list = new ArrayList<ProductDTO>();
+
+		try {
+			openConn();
+
+			sql = "select * from sc_product";
+			pstmt = con.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductDTO dto = new ProductDTO();
+
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
+
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return list;
+	} // getAllProductData() 메서드 end
 }

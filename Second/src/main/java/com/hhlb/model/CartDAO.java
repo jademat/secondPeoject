@@ -195,7 +195,9 @@ public class CartDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} closeConn(rs, pstmt, con);
+		}  finally {
+			closeConn(rs, pstmt, con);
+		}
 		return result;
 	} // deleteCartData() 메서드 end
 	
@@ -231,9 +233,31 @@ public class CartDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} closeConn(rs, pstmt, con);
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
 		return totalPrice;
 	} // getCartTotalPrice() 메서드 end
+	
+	
+	// 주문서 페이지에서 결제가 완료 된 후 해당 유저의 장바구니 목록을 지우는 메서드
+	public void deleteCartList(String user_id) {
+		try {
+			openConn();
+			
+			sql = "delete from sc_cart where user_id = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, user_id);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+	} // deleteCartList() 메서드 end
 	
 }
 		

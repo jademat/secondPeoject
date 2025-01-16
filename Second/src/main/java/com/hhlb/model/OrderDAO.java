@@ -93,8 +93,8 @@ public class OrderDAO {
 	
 	
 	// order.jsp 에서 넘어와서 sc_order 테이블에 저장하는 메서드
-	public void InsertOrderData(String user_id, int totalPrice, String memo, List<CartDTO> cartList) {
-			int count = 0;
+	public int InsertOrderData(String user_id, int totalPrice, String memo, List<CartDTO> cartList) {
+			int result = 0, count = 0;
 		
 			try {
 				openConn();
@@ -121,11 +121,14 @@ public class OrderDAO {
 					pstmt.setString(6, memo);	
 					pstmt.setString(7, user_id);	
 					
-					pstmt.executeUpdate();
+					result = pstmt.executeUpdate();
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} closeConn(rs, pstmt, con);
+			}  finally {
+				closeConn(rs, pstmt, con);
+			}
+			return result;
 	} // InsertOrderData() 메서드 end
 }

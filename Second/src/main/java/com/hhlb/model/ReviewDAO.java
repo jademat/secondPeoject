@@ -184,17 +184,25 @@ Connection con = null;
 	
 	
 	// 상품번호에 해당하는 리뷰를 모두 가져오는 메서드
-	public List<ReviewDTO> getReviewInfo(int pnum) {
+	public List<ReviewDTO> getReviewInfo(int pnum, int page, int rowsize) {
 			List<ReviewDTO> list = new ArrayList<ReviewDTO>();
+			
+			// 해당 페이지에서 시작 글 번호
+			int startNo = (page * rowsize) - (rowsize - 1);
+			// 해당 페이지에서 끝 글번호
+			int endNo = (page * rowsize);
 			
 			try {
 				openConn();
 				
-				sql = "select * from sc_review where product_no = ? order by review_date desc";
+				sql = "select * from (select row_number() over(order by review_date desc) as rnum, b.* from sc_review b) "
+						+ " where product_no = ? and rnum >= ? and rnum <= ?";
 				
 				pstmt = con.prepareStatement(sql);
 				
 				pstmt.setInt(1, pnum);
+				pstmt.setInt(2, startNo);
+				pstmt.setInt(3, endNo);
 				
 				rs = pstmt.executeQuery();
 				
@@ -224,6 +232,7 @@ Connection con = null;
 			}
 			return list;
 	} // getReviewInfo() 메서드 end
+	
 	
 	public ReviewDTO getuserReview(int no) {
 		ReviewDTO dto = null;
