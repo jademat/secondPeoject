@@ -2,10 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%
-	request.setAttribute("pageTitle", "Write an Inquiry");
-%>	
-
+<%-- <%
+request.setAttribute("pageTitle", "Write an Inquiry");
+%>
+ --%>
 <jsp:include page="../include/header.jsp" />
 
 
@@ -21,39 +21,42 @@ textarea {
 	<c:set var="cont" value="${bCont }" />
 	<table class="table table-borderless">
 		<c:if test="${!empty cont }">
-			
-				<tr>
-					<th>${cont.getBoard_type() }</th>
-				</tr>
-				<tr>
-					<th>아이디</th>
-					<td>${cont.getUser_id() }</td>
-				</tr>
-				<tr>
-					<th>글제목</th>
-					<td>${cont.getBoard_title() }</td>
-				</tr>
-				<tr>
-					<th>글내용</th>
-					<td><textarea rows="5" cols="30" readonly>${cont.getBoard_cont() }</textarea></td>
-				</tr>
-			
+
+			<tr>
+				<th>${cont.getBoard_type() }</th>
+			</tr>
+			<tr>
+				<th>아이디</th>
+				<td>${cont.getUser_id() }</td>
+			</tr>
+			<tr>
+				<th>글제목</th>
+				<td>${cont.getBoard_title() }</td>
+			</tr>
+			<tr>
+				<th>글내용</th>
+				<td><textarea rows="5" cols="30" readonly>${cont.getBoard_cont() }</textarea></td>
+			</tr>
+
 		</c:if>
 	</table>
 	<br>
 
 	<div align="center">
-		<input type = "button" class = "btn btn-primary" value = "전체목록" onclick = "location.href = '<%=request.getContextPath()%>/user_board_list.go?board_type=all'">
+		<input type="button" class="btn btn-primary" value="전체목록"
+			onclick="location.href = '<%=request.getContextPath()%>/user_board_list.go?board_type=all'">
 	</div>
 
 	<br> <br>
 	<!-- 관리자만 볼수 있음 -->
 	<c:choose>
-	<c:when test="${sessionScope.user_id == 'admin' }" > 
-	<div align="center">
-		<button type="button" class="btn btn-primary" >답변하기</button>
-	</div>
-	</c:when>
+		<c:when test="${sessionScope.user_id == 'admin' }">
+			<div align="center" align = "center">
+				<!-- Button to Open the Modal -->
+				<button type="button" class="btn btn-primary" data-toggle="modal"
+					data-target="#boardReplyModal">답변하기</button>
+			</div>
+		</c:when>
 	</c:choose>
 </div>
 
