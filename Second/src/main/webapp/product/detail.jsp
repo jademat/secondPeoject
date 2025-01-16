@@ -124,26 +124,24 @@
 	                    <button class="btn btn-primary px-3" id="goCartBtn"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
 	                    
 	                    <script type="text/javascript">
-	                    
-			                 // product/detail.jsp에서 Add to Cart 버튼을 클릭했을 때 sc_cart 테이블에 저장하기
-			                	$("#goCartBtn").click(function() {
-			                		$.ajax({
-			                			url : "/Second/cartInsert.go",
-			                			data : $("#goCart").serialize(),
-			                			dataType : "text",
-			                			success : function(res) {
-			                				if (res > 0) {
-			                					alert("장바구니 추가 완료");
-			                				} else {
-			                					alert("장바구니 추가 실패");
-			                				}
-			                			},
-			                			error : function() {
-			                				alert("데이터 통신 오류입니다...")
-			                			}
-			                		});
-			                	});
-	                    
+		            		// product/detail.jsp에서 Add to Cart 버튼을 클릭했을 때 sc_cart 테이블에 저장하기
+		                	$("#goCartBtn").click(function() {
+		                		$.ajax({
+		                			url : "/Second/cartInsert.go",
+		                			data : $("#goCart").serialize(),
+		                			dataType : "text",
+		                			success : function(res) {
+		                				if (res > 0) {
+		                					alert("장바구니 추가 완료");
+		                				} else {
+		                					alert("장바구니 추가 실패");
+		                				}
+		                			},
+		                			error : function() {
+		                				alert("데이터 통신 오류입니다...")
+		                			}
+		                		});
+		                	});
 	                    </script>
 	                    
 	                </div>
@@ -180,20 +178,20 @@
 
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
-                        <h4 class="mb-3">Product Description</h4>
+                        <h4 class="mb-3" align="center">${ dto.getProduct_spec() }</h4>
                         <br> <br>
                         
-                        <div align="center">
-                        <img class="w-50 h-50" src="<%= request.getContextPath() %>/resource/img/${ dto.getProduct_specInfo() }"
-                            		alt="Image">
-                        </div>
                         <!-- toogle 버튼 -->
                         <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="button" aria-pressed="false"
                             id="moreButton">
                             더보기
                         </button>
+                        
                         <!-- 숨겨진 글 -->
-                        <p id="hiddenContent" style="display: none; margin-top: 10px;">${ dto.getProduct_specInfo() }</p>
+                        <div align="center">
+                        <img class="w-50 h-50" src="<%= request.getContextPath() %>/resource/img/${ dto.getProduct_specInfo() }"
+                            		alt="Image">
+                        </div>
 
                     </div>
                     <div class="tab-pane fade" id="tab-pane-2">
@@ -326,9 +324,6 @@
         </div>
         </c:if>
     </div>
-    
-    
-    
     <!-- 상품 정보(상품 사진, 장바구니 버튼, 상품 설명 등) end -->
 
 
