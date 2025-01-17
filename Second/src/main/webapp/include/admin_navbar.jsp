@@ -13,7 +13,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">HHLB<sup>1</sup></div>
+            <div class="sidebar-brand-text mx-3">HHLB<sup>_admin</sup></div>
         </a>
 
         <!-- Divider -->
@@ -99,7 +99,7 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            매출관리
+            기타
         </div>
 
         <!-- Nav Item - Sales Management -->
@@ -107,12 +107,11 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSalesManagement"
                 aria-expanded="true" aria-controls="collapseSalesManagement">
                 <i class="fas fa-fw fa-chart-line"></i>
-                <span>매출 관리</span>
+                <span>기타</span>
             </a>
             <div id="collapseSalesManagement" class="collapse" aria-labelledby="headingSalesManagement" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="Sales_day.jsp">일자별</a>
-                    <a class="collapse-item" href="Sales_month.jsp">월별</a>
+                    <a class="collapse-item" href="Sales_day.jsp">▶ 404 error</a>
                 </div>
             </div>
         </li>
