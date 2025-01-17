@@ -12,13 +12,7 @@ request.setAttribute("pageTitle", "Bottom");
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%
-ProductDAO dao = ProductDAO.getInstance();
 
-List<ProductDTO> list = dao.womanBottom();
-
-request.setAttribute("ProductList", list);
-%>
 
 <c:set var="list" value="${ ProductList }" />
 
