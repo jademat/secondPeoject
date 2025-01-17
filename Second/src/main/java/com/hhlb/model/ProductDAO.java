@@ -192,7 +192,7 @@ public class ProductDAO {
        List<ProductDTO> productList = new ArrayList<ProductDTO>();
        try {
            openConn();
-           sql = "SELECT * FROM sc_product";  // 전체 상품을 조회하는 쿼리
+           sql = "SELECT * FROM sc_product order by product_no ASC";  // 전체 상품을 조회하는 쿼리
            pstmt = con.prepareStatement(sql);
            rs = pstmt.executeQuery();
            

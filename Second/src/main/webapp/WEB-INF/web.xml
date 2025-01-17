@@ -21,4 +21,10 @@
   	<url-pattern>*.go</url-pattern>
   </servlet-mapping>
   
+  <!-- 404 오류 페이지 설정 -->
+  <error-page>
+      <error-code>404</error-code>
+      <location>/error/error_404.jsp</location>
+  </error-page>
+  
 </web-app>
