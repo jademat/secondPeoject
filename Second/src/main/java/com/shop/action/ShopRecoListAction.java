@@ -91,7 +91,7 @@ public class ShopRecoListAction implements Action {
 
 		forward.setRedirect(false);
 		forward.setPath("product/shop.jsp");
-
+		
 		return forward;
 	}
 

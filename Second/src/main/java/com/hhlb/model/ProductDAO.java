@@ -448,8 +448,7 @@ public class ProductDAO {
 		try {
 			openConn();
 
-			sql = "select p. * from sc_category c " + " join sc_product p on c.category_no = p.category_no"
-					+ " where c.category_no = '9' ";
+			sql = "select * from sc_product where category_no = 9";
 
 			pstmt = con.prepareStatement(sql);
 
@@ -488,8 +487,7 @@ public class ProductDAO {
 		try {
 			openConn();
 
-			sql = "select p. * from sc_category c " + " join sc_product p on c.category_no = p.category_no"
-					+ " where c.category_no = '10' ";
+			sql = "select * from sc_product where category_no = 10";
 
 			pstmt = con.prepareStatement(sql);
 
@@ -519,7 +517,7 @@ public class ProductDAO {
 		}
 		return list;
 	} 
-	// 여성 자켓 상품 리스트를 가져오는 메서드
+	// 여성 하의 상품 리스트를 가져오는 메서드
 
 		public List<ProductDTO> womanOuter() {
 
@@ -528,8 +526,7 @@ public class ProductDAO {
 			try {
 				openConn();
 
-				sql = "select p. * from sc_category c " + " join sc_product p on c.category_no = p.category_no"
-						+ " where c.category_no = '11' ";
+				sql = "select * from sc_product where category_no = 11";
 
 				pstmt = con.prepareStatement(sql);
 
@@ -568,8 +565,7 @@ public class ProductDAO {
 		try {
 			openConn();
 
-			sql = "select p. * from sc_category c " + " join sc_product p on c.category_no = p.category_no"
-					+ " where c.category_no = '6' ";
+			sql = "select * from sc_product where category_no = 6";
 
 			pstmt = con.prepareStatement(sql);
 
@@ -609,8 +605,7 @@ public class ProductDAO {
 		try {
 			openConn();
 
-			sql = "select p. * from sc_category c " + " join sc_product p on c.category_no = p.category_no"
-					+ " where c.category_no = '7' ";
+			sql = "select * from sc_product where category_no = 7";
 
 			pstmt = con.prepareStatement(sql);
 
@@ -639,9 +634,9 @@ public class ProductDAO {
 			closeConn(rs, pstmt, con);
 		}
 		return list;
-	} // getAllProduct() 메서드 end
+	} 
 
-		// 남성 자켓 상품 리스트를 가져오는 메서드
+		// 남성 하의 상품 리스트를 가져오는 메서드
 
 	public List<ProductDTO> manOuter() {
 
@@ -650,8 +645,7 @@ public class ProductDAO {
 		try {
 			openConn();
 
-			sql = "select p. * from sc_category c " + " join sc_product p on c.category_no = p.category_no"
-					+ " where c.category_no = '8' ";
+			sql = "select * from sc_product where category_no = 8";
 
 			pstmt = con.prepareStatement(sql);
 
@@ -689,8 +683,7 @@ public class ProductDAO {
 		try {
 			openConn();
 
-			sql = "select p. * from sc_category c " + " join sc_product p on c.category_no = p.category_no"
-					+ " where c.category_no in (9, 10,11) ";
+			sql = "select * from sc_product where category_no in (9, 10,11) ";
 
 			pstmt = con.prepareStatement(sql);
 
@@ -995,4 +988,651 @@ public class ProductDAO {
 		}
 		return list;
 	} // getAllProductData() 메서드 end
+
+	public List<ProductDTO> searchProduct(String search) {
+		
+		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		
+		
+		try {
+			openConn();
+			
+			sql = "select * from sc_product where product_name  like ?" ; 
+			
+			pstmt=con.prepareStatement(sql);
+			
+			pstmt.setString(1, "%"+ search + "%");
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				ProductDTO dto = new ProductDTO();
+				
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
+
+				list.add(dto);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		
+		return list;
+	}
+	
+	
+	// 페이징에 사용하기 위한 해당하는 상품의 개수를 구하는 메서드(남성 상의)
+	public int getProductCountManTop() {
+		int count = 0;
+		
+		try {
+			openConn();
+			
+			sql = "select count(*) from sc_product where category_no = 6";
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return count;
+	} // getProductCountWomanTop() 메서드 end
+	
+	// 페이징에 사용하기 위한 해당하는 상품의 개수를 구하는 메서드(남성 하의)
+	public int getProductCountManBottom() {
+		int count = 0;
+		
+		try {
+			openConn();
+			
+			sql = "select count(*) from sc_product where category_no = 7";
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return count;
+	} // getProductCountWomanBottom() 메서드 end
+	
+	
+	// 페이징에 사용하기 위한 해당하는 상품의 개수를 구하는 메서드(남성 아우터)
+	public int getProductCountManOuter() {
+		int count = 0;
+
+		try {
+			openConn();
+
+			sql = "select count(*) from sc_product where category_no = 8";
+			pstmt = con.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return count;
+	} // getProductCountWomanOuter() 메서드 end
+	
+	// 페이징에 사용하기 위한 해당하는 상품의 개수를 구하는 메서드 (See All)
+	public int getProductCountManAll() {
+		int count = 0;
+		
+		try {
+			openConn();
+			
+			sql = "select count(*) from sc_product where category_no in (6,7,8)";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return count;
+	} // getProductCountManAll() 메서드 end
+	
+	
+	// 남성 상의 리스트를 가져오는 메서드
+	public List<ProductDTO> getAllProductManTop(int page, int rowsize) {
+		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		
+		// 해당 페이지에서 시작 글 번호
+		int startNo = (page * rowsize) - (rowsize - 1);
+		// 해당 페이지에서 끝 글번호
+		int endNo = (page * rowsize);
+		
+		try {
+			openConn();
+			
+			sql = "select * from (select row_number() over(order by product_no desc) as rnum, b.* from sc_product b) "
+					+ " where category_no = 6 and rnum >= ? and rnum <= ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, startNo);
+			pstmt.setInt(2, endNo);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return list;
+	} // getAllProductManTop() 메서드 end
+	
+	
+	
+	
+	// 남성 하의 리스트를 가져오는 메서드
+	public List<ProductDTO> getAllProductManBottom(int page, int rowsize) {
+		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		
+		// 해당 페이지에서 시작 글 번호
+		int startNo = (page * rowsize) - (rowsize - 1);
+		// 해당 페이지에서 끝 글번호
+		int endNo = (page * rowsize);
+		
+		try {
+			openConn();
+			
+			sql = "select * from (select row_number() over(order by product_no desc) as rnum, b.* from sc_product b) "
+					+ " where category_no = 7 and rnum >= ? and rnum <= ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, startNo);
+			pstmt.setInt(2, endNo);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return list;
+	} // getAllProductManBottom() 메서드 end
+	
+	
+	// 남성 아우터 리스트를 가져오는 메서드
+	public List<ProductDTO> getAllProductManOuter(int page, int rowsize) {
+		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		
+		// 해당 페이지에서 시작 글 번호
+		int startNo = (page * rowsize) - (rowsize - 1);
+		// 해당 페이지에서 끝 글번호
+		int endNo = (page * rowsize);
+
+		try {
+			openConn();
+
+			sql = "select * from (select row_number() over(order by product_no desc) as rnum, b.* from sc_product b) "
+					+ " where category_no =8 and rnum >= ? and rnum <= ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, startNo);
+			pstmt.setInt(2, endNo);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductDTO dto = new ProductDTO();
+
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
+
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return list;
+	} // getAllProductManOuter() 메서드 end
+
+	
+	// 오류 수정 남자
+	public List<ProductDTO> getAllProductMan1 (int page, int rowsize) {
+		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		
+		int startNo = (page * rowsize)  - (rowsize - 1);
+		int endNo = (page * rowsize);
+		
+		try {
+			openConn();
+			
+			sql  = "select * from (select row_number() over(order by product_no desc) as rnum, b.* from sc_product b) "
+					+ " where category_no in (6, 7, 8) and rnum >= ? and rnum <= ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, startNo);
+			pstmt.setInt(2, endNo);
+			
+			rs = pstmt.executeQuery();
+			while ( rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return list;
+	}
+	
+	
+	// 남성 모든 리스트를 가져오는 메서드
+		public List<ProductDTO> getAllProductMan(int page, int rowsize) {
+			
+			List<ProductDTO> list = new ArrayList<ProductDTO>();
+			
+			// 해당 페이지에서 시작 글 번호
+			int startNo = (page * rowsize) - (rowsize - 1);
+			// 해당 페이지에서 끝 글번호
+			int endNo = (page * rowsize);
+			
+			try {
+				
+				openConn();
+				
+
+				sql = "select * from (select row_number() over(order by product_no desc) as rnum, b.* from sc_product b) "
+						+ " where category_no in (6, 7, 8) and rnum >= ? and rnum <= ?";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, startNo);
+				pstmt.setInt(2, endNo);
+				
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					ProductDTO dto = new ProductDTO();
+					
+					dto.setProduct_no(rs.getInt("product_no"));
+					dto.setCategory_no(rs.getInt("category_no"));
+					dto.setProduct_name(rs.getString("product_name"));
+					dto.setProduct_price(rs.getInt("product_price"));
+					dto.setProduct_spec(rs.getString("product_spec"));
+					dto.setProduct_qty(rs.getInt("product_qty"));
+					dto.setProduct_hit(rs.getInt("product_hit"));
+					dto.setProduct_image(rs.getString("product_image"));
+					dto.setProduct_size(rs.getString("product_size"));
+					dto.setProduct_specInfo(rs.getString("product_specInfo"));
+					
+					list.add(dto);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeConn(rs, pstmt, con);
+			}
+			return list;
+		} // getAllProductMan() 메서드 end
+
+	// 페이징에 사용하기 위한 해당하는 상품의 개수를 구하는 메서드(여성 상의)
+	
+	
+	public int getProductCountWomanTop() {
+		int count = 0;
+		
+		try {
+			openConn();
+			
+			sql = "select count(*) from sc_product where category_no = 9";
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return count;
+	} // getProductCountWomanTop() 메서드 end
+	
+	// 페이징에 사용하기 위한 해당하는 상품의 개수를 구하는 메서드(여성 하의)
+	public int getProductCountWomanBottom() {
+		int count = 0;
+		
+		try {
+			openConn();
+			
+			sql = "select count(*) from sc_product where category_no = 10";
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return count;
+	} // getProductCountWomanBottom() 메서드 end
+	
+	
+	// 페이징에 사용하기 위한 해당하는 상품의 개수를 구하는 메서드(여성 아우터)
+	public int getProductCountWomanOuter() {
+		int count = 0;
+		
+		try {
+			openConn();
+			
+			sql = "select count(*) from sc_product where category_no = 11";
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return count;
+	} // getProductCountWomanOuter() 메서드 end
+	
+	// 페이징에 사용하기 위한 해당하는 상품의 개수를 구하는 메서드 (See All)
+	public int getProductCountWomanAll() {
+		int count = 0;
+		
+		try {
+			openConn();
+			
+			sql = "select count(*) from sc_product where category_no in (9,10,11)";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return count;
+	} // getProductCountWomanAll() 메서드 end
+	
+	
+	// 여성 상의 리스트를 가져오는 메서드
+	public List<ProductDTO> getAllProductWomanTop(int page, int rowsize) {
+		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		
+		// 해당 페이지에서 시작 글 번호
+		int startNo = (page * rowsize) - (rowsize - 1);
+		// 해당 페이지에서 끝 글번호
+		int endNo = (page * rowsize);
+		
+		try {
+			openConn();
+			
+			sql = "select * from (select row_number() over(order by product_no desc) as rnum, b.* from sc_product b) "
+					+ " where category_no = 9 and rnum >= ? and rnum <= ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, startNo);
+			pstmt.setInt(2, endNo);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return list;
+	} // getAllProductWomanTop() 메서드 end
+	
+	
+	
+	
+	// 여성 하의 리스트를 가져오는 메서드
+	public List<ProductDTO> getAllProductWomanBottom(int page, int rowsize) {
+		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		
+		// 해당 페이지에서 시작 글 번호
+		int startNo = (page * rowsize) - (rowsize - 1);
+		// 해당 페이지에서 끝 글번호
+		int endNo = (page * rowsize);
+		
+		try {
+			openConn();
+			
+			sql = "select * from (select row_number() over(order by product_no desc) as rnum, b.* from sc_product b) "
+					+ " where category_no = 10 and rnum >= ? and rnum <= ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, startNo);
+			pstmt.setInt(2, endNo);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return list;
+	} // getAllProductWomanBottom() 메서드 end
+	
+	
+	// 여성 아우터 리스트를 가져오는 메서드
+	public List<ProductDTO> getAllProductWomanOuter(int page, int rowsize) {
+		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		
+		// 해당 페이지에서 시작 글 번호
+		int startNo = (page * rowsize) - (rowsize - 1);
+		// 해당 페이지에서 끝 글번호
+		int endNo = (page * rowsize);
+		
+		try {
+			openConn();
+			
+			sql = "select * from (select row_number() over(order by product_no desc) as rnum, b.* from sc_product b) "
+					+ " where category_no = 11 and rnum >= ? and rnum <= ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, startNo);
+			pstmt.setInt(2, endNo);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return list;
+	} // getAllProductWomanOuter() 메서드 end
+	
+	
+	// 여성 모든 리스트를 가져오는 메서드
+	public List<ProductDTO> getAllProductWoman(int page, int rowsize) {
+		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		
+		// 해당 페이지에서 시작 글 번호
+		int startNo = (page * rowsize) - (rowsize - 1);
+		// 해당 페이지에서 끝 글번호
+		int endNo = (page * rowsize);
+		
+		try {
+			openConn();
+			
+			sql = "select * from (select row_number() over(order by product_no desc) as rnum, b.* from sc_product b) "
+					+ " where category_no in (9,10, 11) and rnum >= ? and rnum <= ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, startNo);
+			pstmt.setInt(2, endNo);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				
+				dto.setProduct_no(rs.getInt("product_no"));
+				dto.setCategory_no(rs.getInt("category_no"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
+				dto.setProduct_spec(rs.getString("product_spec"));
+				dto.setProduct_qty(rs.getInt("product_qty"));
+				dto.setProduct_hit(rs.getInt("product_hit"));
+				dto.setProduct_image(rs.getString("product_image"));
+				dto.setProduct_size(rs.getString("product_size"));
+				dto.setProduct_specInfo(rs.getString("product_specInfo"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return list;
+	} // getAllProductWoman() 메서드 end
 }

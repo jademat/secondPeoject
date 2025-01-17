@@ -1,25 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+
 <%
-	request.setAttribute("pageTitle", "See all");
+	request.setAttribute("pageTitle", "Welcome our shop");
 %>
 
 
 <jsp:include page="../include/header.jsp" />
 
 
-<%
-	request.setAttribute("pageTitle", "Welcome our shop");
-%>	
-
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
+<c:set var="list" value="${ ProductList }"/>
 
-
-	<c:set var="list" value="${ ProductList }"/>
 
 	<!-- Shop Start -->
     <div class="container-fluid pt-5">
@@ -32,13 +27,13 @@
                         <div class="d-flex align-items-center justify-content-between mb-4">
                         
                         	<!-- 검색 이벤트 -->
-                            <form action="">
+                            <form action="<%=request.getContextPath()%>/product_search.go">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search by name">
+                                    <input type="text" class="form-control" name="search" id="searchPd" placeholder="상품이름 검색">
                                     <div class="input-group-append">
-                                        <span class="input-group-text bg-transparent text-primary">
+                                        <button type="submit" class="input-group-text bg-transparent text-primary">
                                             <i class="fa fa-search"></i>
-                                        </span>
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -79,9 +74,10 @@
 	                            </div>
 	                        </div>
 	                    </div>
-                    </c:forEach>
-                    
-                    <!-- 페이지네이션 시작 -->
+                    </c:forEach>	
+                </div>
+                
+                <!-- 페이지네이션 시작 -->
                     <div class="container">
 						<ul class="pagination justify-content-center mb-3">
 						
@@ -119,8 +115,7 @@
 						</ul>
 					</div>
 					<!-- 페이지네이션 끝 -->
-					
-                </div>
+                
             </div>
             <!-- Shop Product End -->
         </div>

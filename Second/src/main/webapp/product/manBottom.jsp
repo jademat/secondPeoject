@@ -6,6 +6,7 @@
 <%
 	request.setAttribute("pageTitle", "Bottom");
 %>
+
 <jsp:include page="../include/header.jsp" />
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -16,9 +17,7 @@
 		List<ProductDTO> list = dao.manBottom();
 		
 		request.setAttribute("ProductList", list);
-		
-		
-		
+
 %>
 
 	<c:set var="list" value="${ ProductList }"/>
@@ -81,30 +80,42 @@
 	                        </div>
 	                    </div>
                     </c:forEach>
-                    
-                    <!-- 페이지네이션 -->
-                    <div class="col-12 pb-1">
-                        <nav aria-label="Page navigation">
-                          <ul class="pagination justify-content-center mb-3">
-                            <li class="page-item disabled">
-                              <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                              </a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                              <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                              </a>
-                            </li>
-                          </ul>
-                        </nav>
                     </div>
-                </div>
+                    
+			<!-- 페이지네이션 시작 -->
+			<div class="container">
+				<ul class="pagination justify-content-center mb-3">
+
+					<!-- 처음으로 -->
+					<c:if test="${page > block }">
+						<li class="page-item"><a class="page-link"
+							href="user_manBottom.go?page=1">⏪</a></li>
+						<li class="page-item"><a class="page-link"
+							href="user_manBottom.go?page=${startBlock - 1 }">◀</a></li>
+					</c:if>
+
+					<!-- 페이지 글 번호 -->
+					<c:forEach begin="${startBlock }" end="${endBlock }" var="i">
+						<c:if test="${i == page}">
+							<li class="page-item active"><a class="page-link"
+								href="user_manBottom.go?&page=${ i }">${ i }</a></li>
+						</c:if>
+						<c:if test="${i != page}">
+							<li class="page-item"><a class="page-link"
+								href="user_manBottom.go?page=${ i }">${ i }</a></li>
+						</c:if>
+					</c:forEach>
+
+					<!-- 마지막으로 -->
+					<c:if test="${endBlock < allPage}">
+						<li class="page-item"><a class="page-link"
+							href="user_manBottom.go?page=${endBlock + 1 }">▶</a></li>
+						<li class="page-item"><a class="page-link"
+							href="user_manBottom.go?page=${ allPage }">⏩</a></li>
+					</c:if>
+				</ul>
+			</div>
+			<!-- 페이지네이션 끝 -->
             </div>
             <!-- Shop Product End -->
         </div>
