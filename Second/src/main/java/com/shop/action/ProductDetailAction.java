@@ -88,7 +88,7 @@ public class ProductDetailAction implements Action {
 		// 해당 상품의 리뷰 개수를 가져오는 메서드
 		int review_count = productDAO.getProductRiviewCount(product_no);
 		
-		// 모든 상품의 정보를 가져오는 메서드(디테일 페이지 아래 이벤트 용)
+		// 모든 상품의 정보를 가져오는 메서드(디테일 페이지 아래 이벤트 용 페이징 X)
 		List<ProductDTO> product_list = productDAO.getAllProductData();
 		
 		// 페이징 작업 후 지금까지 페이징 처리 시에 작업했던 모든 정보들을 view page로 바인딩

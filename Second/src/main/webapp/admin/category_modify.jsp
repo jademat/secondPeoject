@@ -108,6 +108,7 @@
                                 <option value="">:::카테고리 목록 없음:::</option>
                             </c:if>
                             <c:if test="${!empty cList}">
+                            	<option value="">:::카테고리 목록 선택:::</option>
                                 <c:forEach items="${cList}" var="dto">
                                     <option value="${dto.getCategory_no()}">${dto.getCategory_name()} [${dto.getCategory_code()}]</option>
                                 </c:forEach>
@@ -132,35 +133,48 @@
 
     <!-- SweetAlert2 확인 팝업 스크립트 -->
     <script>
-        function confirmModify() {
+    function confirmModify() {
+        var categoryNo = document.querySelector('select[name="no"]').value; // 선택된 카테고리 값
+
+        // 카테고리가 선택되지 않은 경우 경고 팝업 띄우기
+        if (categoryNo === "") {
             Swal.fire({
-                title: '정말 수정하시겠습니까?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: '네',
-                cancelButtonText: '아니오'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                	// 네를 클릭하면 수정 완료 팝업
-                    Swal.fire({
-                        title: '수정 완료!',
-                        icon: 'success',
-                        confirmButtonText: '확인'
-                    }).then(() => {
-                        // 수정 완료 후 폼을 제출
-                        document.getElementById('categoryForm').submit();
-                    });
-                } else {
-                    // 아니오를 클릭하면 수정 취소 팝업
-                    Swal.fire({
-                        title: '수정 취소!',
-                        icon: 'error',
-                        confirmButtonText: '확인'
-                    });
-                }
+                title: '카테고리 목록을 선택해주세요!',
+                icon: 'error',
+                confirmButtonText: '확인'
             });
+            return; // 카테고리가 선택되지 않으면 함수 종료
         }
-    </script>
+
+        // 카테고리가 선택된 경우, 수정 확인 팝업 띄우기
+        Swal.fire({
+            title: '정말 수정하시겠습니까?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '네',
+            cancelButtonText: '아니오'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // 네를 클릭하면 수정 완료 팝업
+                Swal.fire({
+                    title: '수정 완료!',
+                    icon: 'success',
+                    confirmButtonText: '확인'
+                }).then(() => {
+                    // 수정 완료 후 폼을 제출
+                    document.getElementById('categoryForm').submit();
+                });
+            } else {
+                // 아니오를 클릭하면 수정 취소 팝업
+                Swal.fire({
+                    title: '수정 취소!',
+                    icon: 'error',
+                    confirmButtonText: '확인'
+                });
+            }
+        });
+    }
+</script>
 
 </body>
 </html>

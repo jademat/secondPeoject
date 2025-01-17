@@ -18,7 +18,7 @@
     <c:set var="reviewDto" value="${ ReviewList }"/>	<!-- 해당 상품의 리뷰 리스트 -->
     <c:set var="reviewRank" value="${ ReviewRank }"/>	<!-- 리뷰의 점수 평균 -->
     <c:set var="reviewCount" value="${ ReviewCount }"/>	<!-- 해당 상품 리뷰 개수  -->
-    //<c:set var="productList" value="${ ProductList }"/>	<!-- 해당 상품 리뷰 개수  -->
+    <c:set var="productList" value="${ ProductList }"/>	<!-- 해당 상품 리뷰 개수  -->
     
     	<!-- 받아올 상품 데이터가 잡힌 경우 -->
     	<c:if test="${ !empty dto  }">
@@ -178,7 +178,7 @@
 
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
-                        <h4 class="mb-3" align="center">${ dto.getProduct_spec() }</h4>
+                        <h4 class="mb-3">${ dto.getProduct_spec() }</h4>
                         <br> <br>
                         
                         <!-- toogle 버튼 -->
@@ -189,9 +189,10 @@
                         
                         <!-- 숨겨진 글 -->
                         <div align="center">
-                        <img class="w-50 h-50" src="<%= request.getContextPath() %>/resource/img/${ dto.getProduct_specInfo() }"
-                            		alt="Image">
-                        </div>
+                        <img id="hiddenContent" style="display: none;" class="w-50 h-50" 
+                        		src="<%= request.getContextPath() %>/resource/img/${ dto.getProduct_specInfo() }" alt="Image">
+                        </div>	 
+                        <!-- <p id="hiddenContent" style="display: none; margin-top: 10px;">${ dto.getProduct_specInfo() }</p> -->
 
                     </div>
                     <div class="tab-pane fade" id="tab-pane-2">

@@ -46,7 +46,7 @@
                 </div>
 
 
-<script src="<%=request.getContextPath() %>/resource/js/main.js"></script> 
+<script src="<%=request.getContextPath() %>/resource/js/main.js"></script>
 
 </body>
 </html>

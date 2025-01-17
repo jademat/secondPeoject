@@ -45,7 +45,7 @@
 <script src="mail/contact.js"></script>
 
 <!-- Template Javascript -->
-<script src="<%=request.getContextPath()%>/js/main.js"></script>
+<script src="js/main.js"></script>
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">

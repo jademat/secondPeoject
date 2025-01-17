@@ -37,8 +37,7 @@ public class ShopListAction implements Action {
 		// 보여줄 페이지 종류 설정하는 변수
 		String product_type = "";
 		
-		if (request.getParameter("p"
-				+ "age") != null) {
+		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 			//product_type = request.getParameter("board_type");
 		} else {
