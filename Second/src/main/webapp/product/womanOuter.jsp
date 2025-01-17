@@ -36,19 +36,7 @@ request.setAttribute("ProductList", list);
 				<div class="col-12 pb-1">
 					<div class="d-flex align-items-center justify-content-between mb-4">
 
-						<!-- 검색 이벤트 -->
-						<form action="<%=request.getContextPath()%>/product_search.go">
-							<div class="input-group">
-								<input type="text" class="form-control" name="search"
-									id="searchPd" placeholder="상품이름 검색">
-								<div class="input-group-append">
-									<button type="submit"
-										class="input-group-text bg-transparent text-primary">
-										<i class="fa fa-search"></i>
-									</button>
-								</div>
-							</div>
-						</form>
+					
 
 						<!-- 정렬 이벤트 -->
 						<div class="dropdown ml-4">
