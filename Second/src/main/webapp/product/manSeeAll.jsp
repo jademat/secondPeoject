@@ -23,18 +23,7 @@ request.setAttribute("pageTitle", "See all");
 				<div class="col-12 pb-1">
 					<div class="d-flex align-items-center justify-content-between mb-4">
 
-						<!-- 검색 이벤트 -->
-						<form action="">
-							<div class="input-group">
-								<input type="text" class="form-control"
-									placeholder="Search by name">
-								<div class="input-group-append">
-									<span class="input-group-text bg-transparent text-primary">
-										<i class="fa fa-search"></i>
-									</span>
-								</div>
-							</div>
-						</form>
+					
 
 						<!-- 정렬 이벤트 -->
 						<div class="dropdown ml-4">
