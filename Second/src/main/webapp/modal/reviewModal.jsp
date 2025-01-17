@@ -37,7 +37,7 @@
         var rating = button.data('rating');
 		var title = button.data('title');
         // 모달에 데이터 설정
-        $(this).find('#reviewImage').attr('src', '<%= request.getContextPath() %>/resource/img/' + image);
+        $(this).find('#reviewImage').attr('src', '<%= request.getContextPath() %>/upload/' + image);
         $(this).find('#reviewUser').text(user);
         $(this).find('#reviewDate').text(date);
         $(this).find('#reviewContent').text(content);

@@ -15,10 +15,10 @@ public class ProductInfoAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-		// 파라미터로 받은 productId를 가져옵니다.
+		// 파라미터로 받은 productId
         int productId = Integer.parseInt(request.getParameter("productId"));
 
-        // ProductDAO를 통해 상품을 삭제합니다.
+        
         ProductDAO dao = ProductDAO.getInstance();
         
         ProductDTO detail = dao.getProductById(productId);

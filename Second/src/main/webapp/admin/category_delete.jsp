@@ -29,6 +29,29 @@
         .modal-footer button {
             width: 100px;
         }
+        .product-card {
+            border: 2px solid #4e73df; /* 카드 테두리 색상 변경 */
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        /* 수정: 제목 색상 변경 */
+        h2.text-center {
+            color: #4e73df; /* 카테고리 삭제 제목 색상 */
+        }
+
+        /* 수정: 라벨 색상 변경 */
+        .form-group label {
+            color: #4e73df; /* 삭제할 카테고리 라벨 색상 */
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -40,11 +63,8 @@
     <jsp:include page="/include/admin_navbar.jsp" />
 
     <!-- 메인 콘텐츠 -->
-    <div class="container">
-        <br><br>
+    <div class="container mt-5">
         <h2 class="text-center mb-4">카테고리 삭제</h2>
-        <hr width="65%">
-        <br><br>
 
         <!-- 삭제 결과 메시지 출력 -->
         <c:if test="${not empty message}">
@@ -77,45 +97,63 @@
             </script>
         </c:if>
 
-        <!-- 카테고리 삭제 폼 -->
-        <form action="${pageContext.request.contextPath}/category_delete_ok.go" method="POST" class="category-form">
-            <c:set var="cList" value="${cList}" />
+        <!-- 카테고리 삭제 폼 카드 -->
+        <div class="product-card">
+            <form id="deleteForm" action="${pageContext.request.contextPath}/category_delete_ok.go" method="POST" class="category-form">
+                <c:set var="cList" value="${cList}" />
 
-            <div class="form-group">
-                <label for="category_no">삭제할 카테고리:</label>
-                <select name="no" id="category_no" class="form-control" required="required">
-                    <c:if test="${empty cList}">
-                        <option value="">:::카테고리 목록 없음:::</option>
-                    </c:if>
-                    <c:if test="${!empty cList}">
-                        <c:forEach items="${cList}" var="dto">
-                            <option value="${dto.getCategory_no()}">${dto.getCategory_name()} [${dto.getCategory_code()}]</option>
-                        </c:forEach>
-                    </c:if>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="category_no">삭제할 카테고리:</label>
+                    <select name="no" id="category_no" class="form-control" required="required">
+                        <c:if test="${empty cList}">
+                            <option value="">:::카테고리 목록 없음:::</option>
+                        </c:if>
+                        <c:if test="${!empty cList}">
+                            <c:forEach items="${cList}" var="dto">
+                                <option value="${dto.getCategory_no()}">${dto.getCategory_name()} [${dto.getCategory_code()}]</option>
+                            </c:forEach>
+                        </c:if>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="category_name">카테고리 이름:</label>
-                <input type="text" id="category_name" name="category_name" class="form-control" readonly />
-            </div>
+                <div class="button-container">
+                    <!-- 삭제 버튼을 클릭했을 때 SweetAlert2 팝업 띄우기 -->
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">카테고리 삭제</button>
+                </div>
+            </form>
+        </div>
 
-            <br>
-            <div class="form-group">
-                <input type="submit" value="카테고리 삭제" class="btn btn-danger" />
-            </div>
-        </form>
     </div>
 
     <script>
-        // 카테고리 선택 시 이름 자동 입력
-        $(document).ready(function() {
-            $('#category_no').change(function() {
-                var selectedOption = $(this).find('option:selected');
-                var categoryName = selectedOption.text().split(' [')[0];
-                $('#category_name').val(categoryName);
+        // 삭제 버튼 클릭 시 팝업 띄우기
+        function confirmDelete() {
+            Swal.fire({
+                title: '정말 삭제하시겠습니까?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '예',
+                cancelButtonText: '아니오'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // 예를 클릭하면 삭제 완료 팝업을 띄운 후 폼 제출
+                    Swal.fire({
+                        title: '삭제 완료!',
+                        icon: 'success',
+                        confirmButtonText: '확인'
+                    }).then(() => {
+                        document.getElementById('deleteForm').submit();
+                    });
+                } else {
+                    // 아니오를 클릭하면 삭제 취소 팝업을 띄운 후 아무 일도 일어나지 않음
+                    Swal.fire({
+                        title: '삭제 취소!',
+                        icon: 'error',
+                        confirmButtonText: '확인'
+                    });
+                }
             });
-        });
+        }
     </script>
 
 </body>

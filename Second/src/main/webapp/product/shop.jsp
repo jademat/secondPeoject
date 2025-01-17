@@ -80,52 +80,49 @@
 	                        </div>
 	                    </div>
                     </c:forEach>
-                    
-                    <!-- 페이지네이션 시작 -->
-                    <div class="container">
-						<ul class="pagination justify-content-center mb-3">
-						
-							<!-- 처음으로 -->
-							<c:if test="${page > block }">
-								<li class="page-item">
-									<a class="page-link" href="user_shop.go?page=1">⏪</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link" href="user_shop.go?page=${startBlock - 1 }">◀</a>
-								</li>
-							</c:if>
-							
-							<!-- 페이지 글 번호 -->
-							<c:forEach begin="${startBlock }" end="${endBlock }" var="i">
-								<c:if test="${i == page}">
-									<li class="page-item active"><a class="page-link"
-										href="user_shop.go?&page=${ i }">${ i }</a></li>
-								</c:if>
-								<c:if test="${i != page}">
-									<li class="page-item"><a class="page-link"
-										href="user_shop.go?page=${ i }">${ i }</a></li>
-								</c:if>
-							</c:forEach>
-							
-							<!-- 마지막으로 -->
-							<c:if test="${endBlock < allPage}">
-							<li class="page-item">
-								<a class="page-link" href="user_shop.go?page=${endBlock + 1 }">▶</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="user_shop.go?page=${ allPage }">⏩</a>
-							</li>
-							</c:if>
-						</ul>
-					</div>
-					<!-- 페이지네이션 끝 -->
-					
                 </div>
             </div>
             <!-- Shop Product End -->
         </div>
     </div>
     <!-- Shop End -->
-
+     <!-- 페이지네이션 시작 -->
+ <div class="container">
+	<ul class="pagination justify-content-center mb-3">
+	
+		<!-- 처음으로 -->
+		<c:if test="${page > block }">
+			<li class="page-item">
+				<a class="page-link" href="user_shop.go?page=1">⏪</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="user_shop.go?page=${startBlock - 1 }">◀</a>
+			</li>
+		</c:if>
+		
+		<!-- 페이지 글 번호 -->
+		<c:forEach begin="${startBlock }" end="${endBlock }" var="i">
+			<c:if test="${i == page}">
+				<li class="page-item active"><a class="page-link"
+					href="user_shop.go?&page=${ i }">${ i }</a></li>
+			</c:if>
+			<c:if test="${i != page}">
+				<li class="page-item"><a class="page-link"
+					href="user_shop.go?page=${ i }">${ i }</a></li>
+			</c:if>
+		</c:forEach>
+		
+		<!-- 마지막으로 -->
+		<c:if test="${endBlock < allPage}">
+		<li class="page-item">
+			<a class="page-link" href="user_shop.go?page=${endBlock + 1 }">▶</a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="user_shop.go?page=${ allPage }">⏩</a>
+		</li>
+		</c:if>
+	</ul>
+</div>
+	<!-- 페이지네이션 끝 -->
 <jsp:include page="../modal/reviewModal.jsp" />
 <jsp:include page="../include/footer.jsp" />

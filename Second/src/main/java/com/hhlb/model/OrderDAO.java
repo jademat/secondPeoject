@@ -141,7 +141,7 @@ public class OrderDAO {
 		try {
 			openConn();
 			
-			sql = "select o.user_id, o.order_date,o.order_total, p.product_name,u.user_phone, o.order_addr,o.order_memo,o.order_no "
+			sql = "select o.user_id, o.order_date,o.order_total, p.product_name,u.user_phone, o.order_addr,o.order_memo,o.order_no,p.product_no "
 					+ "from sc_order o "
 					+ "join sc_product p on o.product_no = p.product_no "
 					+ "join sc_user u on u.user_id = o.user_id "
@@ -166,6 +166,7 @@ public class OrderDAO {
 				dto.setOrder_addr(rs.getString("order_addr"));
 				dto.setOrder_memo(rs.getString("order_memo"));
 				dto.setOrder_no(rs.getInt("order_no"));
+				dto.setProduct_no(rs.getInt("product_no"));
 				
 				list.add(dto);
 			}

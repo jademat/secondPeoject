@@ -13,7 +13,7 @@ public class CategoryInputOkAction implements Action {
 
     @Override
     public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // 카테고리 이름, 성별, 카테고리 코드 폼에서 받는다.
+        // 폼에서 넘어온 카테고리 이름, 성별, 카테고리 코드 
         String categoryName = request.getParameter("category_name");
         String categoryGender = request.getParameter("category_gender");
         String categoryCode = request.getParameter("category_code"); // 클라이언트에서 생성된 카테고리 코드 받기
@@ -22,14 +22,17 @@ public class CategoryInputOkAction implements Action {
         CategoryDAO dao = CategoryDAO.getInstance();
         boolean isInserted = dao.insertCategory(categoryName, categoryCode, categoryGender);
 
-        // 성공/실패에 따른 페이지 이동
+        // 성공/실패 페이지 이동
         ActionForward forward = new ActionForward();
+       
         if (isInserted) {
-            forward.setPath("category_list.go"); // 카테고리 리스트 페이지로 이동
+            forward.setPath("category_list.go"); 
         } else {
-            forward.setPath("category_input.go"); // 실패 시 입력 페이지로 이동
+            forward.setPath("category_input.go");
         }
+        
         forward.setRedirect(true);
+        
         return forward;
     }
 }

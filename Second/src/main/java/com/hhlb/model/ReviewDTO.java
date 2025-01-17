@@ -5,7 +5,6 @@ public class ReviewDTO {
 	private int review_no;
 	private String user_id;
 	private int product_no;
-	private int category_no;
 	private String review_cont;
 	private int review_rank;
 	private String review_image;
@@ -34,12 +33,6 @@ public class ReviewDTO {
 		this.product_no = product_no;
 	}
 	
-	public int getCategory_no() {
-		return category_no;
-	}
-	public void setCategory_no(int category_no) {
-		this.category_no = category_no;
-	}
 	
 	public String getReview_cont() {
 		return review_cont;

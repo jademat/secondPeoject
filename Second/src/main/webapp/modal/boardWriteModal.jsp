@@ -9,11 +9,11 @@ textarea {
 
 <!-- board write modal -->
 <div class="modal fade" id="boardWriteModal" tabindex="-1"
-	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	aria-labelledby="boardWriteModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">게시물 작성</h5>
+				<h5 class="modal-title" id="boardWriteModalLabel">게시물 작성</h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>

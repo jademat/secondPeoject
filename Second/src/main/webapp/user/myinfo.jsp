@@ -68,14 +68,19 @@
 							data-name = "${oCont.getProduct_name()}"
 							data-total = "${oCont.getOrder_total() }"
 							data-memo = "${oCont.getOrder_memo()}"
+							data-no = "${oCont.getProduct_no() }"
 							>
-					${oCont.getProduct_name().substring(0,20) }...
+					${oCont.getProduct_name() }
 				</button>
 			</td>
 			<td>${oCont.getOrder_date() }</td>
 			<td>
 				<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#reviewWriteModal" >리뷰작성</button>
+							data-target="#reviewWriteModal"
+							data-name = "${oCont.getProduct_name()}"
+							data-userid = "${oCont.getUser_id() }"
+							data-product = "${oCont.getProduct_no() }"
+							 >리뷰작성</button>
 			</td>
 		</tr>
 			</c:forEach>

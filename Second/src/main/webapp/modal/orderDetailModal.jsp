@@ -14,29 +14,33 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<h3 id = "orderDate"></h3>
-				<p id = "userId"></p>
-				<p id = "userPhone"></p>
-				<p id = "orderAddr"></p>
+				<h3 id="orderDate"></h3>
+				<p id="userId"></p>
+				<p id="userPhone"></p>
+				<p id="orderAddr"></p>
 				<div>
-				<table class="table table">
-					<tr>
-						<th>상품명</th>
-						<td id = "productName"></td>
-					</tr>
-					<tr>
-						<th>구매수량</th>
-						<td></td>
-					</tr>
-					<tr>
-						<th>총금액</th>
-						<td id = "orderTotal"></td>
-					</tr>
-					<tr>
-						<th>메모</th>
-						<td id = "orderMemo"></td>
-					</tr>
-				</table>
+					<table class="table table">
+						<tr>
+							<th>상품번호</th>
+							<td id="productNo"></td>
+						</tr>
+						<tr>
+							<th>상품명</th>
+							<td id="productName"></td>
+						</tr>
+						<tr>
+							<th>구매수량</th>
+							<td></td>
+						</tr>
+						<tr>
+							<th>총금액</th>
+							<td id="orderTotal"></td>
+						</tr>
+						<tr>
+							<th>메모</th>
+							<td id="orderMemo"></td>
+						</tr>
+					</table>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -48,29 +52,31 @@
 </div>
 
 <script>
-    $('#orderDetailModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // 버튼 클릭 이벤트
-        var date = button.data('date');
-        var user = button.data('user');
-        var phone = button.data('phone');
-        var addr = button.data('addr');
-        var name = button.data('name');
+	$('#orderDetailModal').on('show.bs.modal', function(event) {
+		var button = $(event.relatedTarget); // 버튼 클릭 이벤트
+		var date = button.data('date');
+		var user = button.data('user');
+		var phone = button.data('phone');
+		var addr = button.data('addr');
+		var no = button.data('no');
+		var name = button.data('name');
 		var total = button.data('total');
 		var memo = button.data('memo')
-		var datesub = date.substring(0,10);
-		
-        $(this).find('#orderDate').text(datesub);
-        $(this).find('#userId').text(user);
-        $(this).find('#userPhone').text(phone);
-        $(this).find('#orderAddr').text(addr);
-        $(this).find('#productName').text(name);
-        $(this).find('#orderTotal').text(total);
-        $(this).find('#orderMemo').text(memo);
-		
-        if (!memo) {
-            $(this).find('#orderMemo').text("작성한 메모가 없습니다.");
-        } else {
-            $(this).find('#orderMemo').text(memo);
-        }
-    });
+		var datesub = date.substring(0, 10);
+
+		$(this).find('#orderDate').text(datesub);
+		$(this).find('#userId').text(user);
+		$(this).find('#userPhone').text(phone);
+		$(this).find('#orderAddr').text(addr);
+		$(this).find('#productNo').text(no);
+		$(this).find('#productName').text(name);
+		$(this).find('#orderTotal').text(total);
+		$(this).find('#orderMemo').text(memo);
+
+		if (!memo) {
+			$(this).find('#orderMemo').text("작성한 메모가 없습니다.");
+		} else {
+			$(this).find('#orderMemo').text(memo);
+		}
+	});
 </script>

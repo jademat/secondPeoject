@@ -112,7 +112,6 @@ Connection con = null;
 				dto.setReview_no(rs.getInt("review_no"));
 				dto.setUser_id(rs.getString("user_id"));
 				dto.setProduct_no(rs.getInt("product_no"));
-				dto.setCategory_no(rs.getInt("category_no"));
 				dto.setReview_cont(rs.getString("review_cont"));
 				dto.setReview_rank(rs.getInt("review_rank"));
 				dto.setReview_image(rs.getString("review_image"));
@@ -329,6 +328,39 @@ Connection con = null;
 			closeConn(pstmt, con);
 		}
 
-	
+	}
+	public int insertReview(String id, int no, ReviewDTO dto) {
+		int result = 0 , count = 0;
+		
+		try {
+			openConn();
+			
+			sql = "select max(review_no) from sc_review";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1) + 1;
+			}
+			sql = "insert into sc_review values(?,?,?,?,?,?,sysdate,'',default,?)";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, count);
+			pstmt.setString(2,id);
+			pstmt.setInt(3,no);
+			pstmt.setString(4,dto.getReview_cont());
+			pstmt.setInt(5, dto.getReview_rank());
+			pstmt.setString(6, dto.getReview_image());
+			pstmt.setString(7,dto.getReview_title());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		
+		return result;
 	}
 }
