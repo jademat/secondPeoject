@@ -89,4 +89,77 @@ Connection con = null;
 			}
 		
 	}  // closeConn() 메서드 end
+	
+	public String getUserReply(int no) {
+		
+		String str = "";
+		
+		try {	
+			openConn();
+			
+			sql = "select * from sc_reply where board_no = ? order by reply_date desc";
+		
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			
+			rs = pstmt.executeQuery();
+			str += "<replys>";
+			
+			while(rs.next()) {
+				str += "<reply>";
+				
+				str += "<reply_no>" + rs.getInt("reply_no") + "</reply_no>";
+				str += "<board_no>" + rs.getInt("board_no") + "</board_no>";
+				str += "<user_id>" + rs.getString("user_id") + "</user_id>";
+				str += "<reply_cont>" +rs.getString("reply_cont") + "</reply_cont>";
+				str += "<reply_date>" +rs.getString("reply_date") + "</reply_date>";
+				str += "<reply_update>" +rs.getString("reply_update") + "</reply_update>";
+				
+				str += "</reply>";
+			}
+			str += "</replys>";
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return str;
+	}
+	
+	public int userInsertReply(ReplyDTO dto) {
+		
+		int result = 0, count = 0;
+		
+		try {
+
+			openConn();
+			
+			sql = "select max(reply_no) from sc_reply";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1) + 1;
+			}
+			
+			sql = "insert into sc_reply values(?,?,?,?,sysdate,'')";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, count);
+			pstmt.setInt(2,dto.getBoard_no());
+			pstmt.setString(3, dto.getUser_id());
+			pstmt.setString(4, dto.getReply_cont());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConn(rs, pstmt, con);
+		}
+		return result;
+	}
 }

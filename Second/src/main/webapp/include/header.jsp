@@ -23,7 +23,7 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
 	rel="stylesheet">
-
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- Libraries Stylesheet -->
 <link
 	href="<%=request.getContextPath()%>/resource/lib/owlcarousel/assets/owl.carousel.min.css"
@@ -35,7 +35,6 @@
 
 <link href="<%=request.getContextPath()%>/resource/css/style.css"
 	rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script src="lib/easing/easing.min.js"></script>

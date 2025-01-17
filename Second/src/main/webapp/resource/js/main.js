@@ -33,56 +33,6 @@
     });
 
 
-    // Vendor carousel
-    $('.vendor-carousel').owlCarousel({
-        loop: true,
-        margin: 29,
-        nav: false,
-        autoplay: true,
-        smartSpeed: 1000,
-        responsive: {
-            0:{
-                items:2
-            },
-            576:{
-                items:3
-            },
-            768:{
-                items:4
-            },
-            992:{
-                items:5
-            },
-            1200:{
-                items:6
-            }
-        }
-    });
-
-
-    // Related carousel
-    $('.related-carousel').owlCarousel({
-        loop: true,
-        margin: 29,
-        nav: false,
-        autoplay: true,
-        smartSpeed: 1000,
-        responsive: {
-            0:{
-                items:1
-            },
-            576:{
-                items:2
-            },
-            768:{
-                items:3
-            },
-            992:{
-                items:4
-            }
-        }
-    });
-
 
     // Product Quantity
     $('.quantity button').on('click', function () {
@@ -99,6 +49,55 @@
         }
         button.parent().parent().find('input').val(newVal);
     });
+	// Vendor carousel
+	    $('.vendor-carousel').owlCarousel({
+	        loop: true,
+	        margin: 29,
+	        nav: false,
+	        autoplay: true,
+	        smartSpeed: 1000,
+	        responsive: {
+	            0:{
+	                items:2
+	            },
+	            576:{
+	                items:3
+	            },
+	            768:{
+	                items:4
+	            },
+	            992:{
+	                items:5
+	            },
+	            1200:{
+	                items:6
+	            }
+	        }
+	    });
+
+
+	    // Related carousel
+	    $('.related-carousel').owlCarousel({
+	        loop: true,
+	        margin: 29,
+	        nav: false,
+	        autoplay: true,
+	        smartSpeed: 1000,
+	        responsive: {
+	            0:{
+	                items:1
+	            },
+	            576:{
+	                items:2
+	            },
+	            768:{
+	                items:3
+	            },
+	            992:{
+	                items:4
+	            }
+	        }
+	    });
 
 
 	// product/detail.jsp에서 더보기 버튼 클릭 시 이벤트 핸들러

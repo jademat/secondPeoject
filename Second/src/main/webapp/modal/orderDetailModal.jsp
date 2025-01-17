@@ -29,10 +29,6 @@
 							<td id="productName"></td>
 						</tr>
 						<tr>
-							<th>구매수량</th>
-							<td></td>
-						</tr>
-						<tr>
 							<th>총금액</th>
 							<td id="orderTotal"></td>
 						</tr>
