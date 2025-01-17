@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -381,5 +383,118 @@ Connection con = null;
 		}
 		return result;
 	}
+	
+	// 회원 전체 리스트 -- hm
+		public List<UserDTO> getUserList() {
+			
+			List<UserDTO> userlist = new ArrayList<UserDTO>();
+			
+			
+			try {
+				openConn();
+				
+				sql = "SELECT * FROM sc_user";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				
+				while (rs.next()) {
+					UserDTO dto = new UserDTO();
+					
+					dto.setUser_id(rs.getString("user_id"));
+					dto.setUser_pwd(rs.getString("user_pwd"));
+					dto.setUser_name(rs.getString("user_name"));
+					dto.setUser_nick(rs.getString("user_nick"));
+					dto.setUser_email(rs.getString("user_email"));
+					dto.setUser_age(rs.getInt("user_age"));
+					dto.setUser_gender(rs.getString("user_gender"));
+					dto.setUser_addr(rs.getString("user_addr"));
+					dto.setUser_date(rs.getString("user_date"));
+					
+					userlist.add(dto);
+				}
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				closeConn(rs, pstmt, con);
+			}
+		
+			return userlist;
+		}
+
+		// userId로 해당 회원 데이터 조회 -- hm
+		public UserDTO getUserById(String userId) {
+			
+			UserDTO user = null;
+			
+			try {
+				openConn();
+				
+				sql = "SELECT * FROM SC_USER WHERE USER_ID = ?";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, userId);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					user = new UserDTO();
+					user.setUser_id(rs.getString("USER_NAME"));
+					user.setUser_name(rs.getString("USER_NAME"));
+					user.setUser_nick(rs.getString("USER_NICK"));
+					user.setUser_email(rs.getString("USER_EMAIL"));
+					user.setUser_age(rs.getInt("USER_AGE"));
+					user.setUser_gender(rs.getString("USER_GENDER"));
+					user.setUser_phone(rs.getString("USER_PHONE"));
+					user.setUser_addr(rs.getString("USER_ADDR"));
+					user.setUser_date(rs.getString("USER_DATE"));
+					
+				}
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				closeConn(rs, pstmt, con);
+			}
+			
+			
+			return user;
+		}
+
+		// userId로 해당 회원 삭제 -- hm
+		public boolean deleteUserById(String userId) {
+			
+			boolean result = false;
+	        
+			try {
+	            openConn();
+	            
+	            sql = "DELETE FROM SC_USER WHERE USER_ID = ?";
+	            
+	            pstmt = con.prepareStatement(sql);
+	            
+	            pstmt.setString(1, userId);
+
+	            int chk = pstmt.executeUpdate();
+	            
+	            if (chk > 0) {
+	                result = true; // 삭제 성공
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }finally {
+	            closeConn(pstmt, con);
+	        }
+	        
+	        return result;
+	    }
+	
 	
 }

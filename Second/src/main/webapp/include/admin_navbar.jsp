@@ -43,10 +43,10 @@
             </a>
             <div id="collapseCategoryManagement" class="collapse" aria-labelledby="headingProductManagement" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="<%=request.getContextPath() %>/category_input.go">카테고리 등록</a>
-                    <a class="collapse-item" href="<%=request.getContextPath() %>/category_modify.go">카테고리 수정</a>
-                    <a class="collapse-item" href="<%=request.getContextPath() %>/category_delete.go">카테고리 삭제</a>
-                    <a class="collapse-item" href="<%=request.getContextPath() %>/category_list.go">카테고리 목록</a>
+                    <a class="collapse-item" href="<%=request.getContextPath() %>/category_input.go">▶ 카테고리 등록</a>
+                    <a class="collapse-item" href="<%=request.getContextPath() %>/category_modify.go">▶ 카테고리 수정</a>
+                    <a class="collapse-item" href="<%=request.getContextPath() %>/category_delete.go">▶ 카테고리 삭제</a>
+                    <a class="collapse-item" href="<%=request.getContextPath() %>/category_list.go">▶ 카테고리 목록</a>
                 </div>
             </div>
             
@@ -57,8 +57,8 @@
             </a>
             <div id="collapseProductManagement" class="collapse" aria-labelledby="headingProductManagement" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="<%=request.getContextPath() %>/product_input.go">상품 등록</a>
-                    <a class="collapse-item" href="<%=request.getContextPath() %>/product_list.go">상품 관리</a>
+                    <a class="collapse-item" href="<%=request.getContextPath() %>/product_input.go">▶ 상품 등록</a>
+                    <a class="collapse-item" href="<%=request.getContextPath() %>/product_list.go">▶ 전체 상품 목록</a>
                     <%-- <a class="collapse-item" href="<%=request.getContextPath() %>/product_modify.go">상품 수정</a> --%>
                     <%-- <a class="collapse-item" href="<%=request.getContextPath() %>/product_delete.go">상품 삭제</a> --%>
                     
@@ -85,8 +85,8 @@
             </a>
             <div id="collapseMemberManagement" class="collapse" aria-labelledby="headingMemberManagement" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="memberList.jsp">회원 목록</a>
-                    <a class="collapse-item" href="memberModify.jsp">회원 삭제</a>
+                    <a class="collapse-item" href="<%=request.getContextPath() %>/member_list.go">▶ 전체 회원 목록</a>
+                    <!-- <a class="collapse-item" href="memberModify.jsp">회원 삭제</a> -->
                 </div>
             </div>
         </li>
