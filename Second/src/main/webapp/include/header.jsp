@@ -118,8 +118,8 @@
 							<div
 								class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
 								<a href="<%=request.getContextPath()%>/user_manAll.go"
-									class="dropdown-item"> See All </a> <a
-									href="<%=request.getContextPath()%>/user_manTop.go"
+									class="dropdown-item"> See All </a> 
+									<a href="<%=request.getContextPath()%>/user_manTop.go"
 									class="dropdown-item"> Top </a> <a
 									href="<%=request.getContextPath()%>/user_manBottom.go"
 									class="dropdown-item"> Bottom </a> <a

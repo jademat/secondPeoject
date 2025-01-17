@@ -99,49 +99,6 @@
 	        }
 	    });
 
-
-	// product/detail.jsp에서 더보기 버튼 클릭 시 이벤트 핸들러
-    $(document).ready(function () {
-        $('#moreButton').click(function () {
-            const hiddenContent = $('#hiddenContent');
-            const button = $(this);
-
-            // 숨겨진 내용 표시/숨기기
-            if (hiddenContent.is(':hidden')) {
-                hiddenContent.slideDown(); // 슬라이드 다운 효과로 표시
-                button.text('숨기기'); // 버튼 텍스트 변경
-                hiddenContent.after(button); // 버튼을 숨겨진 내용 아래로 이동
-            } else {
-                hiddenContent.slideUp(); // 슬라이드 업 효과로 숨김
-                button.text('더보기'); // 버튼 텍스트 변경
-            }
-        });
-    });
-	
-	
-	
-	
-	
-	/* // product/cart.jsp 장바구니 리스트에서 X(deleteBtn) 클릭 시 삭제되는 코드
-	$(document).ready(function() {
-        // 삭제 버튼 클릭 이벤트
-        $('.deleteBtn').click(function() {
-
-            // AJAX 요청
-            $.ajax({
-                url: '/Second/cartDelete.go', // 요청 URL
-                method: 'POST',              // 요청 방식
-                data: { cart_no: cartNo },   // 전송 데이터
-                success: function(response) {
-                    alert("상품이 장바구니에서 삭제되었습니다."); // 성공 메시지
-                    location.reload(); // 페이지 새로고침
-                },
-                error: function() {
-                    alert("상품 삭제에 실패했습니다. 다시 시도해 주세요."); // 오류 메시지
-                }
-            });
-        });
-    });*/
     
 })(jQuery);
 
