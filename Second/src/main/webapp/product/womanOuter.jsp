@@ -38,25 +38,6 @@ request.setAttribute("ProductList", list);
 
 					
 
-						<!-- 정렬 이벤트 -->
-						<div class="dropdown ml-4">
-							<button class="btn border dropdown-toggle" type="button"
-								id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false">--- 정렬 ---</button>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="triggerId">
-								<a class="dropdown-item"
-									href="<%=request.getContextPath()%>/user_womanOuter.go">전체
-									상품</a> <a class="dropdown-item"
-									href="<%=request.getContextPath()%>/user_shop_recent.go">최신
-									상품</a> <a class="dropdown-item"
-									href="<%=request.getContextPath()%>/user_shop_pop.go">인기 상품</a>
-								<a class="dropdown-item"
-									href="<%=request.getContextPath()%>/user_shop_reco.go">추천
-									상품</a>
-							</div>
-						</div>
-
 					</div>
 				</div>
 
