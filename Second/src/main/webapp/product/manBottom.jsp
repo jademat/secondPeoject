@@ -6,6 +6,7 @@
 <%
 	request.setAttribute("pageTitle", "Bottom");
 %>
+
 <jsp:include page="../include/header.jsp" />
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -16,9 +17,7 @@
 		List<ProductDTO> list = dao.manBottom();
 		
 		request.setAttribute("ProductList", list);
-		
-		
-		
+
 %>
 
 	<c:set var="list" value="${ ProductList }"/>
@@ -32,32 +31,6 @@
                 <div class="row pb-3  justify-content-center">
                     <div class="col-12 pb-1">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                        
-                        	<!-- 검색 이벤트 -->
-                            <form action="">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search by name">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text bg-transparent text-primary">
-                                            <i class="fa fa-search"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </form>
-                            
-                            <!-- 정렬 이벤트 -->
-                            <div class="dropdown ml-4">
-                                <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                            Sort by
-                                        </button>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                                    <a class="dropdown-item" href="#">Latest</a>
-                                    <a class="dropdown-item" href="#">Popularity</a>
-                                    <a class="dropdown-item" href="#">Best Rating</a>
-                                </div>
-                            </div>
-                            
                         </div>
                     </div>
                     
@@ -81,30 +54,42 @@
 	                        </div>
 	                    </div>
                     </c:forEach>
-                    
-                    <!-- 페이지네이션 -->
-                    <div class="col-12 pb-1">
-                        <nav aria-label="Page navigation">
-                          <ul class="pagination justify-content-center mb-3">
-                            <li class="page-item disabled">
-                              <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                              </a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                              <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                              </a>
-                            </li>
-                          </ul>
-                        </nav>
                     </div>
-                </div>
+                    
+			<!-- 페이지네이션 시작 -->
+			<div class="container">
+				<ul class="pagination justify-content-center mb-3">
+
+					<!-- 처음으로 -->
+					<c:if test="${page > block }">
+						<li class="page-item"><a class="page-link"
+							href="user_manBottom.go?page=1">⏪</a></li>
+						<li class="page-item"><a class="page-link"
+							href="user_manBottom.go?page=${startBlock - 1 }">◀</a></li>
+					</c:if>
+
+					<!-- 페이지 글 번호 -->
+					<c:forEach begin="${startBlock }" end="${endBlock }" var="i">
+						<c:if test="${i == page}">
+							<li class="page-item active"><a class="page-link"
+								href="user_manBottom.go?&page=${ i }">${ i }</a></li>
+						</c:if>
+						<c:if test="${i != page}">
+							<li class="page-item"><a class="page-link"
+								href="user_manBottom.go?page=${ i }">${ i }</a></li>
+						</c:if>
+					</c:forEach>
+
+					<!-- 마지막으로 -->
+					<c:if test="${endBlock < allPage}">
+						<li class="page-item"><a class="page-link"
+							href="user_manBottom.go?page=${endBlock + 1 }">▶</a></li>
+						<li class="page-item"><a class="page-link"
+							href="user_manBottom.go?page=${ allPage }">⏩</a></li>
+					</c:if>
+				</ul>
+			</div>
+			<!-- 페이지네이션 끝 -->
             </div>
             <!-- Shop Product End -->
         </div>

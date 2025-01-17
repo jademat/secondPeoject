@@ -191,49 +191,60 @@
                         <div align="center">
                         <img id="hiddenContent" style="display: none;" class="w-50 h-50" 
                         		src="<%= request.getContextPath() %>/resource/img/${ dto.getProduct_specInfo() }" alt="Image">
-                        </div>	 
+                        </div>
                         <!-- <p id="hiddenContent" style="display: none; margin-top: 10px;">${ dto.getProduct_specInfo() }</p> -->
 
                     </div>
                     <div class="tab-pane fade" id="tab-pane-2">
-                        <h4 class="mb-3">Size Information</h4>
-                        <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam
-                            invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod
-                            consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam.
-                            Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos
-                            dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod
-                            nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt
-                            tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
+                        <h4 class="mb-3">Information</h4>
+                        <p>결제수단 - 무통장 입금(현금결제) - 카드결제 - 에스크로(실시간계좌이체) - 휴대폰결제
+                        <br>
+							무통장 입금(현금결제)시 입금자명과 입금 금액이 다를경우 자동으로 입금확인이 되지 않습니다.
+						<br>
+							위의 경우 꼭 게시판이나 전화로 정확한 입금 정보를 알려주시기 바랍니다.</p>
                         <div class="row">
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item px-0">
-                                        Sit erat duo lorem duo ea consetetur, et eirmod takimata.
+                                        ▶ 교환배송비
+                                        <br>
+										- 우체국 착불 이용시 6,000원 - 그 외 이용시 선불 결제 후 3,000원
                                     </li>
                                     <li class="list-group-item px-0">
-                                        Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
+                                        ▶ 전체반품
+                                        <br>
+										- 우체국 착불 이용시 6,000원 - 그 외 이용시 선불 결제 후 3,000원
                                     </li>
                                     <li class="list-group-item px-0">
-                                        Duo amet accusam eirmod nonumy stet et et stet eirmod.
+                                        ▶ 부분반품
+                                        <br>
+										- 반품상품 제외 후 남은 상품금액 5만원 이상 or 처음에 배송비를 결제하거나 무료쿠폰을 적용한 경우 우체국 착불 이용시 3,000원
                                     </li>
                                     <li class="list-group-item px-0">
-                                        Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
+                                        ▶ 제주도 및 도서, 산간지역 추가 배송비 무료
                                     </li>
                                 </ul>
                             </div>
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item px-0">
-                                        Sit erat duo lorem duo ea consetetur, et eirmod takimata.
+                                        ▶ 상품 불량 or 오배송
+                                        <br>
+										- 우체국 착불 이용시 무상 - 그 외 이용시 선불 결제 - 상품 검수 시 불량으로 간주가 어려울 경우 배송비 발생
                                     </li>
                                     <li class="list-group-item px-0">
-                                        Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
+                                        ▶반품주소지
+                                        <br>
+										 - 우체국 착불 이용시 서울시 마포구 신촌
                                     </li>
                                     <li class="list-group-item px-0">
-                                        Duo amet accusam eirmod nonumy stet et et stet eirmod.
+                                        ★ 택배비 입금시에는 "주문자성함+주문자휴대폰번호뒷4자리" 작성하여 입금 부탁드립니다. ex) 홍길동4389
+                                        <br>
+										★ 동봉하실 경우 분실시 고객님께 이중부담될 수 있습니다.
+                                        
                                     </li>
                                     <li class="list-group-item px-0">
-                                        Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
+                                        상품의 가치가 훼손된 경우 (외부착용, 세탁, 향수, 오염, 착용 후 손상 등), 상품의 초도 불량을 확인하기 어려울 경우 반품/교환 불가
                                     </li>
                                 </ul>
                             </div>
@@ -241,52 +252,87 @@
                     </div>
                     
                     
+                    <!-- 리뷰 이벤트 -->
                     <div class="tab-pane fade" id="tab-pane-3">
                         <div class="row">
-                        
-                        <!-- 해당 상품의 리뷰 가져오기 -->
-                        <c:if test="${ !empty reviewDto }">
-                        	<c:forEach items="${ reviewDto }" var="dto">
-	                            <div class="col-md-6">
-	                                <h4 class="mb-4">${ dto.getUser_id() } 님의 리뷰</h4>
-	                                <!-- Modal 트리거 -->
-	                                <a href="#" data-toggle="modal" data-target="#reviewDetailModal">
-	                                <div class="media mb-4">
-	                                    <img src="<%= request.getContextPath() %>/resource/img/${ dto.getReview_image() }"
-	                                    	alt="Image" class="img-fluid mr-3 mt-1" style="width: 150px;">
-	                                    <div class="media-body">
-	                                        <h6>${ dto.getUser_id() }<small> - <i>${ dto.getReview_date() }</i></small></h6>
-	                                        <div class="text-primary mb-2">
-	                                        
-	                                        	<!-- 별 찍는 for문 -->
-	                                        	<c:forEach var="i" begin="1" end="5">
-											        <c:choose>
-											            <c:when test="${dto.review_rank >= i}">
-											                <i class="fas fa-star text-warning"></i> <!-- 금색 별 -->
-											            </c:when>
-											            <c:otherwise>
-											                <i class="far fa-star text-muted"></i> <!-- 회색 별 -->
-											            </c:otherwise>
-											        </c:choose>
-											    </c:forEach>
-											    
-	                                        </div>
-	                                        <p>${ dto.getReview_cont() }</p>
-	                                    </div>
-	                                </div>
-	                                </a>
-	                            </div>
-                            </c:forEach>
+							<c:if test="${ !empty reviewDto }">
+						    <c:forEach items="${ reviewDto }" var="dto" varStatus="status">
+						        <div class="col-md-6">
+						            <h4 class="mb-4">${ dto.getUser_id() } 님의 리뷰</h4>
+						            <!-- Modal 트리거 -->
+						            <a href="#" data-toggle="modal" data-target="#reviewDetailModal${status.index}">
+						                <div class="media mb-4">
+						                    <img src="<%= request.getContextPath() %>/resource/img/${ dto.getReview_image() }"
+						                         alt="Image" class="img-fluid mr-3 mt-1" style="width: 150px;">
+						                    <div class="media-body">
+						                        <h6>${ dto.getUser_id() }<small> - <i>${ dto.getReview_date() }</i></small></h6>
+						                        <div class="text-primary mb-2">
+						                            <!-- 별 찍는 for문 -->
+						                            <c:forEach var="i" begin="1" end="5">
+						                                <c:choose>
+						                                    <c:when test="${dto.review_rank >= i}">
+						                                        <i class="fas fa-star text-warning"></i> <!-- 금색 별 -->
+						                                    </c:when>
+						                                    <c:otherwise>
+						                                        <i class="far fa-star text-muted"></i> <!-- 회색 별 -->
+						                                    </c:otherwise>
+						                                </c:choose>
+						                            </c:forEach>
+						                        </div>
+						                        <p>${ dto.getReview_cont() }</p>
+						                    </div>
+						                </div>
+						            </a>
+						        </div>
+						
+						        <!-- Modal(index 를 받아와서 개별 생성) -->
+						        <div class="modal fade" id="reviewDetailModal${status.index}" tabindex="-1" aria-labelledby="reviewDetailModalLabel${status.index}"
+						             aria-hidden="true">
+						            <div class="modal-dialog modal-lg">
+						                <div class="modal-content">
+						                    <div class="modal-header">
+						                        <h5 class="modal-title" id="reviewDetailModalLabel${status.index}">Review Details</h5>
+						                        <button type="button" class="btn-close" data-dismiss="modal"
+						                                aria-label="Close"></button>
+						                    </div>
+						                    <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
+						                        <img src="<%= request.getContextPath() %>/resource/img/${ dto.getReview_image() }"
+						                             alt="Image" class="img-fluid mr-3 mt-1" style="width: 400px;">
+						                        <p><strong>Reviewer :</strong> ${ dto.getUser_id() }</p>
+						                        <p><strong>Title :</strong> ${ dto.getReview_title() }</p>
+						                        <p><strong>Date :</strong> ${ dto.getReview_date() }</p>
+						                        <p><strong>Review :</strong> ${ dto.getReview_cont() }</p>
+						                        <p><strong>Rating:</strong> 
+						                            <c:forEach var="i" begin="1" end="5">
+						                                <c:choose>
+						                                    <c:when test="${dto.review_rank >= i}">
+						                                        <i class="fas fa-star text-warning"></i> <!-- 금색 별 -->
+						                                    </c:when>
+						                                    <c:otherwise>
+						                                        <i class="far fa-star text-muted"></i> <!-- 회색 별 -->
+						                                    </c:otherwise>
+						                                </c:choose>
+						                            </c:forEach>
+						                        </p>
+						                    </div>
+						                    <div class="modal-footer">
+						                        <button type="button" class="btn btn-secondary"
+						                                data-dismiss="modal">Close</button>
+						                    </div>
+						                </div>
+						            </div>
+						        </div>
+						    </c:forEach>
 						</c:if>
 
-                            <!-- 페이지네이션 시작 -->
+                            <!-- review 페이지네이션 시작 -->
 		                    <div class="container">
 								<ul class="pagination justify-content-center mb-3">
 								
 									<!-- 처음으로 -->
 									<c:if test="${page > block }">
 										<li class="page-item">
-											<a class="page-link" href="user_product_view.go?pnum=${ pnum }&page=1">⏪</a>
+											<a class="page-link" href="user_product_view.go?pnum=${ pnum }&page=1">◀◀</a>
 										</li>
 										<li class="page-item">
 											<a class="page-link" href="user_product_view.go?pnum=${ pnum }&page=${startBlock - 1 }">◀</a>
@@ -311,12 +357,12 @@
 										<a class="page-link" href="user_product_view.go?pnum=${ pnum }&page=${endBlock + 1 }">▶</a>
 									</li>
 									<li class="page-item">
-										<a class="page-link" href="user_product_view.go?pnum=${ pnum }&page=${ allPage }">⏩</a>
+										<a class="page-link" href="user_product_view.go?pnum=${ pnum }&page=${ allPage }">▶▶</a>
 									</li>
 									</c:if>
 								</ul>
 							</div>
-							<!-- 페이지네이션 끝 -->
+							<!-- review 페이지네이션 끝 -->
                             
                         </div>
                     </div>
@@ -339,23 +385,22 @@
                 
                		<!-- 추천 상품 로테이션(미정) -->
                		<c:forEach items="${ productList }" var="dto">
-               			<div class="col-lg-4 col-md-6 col-sm-12 pb-1">
-		                    <div class="card product-item border-0 mb-4">
-		                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-		                            <img class="img-fluid w-100" src="<%= request.getContextPath() %>/resource/img/${ dto.getProduct_image() }" alt="">
-		                        </div>
-		                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-		                            <h6 class="text-truncate mb-3">${ dto.getProduct_name() }</h6>
-		                            <div class="d-flex justify-content-center">
-		                                <h6>${ dto.getProduct_price() }</h6>
-		                                <h6 class="text-muted ml-2"><del>${ dto.getProduct_price() }</del></h6>
-		                            </div>
-		                        </div>
-		                        <div class="card-footer d-flex justify-content-between bg-light border">
-		                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-		                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-		                        </div>
-		                    </div>
+	                    <div class="card product-item border-0">
+	                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+	                            <img class="img-fluid w-100" src="<%= request.getContextPath() %>/resource/img/${ dto.getProduct_image() }" 
+	                            		alt="">
+	                        </div>
+	                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+	                            <h6 class="text-truncate mb-3">${ dto.getProduct_name() }</h6>
+	                            <div class="d-flex justify-content-center">
+	                                <h6>${ dto.getProduct_price() }</h6>
+	                                <h6 class="text-muted ml-2"><del>${ dto.getProduct_price() }</del></h6>
+	                            </div>
+	                        </div>
+	                        <div class="card-footer d-flex justify-content-between bg-light border">
+	                            <a href="<%= request.getContextPath() %>/user_product_view.go?pnum=${ dto.getProduct_no() }"
+	                            		 class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+	                    	</div>
 	                    </div>
 	            	</c:forEach>
 	            	
@@ -364,11 +409,58 @@
         </div>
     </div>
     <!-- 추천상품 로테이션 리스트 End -->
+    
+    
 
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    
+    <script>
 
+		// product/detail.jsp에서 더보기 버튼 클릭 시 이벤트 핸들러
+	    $(document).ready(function () {
+	        $('#moreButton').click(function () {
+	            const hiddenContent = $('#hiddenContent');
+	            const button = $(this);
+	 
+	            // 숨겨진 내용 표시/숨기기
+	            if (hiddenContent.is(':hidden')) {
+	                hiddenContent.slideDown(); // 슬라이드 다운 효과로 표시
+	                button.text('숨기기'); // 버튼 텍스트 변경
+	                hiddenContent.after(button); // 버튼을 숨겨진 내용 아래로 이동
+	            } else {
+	                hiddenContent.slideUp(); // 슬라이드 업 효과로 숨김
+	                button.text('더보기'); // 버튼 텍스트 변경
+	            }
+	        });
+	    });
+		
+		
+	 	// Related carousel
+	    $('.related-carousel').owlCarousel({
+	        loop: true,
+	        margin: 29,
+	        nav: false,
+	        autoplay: true,
+	        smartSpeed: 1000,
+	        responsive: {
+	            0:{
+	                items:1
+	            },
+	            576:{
+	                items:2
+	            },
+	            768:{
+	                items:3
+	            },
+	            992:{
+	                items:4
+	            }
+	        }
+	    });
+    
+	</script>
 
-<jsp:include page="../modal/reviewDetailModal.jsp" />		<!-- 리뷰 클릭시 modal 팝업 -->
+<script src="../resource/js/main.js"></script>
 <jsp:include page="../include/footer.jsp" />

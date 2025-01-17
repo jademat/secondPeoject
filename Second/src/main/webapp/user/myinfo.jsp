@@ -87,8 +87,8 @@
 			</c:if>
 			<c:if test = "${empty oCont }">
 		<tr>
-			<td colspan = "4">
-				작성한 리뷰가 없습니다.
+			<td colspan = "4" align="center">
+				구매내역이 없습니다.
 			</td>
 		</tr>
 			</c:if>

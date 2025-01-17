@@ -52,6 +52,9 @@
                     <br>
                     - 개인정보 처리방침 고지일자 : 2024년 10월 21일<br>
                     - 개인정보 처리방침 시행일자 : 2024년 10월 23일
+                    <br>
+                    상품 출처 : LAKICKS(https://lakickz.com/)<br>
+                    상품 출처 : ATTRANGS(https://attrangs.co.kr/)<br>
                 </p>
             </div>
             <div class="modal-footer">
