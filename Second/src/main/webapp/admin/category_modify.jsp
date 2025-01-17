@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>카테고리 수정</title>
     
-    
     <!-- 로컬 CSS 파일 경로 -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/startbootstrap_admin_pages/css/styles.css">
     
@@ -19,7 +18,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-	<!-- SweetAlert2 CSS -->
+    <!-- SweetAlert2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.css" rel="stylesheet">
 
     <!-- SweetAlert2 JS -->
@@ -27,7 +26,7 @@
 
     <!-- jQuery (AJAX 요청을 보내기 위해 필요) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	
+    
     <style>
         .modal-header {
             background-color: #5cb85c;
@@ -38,6 +37,29 @@
         }
         .modal-footer button {
             width: 100px;
+        }
+
+        /* 수정된 부분: 카드 테두리 색상 */
+        .card {
+            margin-top: 30px;
+            border: 2px solid #4e73df !important; /* 카드 테두리 색상 */
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center; /* 수평 가운데 정렬 */
+            align-items: center;     /* 수직 가운데 정렬 */
+        }
+
+        /* 수정할 카테고리 코드, 이름, 라벨 색상 변경 */
+        .form-group label {
+            color: #4e73df; /* 텍스트 색상 */
+            font-weight: bold;
+        }
+
+        /* '카테고리 수정' 제목 색상 변경 */
+        h2.text-center {
+            color: #4e73df; /* 텍스트 색상 */
         }
     </style>
 </head>
@@ -51,74 +73,94 @@
 
     <!-- 메인 콘텐츠 -->
     <div class="container">
-        <br><br>
-        <hr width="65%">
         
+        <br><br>
         <h2 class="text-center mb-4">카테고리 수정</h2>
-        
-        <hr width="65%">
-        <br><br>
 
         <!-- 수정 결과 메시지 출력 -->
         <c:if test="${not empty message}">
-            <!-- 모달 시작 -->
-            <div class="modal fade show" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header ${messageType == 'success' ? '' : 'error'}">
-                            <h5 class="modal-title" id="messageModalLabel">알림</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>${message}</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 모달 끝 -->
-
-            <!-- 모달 자동으로 열기 위한 스크립트 -->
             <script>
-                // 페이지가 완전히 로드된 후 모달을 띄웁니다.
                 $(document).ready(function() {
-                    $('#messageModal').modal('show'); // 모달 자동으로 띄우기
+                    Swal.fire({
+                        title: '${message}',
+                        icon: '${messageType == "success" ? "success" : "error"}',
+                        confirmButtonText: '확인'
+                    }).then(function(result) {
+                        if (result.isConfirmed) {
+                            window.location.href = "${pageContext.request.contextPath}/category_list.go";
+                        }
+                    });
                 });
             </script>
         </c:if>
 
-        <form action="<%=request.getContextPath() %>/category_modify_ok.go" method="POST" class="category-form">
-            <c:set var="cList" value="${categoryList }" />
-            
-            <div class="form-group">
-                <label for="category_no">수정할 카테고리 코드:</label>
-                <select name="no">
-                    <c:if test="${empty cList}">
-                        <option value="">:::카테고리 목록 없음:::</option>
-                    </c:if>
-                    <c:if test="${!empty cList}">
-                        <c:forEach items="${cList}" var="dto">
-                            <option value="${dto.getCategory_no()}">${dto.getCategory_name()} [${dto.getCategory_code()}]</option>
-                        </c:forEach>
-                    </c:if>
-                </select>
-            </div>
+        <!-- 카드 안에 폼 -->
+        <div class="card">
+            <div class="card-body">
+                <!-- 카테고리 수정 폼 -->
+                <form id="categoryForm" action="${pageContext.request.contextPath}/category_modify_ok.go" method="POST" class="category-form">
+                    <c:set var="cList" value="${categoryList }" />
+                    
+                    <div class="form-group">
+                        <label for="category_no">수정할 카테고리 코드:</label>
+                        <select name="no" class="form-control" required="required">
+                            <c:if test="${empty cList}">
+                                <option value="">:::카테고리 목록 없음:::</option>
+                            </c:if>
+                            <c:if test="${!empty cList}">
+                                <c:forEach items="${cList}" var="dto">
+                                    <option value="${dto.getCategory_no()}">${dto.getCategory_name()} [${dto.getCategory_code()}]</option>
+                                </c:forEach>
+                            </c:if>
+                        </select>
+                    </div>
 
-            <div class="form-group">
-                <label for="category_name">수정할 카테고리 이름:</label>
-                <input type="text" id="category_name" name="category_name" class="form-control" value="${category.category_name}" required="required" />
-            </div>
+                    <div class="form-group">
+                        <label for="category_name">수정할 카테고리 이름:</label>
+                        <input type="text" id="category_name" name="category_name" class="form-control" value="${category.category_name}" required="required" />
+                    </div>
 
-            <br>
-            <div class="form-group">
-                <input type="submit" value="카테고리 수정" class="btn btn-primary" />
+                    <br>
+                    
+                    <div class="button-container">
+                        <button type="button" class="btn btn-warning mx-2 btn-custom" onclick="confirmModify()">카테고리 수정</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
+
+    <!-- SweetAlert2 확인 팝업 스크립트 -->
+    <script>
+        function confirmModify() {
+            Swal.fire({
+                title: '정말 수정하시겠습니까?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '네',
+                cancelButtonText: '아니오'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                	// 네를 클릭하면 수정 완료 팝업
+                    Swal.fire({
+                        title: '수정 완료!',
+                        icon: 'success',
+                        confirmButtonText: '확인'
+                    }).then(() => {
+                        // 수정 완료 후 폼을 제출
+                        document.getElementById('categoryForm').submit();
+                    });
+                } else {
+                    // 아니오를 클릭하면 수정 취소 팝업
+                    Swal.fire({
+                        title: '수정 취소!',
+                        icon: 'error',
+                        confirmButtonText: '확인'
+                    });
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>

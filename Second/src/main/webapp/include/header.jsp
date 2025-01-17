@@ -193,7 +193,7 @@
 								href="<%= request.getContextPath() %>/user_cart.go?id=${ user_id }"
 								class="btn border ms-auto"> <i
 								class="fas fa-shopping-cart text-primary"></i> <span
-								class="badge">0</span>
+								class="badge">CART</span>
 							</a>
 						</div>
 					</div>

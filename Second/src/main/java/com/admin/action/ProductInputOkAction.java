@@ -16,7 +16,7 @@ public class ProductInputOkAction implements Action {
     public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         
         // 첨부파일 저장 경로
-        String saveFolder = "D:\\NCS\\workspase(jsp)\\Second\\src\\main\\webapp\\upload";
+        String saveFolder = "C:\\Users\\admin\\git\\secondPeoject\\Second\\src\\main\\webapp\\upload";
         
         // 최대 파일 사이즈 10MB
         int fileSize = 10 * 1024 * 1024; 
@@ -36,33 +36,34 @@ public class ProductInputOkAction implements Action {
         String productSpec = multi.getParameter("productSpec");  // 상품 설명
         int productQty = Integer.parseInt(multi.getParameter("productQuantity"));  // 상품 수량
         String productCategory = multi.getParameter("productCategory"); // 카테고리 코드
-        String productImage = multi.getFilesystemName("productImage");  // 상품 이미지
-        String productSpecInfo = multi.getFilesystemName("productSpecInfo");  // 상품 설명 이미지
-        String productSize = multi.getParameter("productSize");  // 상품 사이즈
+        String productSubCategory = multi.getParameter("productSubCategory");
+        String productImage = multi.getFilesystemName("productImage");
+        String productSpecInfo = multi.getFilesystemName("productSpecInfo");  // 상품 상세설명 이미지
+        String productSize = multi.getParameter("productSize");
         
         // 카테고리 코드에서 카테고리 번호로 변환
-        int categoryNo = ProductDAO.getInstance().getCategoryNoByCode(productCategory);
+        int categoryNo = ProductDAO.getInstance().getCategoryNoByCode(productCategory, productSubCategory);
         
-        // 카테고리 번호가 유효하지 않으면 상품 등록을 진행하지 않음
+        // 카테고리 번호가 유효하지 않으면 상품 등록 X
         if (categoryNo == 0) {
             
             System.out.println("잘못된 카테고리 코드: " + productCategory);
             
-            // 클라이언트에 상세한 오류 메시지 전달
+            // 오류 메시지
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "유효하지 않은 카테고리 코드입니다. (잘못된 카테고리 코드: " + productCategory + ")");
-            return null;  // 잘못된 카테고리 코드일 경우 오류 응답
+            return null;  // 잘못된 카테고리 코드일 경우 오류
         }
         
-        // ProductDTO 객체에 데이터 설정
+        // ProductDTO 객체에 데이터 담기
         ProductDTO dto = new ProductDTO();
-        dto.setCategory_no(categoryNo);  // category_no 설정
+        dto.setCategory_no(categoryNo);
         dto.setProduct_name(productName);
         dto.setProduct_price(productPrice);
         dto.setProduct_spec(productSpec);
         dto.setProduct_qty(productQty);
         dto.setProduct_image(productImage);
         dto.setProduct_specInfo(productSpecInfo);
-        dto.setProduct_size(productSize);  // 상품 사이즈 설정
+        dto.setProduct_size(productSize);
         
         System.out.println("Product Name: " + productName);
         System.out.println("Category No: " + categoryNo);
@@ -74,11 +75,11 @@ public class ProductInputOkAction implements Action {
 
         // 상품 등록 후 이동할 페이지 설정
         ActionForward forward = new ActionForward();
-        if (result == 1) {
-            forward.setPath("product_list.go");  // 성공 시 상품 목록 페이지로 이동
+        if (result == 1) {	// 성공 시 상품 목록 페이지로
+            forward.setPath("product_list.go");  
             forward.setRedirect(true);
-        } else {
-            forward.setPath("product_input.go");  // 실패 시 다시 상품 등록 페이지로 이동
+        } else {	// 실패 시 다시 상품 등록 페이지로
+            forward.setPath("product_input.go");  
             forward.setRedirect(true);
         }
 

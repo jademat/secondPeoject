@@ -86,7 +86,7 @@
             <div id="collapseMemberManagement" class="collapse" aria-labelledby="headingMemberManagement" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="memberList.jsp">회원 목록</a>
-                    <a class="collapse-item" href="memberModify.jsp">회원 정보 수정</a>
+                    <a class="collapse-item" href="memberModify.jsp">회원 삭제</a>
                 </div>
             </div>
         </li>

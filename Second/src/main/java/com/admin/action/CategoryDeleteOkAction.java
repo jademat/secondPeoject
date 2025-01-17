@@ -29,7 +29,7 @@ public class CategoryDeleteOkAction implements Action {
 
         // 4. 결과 처리
         ActionForward forward = new ActionForward();
-        PrintWriter out = response.getWriter();
+        // PrintWriter out = response.getWriter();
         
         if (chk > 0) {
             // 삭제 성공
@@ -42,7 +42,7 @@ public class CategoryDeleteOkAction implements Action {
             forward.setRedirect(false);
             request.setAttribute("message", "카테고리 삭제에 실패했습니다.");
             request.setAttribute("messageType", "error");
-            forward.setPath("/admin/category_delete.jsp"); // 삭제 페이지로 다시 이동
+            forward.setPath("admin/category_delete.jsp"); // 삭제 페이지로 다시 이동
         }
 
         return forward;

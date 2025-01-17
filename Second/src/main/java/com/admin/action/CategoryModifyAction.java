@@ -15,7 +15,7 @@ public class CategoryModifyAction implements Action {
 
     @Override
     public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // 1. 카테고리 번호 받아오기
+       
         
     	CategoryDAO dao = CategoryDAO.getInstance();
     	
