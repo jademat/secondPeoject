@@ -47,7 +47,7 @@
 							data-rating="${dto.getReview_rank()}"
 							data-title="${dto.getReview_title()}">
 							<img class="img-fluid"
-								src="<%= request.getContextPath() %>/resource/img/${dto.getReview_image()}"
+								src="<%= request.getContextPath() %>/upload/${dto.getReview_image()}"
 								alt=""
 								style="max-width: 100%; max-height: 300px; object-fit: cover;">
 						</button>

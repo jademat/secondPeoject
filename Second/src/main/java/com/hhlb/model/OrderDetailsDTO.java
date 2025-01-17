@@ -11,6 +11,7 @@ public class OrderDetailsDTO {
     private String order_addr;
     private String order_memo;
     private String product_name;
+    private int product_no;
 
 	public String getUser_id() {
 		return user_id;
@@ -75,7 +76,15 @@ public class OrderDetailsDTO {
 	public void setProduct_name(String product_name) {
 		this.product_name = product_name;
 	}
-    
+
+	public final int getProduct_no() {
+		return product_no;
+	}
+
+	public final void setProduct_no(int product_no) {
+		this.product_no = product_no;
+	}
+	
     
 
 }
