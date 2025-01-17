@@ -15,6 +15,7 @@ request.setAttribute("ProductList", list);
 %>
 
 
+
 <%
 	request.setAttribute("pageTitle", "Enjoy your shopping at our shop");
 %>
@@ -83,8 +84,7 @@ request.setAttribute("ProductList", list);
 				</div>
 			</div>
 			<div class="carousel-item" style="height: 410px;">
-				<img class="img-fluid"
-					src="<%=request.getContextPath()%>/resource/img/carousel-2.jpg"
+				<img class="img-fluid" src="<%=request.getContextPath()%>/resource/img/carousel-2.jpg"
 					alt="Image">
 				<div
 					class="carousel-caption d-flex flex-column align-items-center justify-content-center">

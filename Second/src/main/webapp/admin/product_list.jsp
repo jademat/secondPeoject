@@ -18,10 +18,16 @@
 
     <style>
         /* h2 태그 글자색 변경 */
-        h2 {
+        .container h2 {
+        	text-align: center;
             color: #4e73df; /* 상품 목록 제목 색상 */
         }
-
+		
+		/* 각 container 사이에 적당한 여백 추가 */
+		.container {
+			margin-top: 20px;
+		}
+		
         /* th 태그 글자색 변경 */
         th {
             color: #4e73df; /* 테이블 헤더 글자 색상 */
@@ -37,6 +43,18 @@
             background-color: #f5c6cb;
             border-color: #f1a9b8;
         }
+        
+        /* sub 태그 스타일 */
+	    sub {
+	        color: #4e73df;
+	        text-align: right;
+	        display: block;
+	        margin-top: 20px;
+	        padding-right: 10px;
+	        width: 100%;
+	        font-size: 0.9rem; /* 글자 크기 조정 */
+	        
+	    }
     </style>
 
 </head>
@@ -52,8 +70,10 @@
     <div class="container">
     
     <br>
-        <h2 class="text-center mb-4">상품 목록</h2>
-
+        <h2 class="text-primary">상품 목록</h2>
+		<sub>* 해당 상품 이름 클릭 시 상세정보 확인 가능</sub>
+		
+		<br>
         <table class="table table-bordered">
             <thead>
                 <tr align="center">

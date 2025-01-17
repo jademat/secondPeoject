@@ -109,6 +109,7 @@
                             <option value="">:::카테고리 목록 없음:::</option>
                         </c:if>
                         <c:if test="${!empty cList}">
+                        	<option value="">:::카테고리 목록 선택:::</option>
                             <c:forEach items="${cList}" var="dto">
                                 <option value="${dto.getCategory_no()}">${dto.getCategory_name()} [${dto.getCategory_code()}]</option>
                             </c:forEach>
@@ -126,35 +127,48 @@
     </div>
 
     <script>
-        // 삭제 버튼 클릭 시 팝업 띄우기
-        function confirmDelete() {
+    // 삭제 버튼 클릭 시 팝업 띄우기
+    function confirmDelete() {
+        var categoryNo = document.getElementById("category_no").value; // 선택된 카테고리 값
+
+        // 카테고리가 선택되지 않은 경우 경고 팝업 띄우기
+        if (categoryNo === "") {
             Swal.fire({
-                title: '정말 삭제하시겠습니까?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: '예',
-                cancelButtonText: '아니오'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // 예를 클릭하면 삭제 완료 팝업을 띄운 후 폼 제출
-                    Swal.fire({
-                        title: '삭제 완료!',
-                        icon: 'success',
-                        confirmButtonText: '확인'
-                    }).then(() => {
-                        document.getElementById('deleteForm').submit();
-                    });
-                } else {
-                    // 아니오를 클릭하면 삭제 취소 팝업을 띄운 후 아무 일도 일어나지 않음
-                    Swal.fire({
-                        title: '삭제 취소!',
-                        icon: 'error',
-                        confirmButtonText: '확인'
-                    });
-                }
+                title: '카테고리 목록을 선택해주세요!',
+                icon: 'error',
+                confirmButtonText: '확인'
             });
+            return; // 카테고리가 선택되지 않으면 함수 종료
         }
-    </script>
+
+        // 카테고리가 선택된 경우, 삭제 확인 팝업 띄우기
+        Swal.fire({
+            title: '정말 삭제하시겠습니까?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '예',
+            cancelButtonText: '아니오'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // 예를 클릭하면 삭제 완료 팝업을 띄운 후 폼 제출
+                Swal.fire({
+                    title: '삭제 완료!',
+                    icon: 'success',
+                    confirmButtonText: '확인'
+                }).then(() => {
+                    document.getElementById('deleteForm').submit(); // 폼 제출
+                });
+            } else {
+                // 아니오를 클릭하면 삭제 취소 팝업을 띄운 후 아무 일도 일어나지 않음
+                Swal.fire({
+                    title: '삭제 취소!',
+                    icon: 'error',
+                    confirmButtonText: '확인'
+                });
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
