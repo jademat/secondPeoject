@@ -25,7 +25,6 @@ public class InsertOrderAction implements Action {
 		String memo = request.getParameter("memo");
 		String addr = request.getParameter("addr");
 		
-		
 		CartDAO cartDAO = CartDAO.getInstance();
 		
 		// 해당 유저의 장바구니 상품을 가져오는 메서드
@@ -43,8 +42,6 @@ public class InsertOrderAction implements Action {
 			
 			// 결제 성공 시(sc_order 테이블에 정상적으로 insert 된 경우) 장바구니 품목 삭제하는 메서드
 			cartDAO.deleteCartList(user_id);
-			
-			
 		}
 		
 		ActionForward forward = new ActionForward();
