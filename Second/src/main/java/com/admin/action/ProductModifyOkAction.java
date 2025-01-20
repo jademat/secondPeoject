@@ -17,7 +17,7 @@ public class ProductModifyOkAction implements Action {
     public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         
     	// 첨부파일 저장 경로
-        String saveFolder = "C:\\Users\\admin\\git\\secondPeoject\\Second\\src\\main\\webapp\\resource\\img";
+        String saveFolder = "C:\\Users\\bin43\\git\\secondPeoject\\Second\\src\\main\\webapp\\resource\\img";
         
         // 최대 파일 사이즈 10MB
         int fileSize = 10 * 1024 * 1024; 
