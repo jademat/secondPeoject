@@ -17,7 +17,7 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link
@@ -50,7 +50,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-					<br> <br>
+               <br> <br>
                     <!-- 404 Error Text -->
                     <div class="text-center">
                         <div class="error mx-auto" data-text="404">404</div>
