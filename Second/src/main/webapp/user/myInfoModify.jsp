@@ -20,7 +20,7 @@
 			<tr>
 				<th scope="col">이름</th>
 				<td><input type="text" class="form-control" name="user_name"
-					value="${dto.getUser_name() }" readonly></td>
+					value="${dto.getUser_name() }"></td>
 			</tr>
 			<tr>
 				<th scope="col">닉네임</th>
