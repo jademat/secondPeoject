@@ -232,7 +232,7 @@ Connection con = null;
 		try {
 			openConn();
 			
-			sql = "update sc_user set user_nick = ?,user_email = ?, user_phone = ?, user_addr = ? where user_id = ?";
+			sql = "update sc_user set user_nick = ?,user_email = ?, user_phone = ?, user_addr = ?, user_name = ? where user_id = ?";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -240,7 +240,8 @@ Connection con = null;
 			pstmt.setString(2, dto.getUser_email());
 			pstmt.setString(3, dto.getUser_phone());
 			pstmt.setString(4, dto.getUser_addr());
-			pstmt.setString(5, dto.getUser_id());
+			pstmt.setString(5, dto.getUser_name());
+			pstmt.setString(6, dto.getUser_id());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

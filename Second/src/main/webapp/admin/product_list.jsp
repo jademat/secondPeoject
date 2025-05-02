@@ -101,7 +101,7 @@
                             <td align="center">${product.getProduct_price()}</td>
                             <td align="center">${product.getProduct_hit()}</td>
                             <td align="center">
-                                <img src="${pageContext.request.contextPath}/upload/${product.getProduct_image()}" alt="상품 이미지" width="100" height="100"/>
+                                <img src="<%= request.getContextPath() %>/resource/img/${ product.getProduct_image() }" alt="상품 이미지" width="100" height="100"/>
                             </td>
                             <td align="center">
                                 <!-- 수정 버튼 -->

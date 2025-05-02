@@ -25,44 +25,26 @@
                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                     <i class="fa fa-bars"></i>
                 </button>
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                            aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                
 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">admin info</span>
                             <img class="img-profile rounded-circle" 
                             	src="${pageContext.request.contextPath}/resource/startbootstrap_admin_pages/img/undraw_profile_1.svg">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
                            
-                           <!-- Profile, Settings, Activity Log 없앨지..? -->
                            
-                            <a class="dropdown-item" href="#">
+                           
+                            <a class="dropdown-item" href="<%=request.getContextPath() %>/admin_info.go">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
                             </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> Activity Log
-                            </a>
+                            
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
-                            </a>
                         </div>
                     </li>
                 </ul>
@@ -74,9 +56,10 @@
                 <h3 class="mt-4">관리자님 반갑습니다.</h3>
             </div>
         </div>
-
+        
+	
         <!-- 푸터 포함 -->
         <jsp:include page="/include/admin_footer.jsp" />
-    </div>
+    
 </body>
 </html>

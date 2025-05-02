@@ -127,12 +127,12 @@
                 
                 <div class="product-info">
                     <label>상품 이미지 :</label>
-                    <img src="${pageContext.request.contextPath}/upload/${product.getProduct_image()}" alt="상품 이미지" />
+                    <img src="<%= request.getContextPath() %>/resource/img/${ product.getProduct_image() }" alt="상품 이미지" />
                 </div>
                 
                 <div class="product-info">
                     <label>상품 상세 설명 이미지 :</label>
-                    <img src="${pageContext.request.contextPath}/upload/${product.getProduct_specInfo()}" alt="상품 상세 이미지" />
+                    <img src="<%= request.getContextPath() %>/resource/img/${ product.getProduct_specInfo() }" alt="상품 상세 이미지" />
                 </div>
             </div>
 

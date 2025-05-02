@@ -12,13 +12,7 @@ request.setAttribute("pageTitle", "Bottom");
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%
-ProductDAO dao = ProductDAO.getInstance();
 
-List<ProductDTO> list = dao.womanBottom();
-
-request.setAttribute("ProductList", list);
-%>
 
 <c:set var="list" value="${ ProductList }" />
 
@@ -33,32 +27,6 @@ request.setAttribute("ProductList", list);
 			<div class="row pb-3  justify-content-center">
 				<div class="col-12 pb-1">
 					<div class="d-flex align-items-center justify-content-between mb-4">
-
-						<!-- 검색 이벤트 -->
-						<form action="">
-							<div class="input-group">
-								<input type="text" class="form-control"
-									placeholder="Search by name">
-								<div class="input-group-append">
-									<span class="input-group-text bg-transparent text-primary">
-										<i class="fa fa-search"></i>
-									</span>
-								</div>
-							</div>
-						</form>
-
-						<!-- 정렬 이벤트 -->
-						<div class="dropdown ml-4">
-							<button class="btn border dropdown-toggle" type="button"
-								id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false">Sort by</button>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="triggerId">
-								<a class="dropdown-item" href="#">Latest</a> <a
-									class="dropdown-item" href="#">Popularity</a> <a
-									class="dropdown-item" href="#">Best Rating</a>
-							</div>
-						</div>
 
 					</div>
 				</div>

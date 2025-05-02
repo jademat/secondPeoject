@@ -332,7 +332,7 @@
 									<!-- 처음으로 -->
 									<c:if test="${page > block }">
 										<li class="page-item">
-											<a class="page-link" href="user_product_view.go?pnum=${ pnum }&page=1">⏪</a>
+											<a class="page-link" href="user_product_view.go?pnum=${ pnum }&page=1">◀◀</a>
 										</li>
 										<li class="page-item">
 											<a class="page-link" href="user_product_view.go?pnum=${ pnum }&page=${startBlock - 1 }">◀</a>
@@ -357,7 +357,7 @@
 										<a class="page-link" href="user_product_view.go?pnum=${ pnum }&page=${endBlock + 1 }">▶</a>
 									</li>
 									<li class="page-item">
-										<a class="page-link" href="user_product_view.go?pnum=${ pnum }&page=${ allPage }">⏩</a>
+										<a class="page-link" href="user_product_view.go?pnum=${ pnum }&page=${ allPage }">▶▶</a>
 									</li>
 									</c:if>
 								</ul>

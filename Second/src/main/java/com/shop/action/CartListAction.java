@@ -39,6 +39,7 @@ public class CartListAction implements Action {
 		int totalPrice = dao.getCartTotalPrice(user_id);
 
 		request.setAttribute("CartList", cartList);
+		request.setAttribute("TotalPrice", totalPrice);
 		
 		ActionForward forward = new ActionForward();
 		

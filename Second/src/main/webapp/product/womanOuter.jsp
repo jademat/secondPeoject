@@ -36,38 +36,7 @@ request.setAttribute("ProductList", list);
 				<div class="col-12 pb-1">
 					<div class="d-flex align-items-center justify-content-between mb-4">
 
-						<!-- 검색 이벤트 -->
-						<form action="<%=request.getContextPath()%>/product_search.go">
-							<div class="input-group">
-								<input type="text" class="form-control" name="search"
-									id="searchPd" placeholder="상품이름 검색">
-								<div class="input-group-append">
-									<button type="submit"
-										class="input-group-text bg-transparent text-primary">
-										<i class="fa fa-search"></i>
-									</button>
-								</div>
-							</div>
-						</form>
-
-						<!-- 정렬 이벤트 -->
-						<div class="dropdown ml-4">
-							<button class="btn border dropdown-toggle" type="button"
-								id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false">--- 정렬 ---</button>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="triggerId">
-								<a class="dropdown-item"
-									href="<%=request.getContextPath()%>/user_womanOuter.go">전체
-									상품</a> <a class="dropdown-item"
-									href="<%=request.getContextPath()%>/user_shop_recent.go">최신
-									상품</a> <a class="dropdown-item"
-									href="<%=request.getContextPath()%>/user_shop_pop.go">인기 상품</a>
-								<a class="dropdown-item"
-									href="<%=request.getContextPath()%>/user_shop_reco.go">추천
-									상품</a>
-							</div>
-						</div>
+					
 
 					</div>
 				</div>
